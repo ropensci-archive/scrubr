@@ -1,0 +1,9 @@
+Package: cleanoccs
+Type: Package
+Title: Clean Biological Occurrence Records
+Description: Clean Biological Occurrence Records.
+Version: 0.0.1.9000
+Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
+    email = "myrmecocystus@gmail.com"))
+License: MIT + file LICENSE
+LazyData: TRUE
