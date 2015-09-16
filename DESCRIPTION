@@ -1,12 +1,16 @@
 Package: cleanoccs
 Type: Package
 Title: Clean Biological Occurrence Records
-Description: Clean Biological Occurrence Records.
-Version: 0.0.1.9000
+Description: Clean biological occurrence records. Includes functionality
+    for cleaning based on various aspects of spatial coordinates,
+    unlikely values due to political centroids, coordinates based on
+    where collections of specimens are held, and more.
+Version: 0.0.1.9300
 Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com"))
 License: MIT + file LICENSE
 LazyData: TRUE
-LazyLoad: TRUE
 Imports:
     magrittr
+Suggests:
+    testthat

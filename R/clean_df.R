@@ -2,6 +2,15 @@
 #'
 #' @export
 #' @param x Input data.frame
+#' @param lat,lon (character) Latitude and longitude column to use. See Details.
+#'
+#' @details If either lat or lon (or both) given, we assign the given column name
+#' to be standardized names of "latitude", and "longitude". If not given, we attempt
+#' to guess what the lat and lon column names are and assign the same standardized
+#' names. Assign the same standardized names makes downstream processing easier
+#' so that we're dealing with consistent column names. FIXME: we could put back
+#' original names I suppose, on returning from any functions.
+#'
 clean_df <- function(x, lat = NULL, lon = NULL) {
   if (!is.data.frame(x)) stop("x must be a data.frame", call. = FALSE)
   x <- guess_latlon(x, lat, lon)
