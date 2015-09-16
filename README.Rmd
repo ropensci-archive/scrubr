@@ -20,7 +20,7 @@ Clean using the following use cases:
 * Impossible lat/long values: e.g., latitude 75
 * Incomplete cases: one or the other of lat/long missing
 * Unlikely lat/long values: e.g., points at 0,0
-* Political centroids: unlikely that occurrences fall exactly on these points, more likely a 
+* Political centroids: unlikely that occurrences fall exactly on these points, more likely a
 default position
 * Herbaria/Museums: many specimens may have location of the collection they are housed in
 * Habitat type filtering: e.g., fish should not be on land; marine fish should not be in fresh water
@@ -38,6 +38,20 @@ devtools::install_github("sckott/cleanoccs")
 
 ```{r}
 library("cleanoccs")
+```
+
+## Coordinate based cleaning
+
+Remove impossible coordinates (using sample data included in the pkg)
+
+```{r}
+clean_df(sample_data_1) %>% coord_impossible()
+```
+
+Remove impossible coordinates
+
+```{r}
+clean_df(sample_data_1) %>% coord_incomplete()
 ```
 
 ## Meta

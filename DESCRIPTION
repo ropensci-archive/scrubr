@@ -7,3 +7,6 @@ Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com"))
 License: MIT + file LICENSE
 LazyData: TRUE
+LazyLoad: TRUE
+Imports:
+    magrittr
