@@ -18,7 +18,7 @@
 #' NROW(df)
 #' df_inc <- clean_df(df) %>% coord_incomplete()
 #' NROW(df_inc)
-#' attr(df_inc, "coord_incomplete")
+#' # attr(df_inc, "coord_incomplete")
 #'
 #' # Remove unlikely points
 #' NROW(df)

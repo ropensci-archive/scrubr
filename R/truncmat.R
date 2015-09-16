@@ -5,7 +5,9 @@ trunc_mat_ <- function(x, n = NULL){
     return()
   if (is.null(n)) {
     if (is.na(rows) || rows > 100) { n <- 10 }
-    else { n <- rows }
+    else {
+      n <- rows
+    }
   }
   df <- as.data.frame(head(x, n))
   if (nrow(df) == 0)
@@ -19,6 +21,9 @@ trunc_mat_ <- function(x, n = NULL){
   w <- pmax(nchar(values), nchar(names))
   cumw <- cumsum(w + 1)
   too_wide <- cumw[-1] > width
+  # replace NA's with 2
+  too_wide[is.na(too_wide)] <- FALSE
+
   if (all(too_wide)) {
     too_wide[1] <- FALSE
     df[[1]] <- substr(df[[1]], 1, width)

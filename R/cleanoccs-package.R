@@ -2,6 +2,9 @@
 #'
 #' Clean biological occurrence data
 #'
+#' @importFrom methods is
+#' @importFrom stats complete.cases na.omit
+#' @importFrom utils head
 #' @name cleanoccs-package
 #' @aliases cleanoccs
 #' @docType package

@@ -11,6 +11,9 @@ Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
+    methods,
+    stats,
+    utils,
     magrittr
 Suggests:
     testthat
