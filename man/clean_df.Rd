@@ -22,4 +22,10 @@ names. Assign the same standardized names makes downstream processing easier
 so that we're dealing with consistent column names. FIXME: we could put back
 original names I suppose, on returning from any functions.
 }
+\examples{
+df <- sample_data_1
+
+# Make a `clean_df` object
+clean_df(df)
+}
 

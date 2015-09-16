@@ -3,15 +3,21 @@
 \name{coords}
 \alias{coord_impossible}
 \alias{coord_incomplete}
+\alias{coord_unlikely}
 \alias{coords}
 \title{Coordinate based cleaning}
 \usage{
-coord_incomplete(x)
+coord_incomplete(x, drop = TRUE)
 
-coord_impossible(x)
+coord_impossible(x, drop = TRUE)
+
+coord_unlikely(x, drop = TRUE)
 }
 \arguments{
-\item{x}{A data.frame}
+\item{x}{(data.frame) A data.frame}
+
+\item{drop}{(logical) Drop bad data points or not. Either way, we parse
+out bade data points as an attribute you can access. Default: \code{TRUE}}
 }
 \value{
 Returns a data.frame, with attributes
@@ -20,11 +26,7 @@ Returns a data.frame, with attributes
 Coordinate based cleaning
 }
 \examples{
-\dontrun{
 df <- sample_data_1
-
-# Make a `clean_df` object
-clean_df(df)
 
 # Remove impossible coordinates
 NROW(df)
@@ -37,6 +39,11 @@ NROW(df)
 df_inc <- clean_df(df) \%>\% coord_incomplete()
 NROW(df_inc)
 attr(df_inc, "coord_incomplete")
-}
+
+# Remove unlikely points
+NROW(df)
+df_unlikely <- clean_df(df) \%>\% coord_unlikely()
+NROW(df_unlikely)
+attr(df_unlikely, "coord_unlikely")
 }
 
