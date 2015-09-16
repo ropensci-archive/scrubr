@@ -54,6 +54,29 @@ Remove impossible coordinates
 clean_df(sample_data_1) %>% coord_incomplete()
 ```
 
+Remove unlikely points (e.g., those at 0,0)
+
+```{r}
+clean_df(sample_data_1) %>% coord_unlikely()
+```
+
+Do all three
+
+```{r}
+clean_df(sample_data_1) %>% 
+  coord_impossible() %>% 
+  coord_incomplete() %>% 
+  coord_unlikely()
+```
+
+Don't drop bad data
+
+```{r}
+clean_df(sample_data_1) %>% coord_incomplete(drop = TRUE) %>% NROW
+clean_df(sample_data_1) %>% coord_incomplete(drop = FALSE) %>% NROW
+```
+
+
 ## Meta
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
