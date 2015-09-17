@@ -28,6 +28,7 @@ default position
 * Check for contextually wrong values: That is, if 99 out of 100 lat/long coordinates are within the continental US, but 1 is in China, then perhaps something is wrong with that one point
 * Outside political boundary: User input to check for points in the wrong country, or points outside of a known country
 * Taxonomic name based cleaning: via `taxize`
+* Date based cleaning perhaps?
 * ...
 
 ## Install
@@ -63,9 +64,9 @@ clean_df(sample_data_1) %>% coord_unlikely()
 Do all three
 
 ```{r}
-clean_df(sample_data_1) %>% 
-  coord_impossible() %>% 
-  coord_incomplete() %>% 
+clean_df(sample_data_1) %>%
+  coord_impossible() %>%
+  coord_incomplete() %>%
   coord_unlikely()
 ```
 
@@ -76,6 +77,20 @@ clean_df(sample_data_1) %>% coord_incomplete(drop = TRUE) %>% NROW
 clean_df(sample_data_1) %>% coord_incomplete(drop = FALSE) %>% NROW
 ```
 
+
+## Dedpulicate
+
+```{r}
+smalldf <- sample_data_1[1:20, ]
+# create a duplicate record
+smalldf <- rbind(smalldf, smalldf[10,])
+# make it slightly different
+smalldf[21, "key"] <- 1088954555 
+NROW(smalldf)
+dp <- clean_df(smalldf) %>% dedup()
+NROW(dp)
+attr(dp, "dups")
+```
 
 ## Meta
 
