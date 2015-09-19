@@ -1,10 +1,10 @@
-cleanoccs
-=========
+scrubr
+======
 
 
 
-[![Build Status](https://travis-ci.org/sckott/cleanoccs.svg?branch=master)](https://travis-ci.org/sckott/cleanoccs)
-[![codecov.io](http://codecov.io/github/sckott/cleanoccs/coverage.svg?branch=master)](http://codecov.io/github/sckott/cleanoccs?branch=master)
+[![Build Status](https://travis-ci.org/sckott/scrubr.svg?branch=master)](https://travis-ci.org/sckott/scrubr)
+[![codecov.io](http://codecov.io/github/sckott/scrubr/coverage.svg?branch=master)](http://codecov.io/github/sckott/scrubr?branch=master)
 
 __Clean Biological Occurrence Records__
 
@@ -28,12 +28,12 @@ default position
 
 
 ```r
-devtools::install_github("sckott/cleanoccs")
+devtools::install_github("sckott/scrubr")
 ```
 
 
 ```r
-library("cleanoccs")
+library("scrubr")
 ```
 
 ## Coordinate based cleaning
@@ -148,19 +148,15 @@ smalldf <- sample_data_1[1:20, ]
 # create a duplicate record
 smalldf <- rbind(smalldf, smalldf[10,])
 # make it slightly different
-smalldf[21, "key"] <- 1088954555 
+smalldf[21, "key"] <- 1088954555
 NROW(smalldf)
 #> [1] 21
 dp <- clean_df(smalldf) %>% dedup()
+#> Error in sparseMatrix(i = indices, j = rep.int(1:length(strings), strings.length)): could not find function "checkAtAssignment"
 NROW(dp)
-#> [1] 19
+#> Error in NROW(dp): object 'dp' not found
 attr(dp, "dups")
-#> <clean dataset>
-#> Size: 2 X 5
-#> 
-#>               name longitude latitude                date        key
-#> 1 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954559
-#> 2 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954555
+#> Error in eval(expr, envir, enclos): object 'dp' not found
 ```
 
 ## Meta
