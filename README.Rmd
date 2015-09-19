@@ -1,5 +1,5 @@
-cleanoccs
-=========
+scrubr
+======
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(
@@ -10,8 +10,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Build Status](https://travis-ci.org/sckott/cleanoccs.svg?branch=master)](https://travis-ci.org/sckott/cleanoccs)
-[![codecov.io](http://codecov.io/github/sckott/cleanoccs/coverage.svg?branch=master)](http://codecov.io/github/sckott/cleanoccs?branch=master)
+[![Build Status](https://travis-ci.org/sckott/scrubr.svg?branch=master)](https://travis-ci.org/sckott/scrubr)
+[![codecov.io](http://codecov.io/github/sckott/scrubr/coverage.svg?branch=master)](http://codecov.io/github/sckott/scrubr?branch=master)
 
 __Clean Biological Occurrence Records__
 
@@ -34,11 +34,11 @@ default position
 ## Install
 
 ```{r eval=FALSE}
-devtools::install_github("sckott/cleanoccs")
+devtools::install_github("sckott/scrubr")
 ```
 
 ```{r}
-library("cleanoccs")
+library("scrubr")
 ```
 
 ## Coordinate based cleaning

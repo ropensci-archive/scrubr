@@ -1,4 +1,4 @@
-Package: cleanoccs
+Package: scrubr
 Type: Package
 Title: Clean Biological Occurrence Records
 Description: Clean biological occurrence records. Includes functionality
