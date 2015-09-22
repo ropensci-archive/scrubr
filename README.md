@@ -140,7 +140,7 @@ clean_df(sample_data_1) %>% coord_incomplete(drop = FALSE) %>% NROW
 ```
 
 
-## Dedpulicate
+## Deduplicate
 
 
 ```r
