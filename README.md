@@ -152,11 +152,15 @@ smalldf[21, "key"] <- 1088954555
 NROW(smalldf)
 #> [1] 21
 dp <- clean_df(smalldf) %>% dedup()
-#> Error in sparseMatrix(i = indices, j = rep.int(1:length(strings), strings.length)): could not find function "checkAtAssignment"
 NROW(dp)
-#> Error in NROW(dp): object 'dp' not found
+#> [1] 19
 attr(dp, "dups")
-#> Error in eval(expr, envir, enclos): object 'dp' not found
+#> <clean dataset>
+#> Size: 2 X 5
+#> 
+#>               name longitude latitude                date        key
+#> 1 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954559
+#> 2 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954555
 ```
 
 ## Meta
