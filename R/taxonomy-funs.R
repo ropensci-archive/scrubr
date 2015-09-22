@@ -17,8 +17,9 @@
 #' @export
 #' @rdname taxonomy
 tax_ <- function(x, drop = TRUE) {
-  incomp <- x[!complete.cases(x$latitude, x$longitude), ]
-  if (NROW(incomp) == 0) incomp <- NA
-  if (drop) x <- x[complete.cases(x$latitude, x$longitude), ]
-  structure(x, coord_incomplete = incomp)
+  message("not working yet...")
+  # incomp <- x[!complete.cases(x$latitude, x$longitude), ]
+  # if (NROW(incomp) == 0) incomp <- NA
+  # if (drop) x <- x[complete.cases(x$latitude, x$longitude), ]
+  # structure(x, coord_incomplete = incomp)
 }
