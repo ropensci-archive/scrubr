@@ -15,6 +15,7 @@ Imports:
     stats,
     utils,
     magrittr,
-    qlcMatrix
+    qlcMatrix,
+    lazyeval
 Suggests:
     testthat

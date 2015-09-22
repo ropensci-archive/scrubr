@@ -23,8 +23,12 @@ date_create_(x, ..., .dots, format = "\%Y-\%m-\%d", date_column = "date")
 
 \item{date_column}{(character) Name of the date column}
 
+\item{...}{Comma separated list of unquoted variable names}
+
 \item{drop}{(logical) Drop bad data points or not. Either way, we parse
 out bade data points as an attribute you can access. Default: \code{TRUE}}
+
+\item{.dots}{Used to work around non-standard evaluation}
 }
 \value{
 Returns a data.frame, with attributes

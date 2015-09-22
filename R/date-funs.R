@@ -6,7 +6,11 @@
 #' @param date_column (character) Name of the date column
 #' @param drop (logical) Drop bad data points or not. Either way, we parse
 #' out bade data points as an attribute you can access. Default: \code{TRUE}
+#' @param ...	Comma separated list of unquoted variable names
+#' @param .dots	Used to work around non-standard evaluation
+#'
 #' @return Returns a data.frame, with attributes
+#'
 #' @details
 #' \itemize{
 #'  \item date_standardize - Converts dates to a specific format
@@ -14,6 +18,7 @@
 #'  NA or being a zero length character string
 #'  \item date_create - Create a date field from
 #' }
+#'
 #' @examples
 #' df <- sample_data_1
 #' # Standardize dates
