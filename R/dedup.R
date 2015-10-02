@@ -3,12 +3,12 @@
 #' @export
 #' @importFrom qlcMatrix sim.strings
 #' @param x (data.frame) A data.frame
-#' @param drop (logical) Drop bad data points or not. Either way, we parse
-#' out bade data points as an attribute you can access. Default: \code{TRUE}
+#' @param how (character) Drop bad data points or not. Either way, we parse
+#' out bade data points as an attribute you can access. Default: \code{"one"}
 #' @param tolerance (numeric) Score (0 to 1) at which to determine a match. You'll
 #' want to inspect outputs closely to tweak this value based on your data, as
 #' results can vary.
-#' @return Returns a data.frame, with attributes
+#' @return Returns a data.frame, optionally with attributes
 #' @examples
 #' df <- sample_data_1
 #' smalldf <- df[1:20, ]
@@ -19,26 +19,46 @@
 #' NROW(dp)
 #' attr(dp, "dups")
 #'
-#' # Another example
-#' "xxx"
-dedup <- function(x, drop = TRUE, tolerance = 0.9) {
+#' # Another example - more than one set of duplicates
+#' df <- sample_data_1
+#' twodups <- df[1:10, ]
+#' twodups <- rbind(twodups, twodups[c(9, 10), ])
+#' rownames(twodups) <- NULL
+#' NROW(twodups)
+#' dp <- clean_df(twodups) %>% dedup()
+#' NROW(dp)
+#' attr(dp, "dups")
+dedup <- function(x, how = "one", tolerance = 0.9) {
   strs <- apply(x, 1, function(x) gsub("\\s", "", paste0(x, collapse = ",")))
   mat <- sim.strings(strs)
   mat <- matrix2df(mat)
-  # mat <- drop_dups(mat)
+  mat <- mat[!duplicated(mat), ]
   res <- mat[mat$values > tolerance, ]
   out <- list()
   for (i in seq_len(NROW(res))) {
-    out[[i]] <- x[strs %in% c(res$one, res$two), ]
+    out[[i]] <- x[strs %in% c(res[i,]$one, res[i,]$two), ]
   }
-  df <- do.call("rbind.data.frame", out)
-  row.names(df) <- NULL
 
-  if (drop) {
-    for (i in seq_len(NROW(res))) {
-      x <- x[!strs %in% c(res$one, res$two), ]
-    }
-  }
+  how <- match.arg(how, c("one", "all"))
+  switch(how,
+     one = {
+       x <- x[!strs %in% unique(c(res$one, res$two)), ]
+       for (i in seq_along(out)) {
+         x <- rbind(x, out[[i]][1,])
+       }
+       outdups <- list()
+       for (i in seq_along(out)) {
+         outdups[[i]] <- out[[i]][-1, ]
+       }
+       df <- do.call("rbind.data.frame", outdups)
+     },
+     all = {
+       x <- x[!strs %in% unique(c(res$one, res$two)), ]
+       df <- do.call("rbind.data.frame", out)
+     }
+  )
+
+  row.names(df) <- NULL
   row.names(x) <- NULL
   structure(x, dups = df)
 }

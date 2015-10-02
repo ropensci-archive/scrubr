@@ -4,20 +4,20 @@
 \alias{dedup}
 \title{Deduplicate records}
 \usage{
-dedup(x, drop = TRUE, tolerance = 0.9)
+dedup(x, how = "one", tolerance = 0.9)
 }
 \arguments{
 \item{x}{(data.frame) A data.frame}
 
-\item{drop}{(logical) Drop bad data points or not. Either way, we parse
-out bade data points as an attribute you can access. Default: \code{TRUE}}
+\item{how}{(character) Drop bad data points or not. Either way, we parse
+out bade data points as an attribute you can access. Default: \code{"one"}}
 
 \item{tolerance}{(numeric) Score (0 to 1) at which to determine a match. You'll
 want to inspect outputs closely to tweak this value based on your data, as
 results can vary.}
 }
 \value{
-Returns a data.frame, with attributes
+Returns a data.frame, optionally with attributes
 }
 \description{
 Deduplicate records
@@ -32,7 +32,14 @@ dp <- clean_df(smalldf) \%>\% dedup()
 NROW(dp)
 attr(dp, "dups")
 
-# Another example
-"xxx"
+# Another example - more than one set of duplicates
+df <- sample_data_1
+twodups <- df[1:10, ]
+twodups <- rbind(twodups, twodups[c(9, 10), ])
+rownames(twodups) <- NULL
+NROW(twodups)
+dp <- clean_df(twodups) \%>\% dedup()
+NROW(dp)
+attr(dp, "dups")
 }
 
