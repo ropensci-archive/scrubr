@@ -3,8 +3,11 @@
 #' @export
 #' @importFrom qlcMatrix sim.strings
 #' @param x (data.frame) A data.frame
-#' @param how (character) Drop bad data points or not. Either way, we parse
-#' out bade data points as an attribute you can access. Default: \code{"one"}
+#' @param how (character) How to deal with duplicates. The default of \code{"one"}
+#' keeps one record of each group of duplicates, and drops the others, putting them
+#' into the \code{dups} attribute. \code{"all"} drops all duplicates, in case e.g.,
+#' you don't want to deal with any records that are duplicated, as e.g., it may
+#' be hard to tell which one to remove.
 #' @param tolerance (numeric) Score (0 to 1) at which to determine a match. You'll
 #' want to inspect outputs closely to tweak this value based on your data, as
 #' results can vary.

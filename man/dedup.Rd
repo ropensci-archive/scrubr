@@ -9,8 +9,11 @@ dedup(x, how = "one", tolerance = 0.9)
 \arguments{
 \item{x}{(data.frame) A data.frame}
 
-\item{how}{(character) Drop bad data points or not. Either way, we parse
-out bade data points as an attribute you can access. Default: \code{"one"}}
+\item{how}{(character) How to deal with duplicates. The default of \code{"one"}
+keeps one record of each group of duplicates, and drops the others, putting them
+into the \code{dups} attribute. \code{"all"} drops all duplicates, in case e.g.,
+you don't want to deal with any records that are duplicated, as e.g., it may
+be hard to tell which one to remove.}
 
 \item{tolerance}{(numeric) Score (0 to 1) at which to determine a match. You'll
 want to inspect outputs closely to tweak this value based on your data, as
