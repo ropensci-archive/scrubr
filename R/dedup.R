@@ -39,6 +39,7 @@ dedup <- function(x, drop = TRUE, tolerance = 0.9) {
       x <- x[!strs %in% c(res$one, res$two), ]
     }
   }
+  row.names(x) <- NULL
   structure(x, dups = df)
 }
 

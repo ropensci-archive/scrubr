@@ -52,11 +52,13 @@ date_missing <- function(x, date_column = "date", drop = TRUE, ...) {
   miss <- x[is.na(x[[date_column]]), ]
   zero <- x[nchar(x[[date_column]]) == 0, ]
   all <- rbind(miss, zero)
+  row.names(all) <- NULL
   if (NROW(all) == 0) all <- NA
   if (drop) {
     x <- x[!is.na(x[[date_column]]), ]
     x <- x[nchar(x[[date_column]]) != 0, ]
   }
+  row.names(x) <- NULL
   structure(x, date_missing = all)
 }
 

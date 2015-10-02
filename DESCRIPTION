@@ -5,7 +5,7 @@ Description: Clean biological occurrence records. Includes functionality
     for cleaning based on various aspects of spatial coordinates,
     unlikely values due to political centroids, coordinates based on
     where collections of specimens are held, and more.
-Version: 0.0.2.9700
+Version: 0.0.2.9900
 Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com"))
 License: MIT + file LICENSE

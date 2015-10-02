@@ -32,6 +32,8 @@ coord_incomplete <- function(x, drop = TRUE) {
   incomp <- x[!complete.cases(x$latitude, x$longitude), ]
   if (NROW(incomp) == 0) incomp <- NA
   if (drop) x <- x[complete.cases(x$latitude, x$longitude), ]
+  row.names(incomp) <- NULL
+  row.names(x) <- NULL
   structure(x, coord_incomplete = incomp)
 }
 
@@ -41,6 +43,8 @@ coord_impossible <- function(x, drop = TRUE) {
   np <- na.omit(x[!abs(x$latitude) <= 90 | !abs(x$longitude) <= 180, ])
   if (NROW(np) == 0) np <- NA
   if (drop) x <- x[abs(x$latitude) <= 90 | abs(x$longitude) <= 180, ]
+  row.names(np) <- NULL
+  row.names(x) <- NULL
   structure(x, coord_impossible = np)
 }
 
@@ -51,7 +55,7 @@ coord_unlikely <- function(x, drop = TRUE) {
   unl <- na.omit(x[x$latitude == 0 & x$longitude == 0, ])
   if (NROW(unl) == 0) unl <- NA
   if (drop) x <- x[!x$latitude == 0 & !x$longitude == 0, ]
+  row.names(unl) <- NULL
+  row.names(x) <- NULL
   structure(x, coord_unlikely = unl)
 }
-
-

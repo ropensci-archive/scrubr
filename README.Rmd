@@ -43,6 +43,10 @@ library("scrubr")
 
 ## Coordinate based cleaning
 
+```{r}
+data("sampledata1")
+```
+
 Remove impossible coordinates (using sample data included in the pkg)
 
 ```{r}
@@ -84,6 +88,7 @@ clean_df(sample_data_1) %>% coord_incomplete(drop = FALSE) %>% NROW
 smalldf <- sample_data_1[1:20, ]
 # create a duplicate record
 smalldf <- rbind(smalldf, smalldf[10,])
+row.names(smalldf) <- NULL
 # make it slightly different
 smalldf[21, "key"] <- 1088954555
 NROW(smalldf)
