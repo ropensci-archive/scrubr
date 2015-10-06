@@ -24,6 +24,10 @@ default position
 * Outside political boundary: User input to check for points in the wrong country, or points outside of a known country
 * ...
 
+A note about examples: We think that using a piping workflow with `%>%` makes code easier to 
+build up, and easier to understand. However, in some examples we provide examples without the pipe
+to demonstrate traditional usage.
+
 ## Install
 
 
@@ -38,10 +42,16 @@ library("scrubr")
 
 ## Coordinate based cleaning
 
+
+```r
+data("sampledata1")
+```
+
 Remove impossible coordinates (using sample data included in the pkg)
 
 
 ```r
+# coord_impossible(clean_df(sample_data_1)) # w/o pipe
 clean_df(sample_data_1) %>% coord_impossible()
 #> <clean dataset>
 #> Size: 1500 X 5
@@ -60,10 +70,11 @@ clean_df(sample_data_1) %>% coord_impossible()
 #> ..              ...        ...      ...                 ...        ...
 ```
 
-Remove impossible coordinates
+Remove incomplete coordinates
 
 
 ```r
+# coord_incomplete(clean_df(sample_data_1)) # w/o pipe
 clean_df(sample_data_1) %>% coord_incomplete()
 #> <clean dataset>
 #> Size: 1306 X 5
@@ -82,10 +93,11 @@ clean_df(sample_data_1) %>% coord_incomplete()
 #> ..              ...        ...      ...                 ...        ...
 ```
 
-Remove unlikely points (e.g., those at 0,0)
+Remove unlikely coordinates (e.g., those at 0,0)
 
 
 ```r
+# coord_unlikely(clean_df(sample_data_1)) # w/o pipe
 clean_df(sample_data_1) %>% coord_unlikely()
 #> <clean dataset>
 #> Size: 1488 X 5
@@ -147,20 +159,20 @@ clean_df(sample_data_1) %>% coord_incomplete(drop = FALSE) %>% NROW
 smalldf <- sample_data_1[1:20, ]
 # create a duplicate record
 smalldf <- rbind(smalldf, smalldf[10,])
+row.names(smalldf) <- NULL
 # make it slightly different
 smalldf[21, "key"] <- 1088954555
 NROW(smalldf)
 #> [1] 21
 dp <- clean_df(smalldf) %>% dedup()
 NROW(dp)
-#> [1] 19
+#> [1] 20
 attr(dp, "dups")
 #> <clean dataset>
-#> Size: 2 X 5
+#> Size: 1 X 5
 #> 
 #>               name longitude latitude                date        key
-#> 1 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954559
-#> 2 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954555
+#> 1 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954555
 ```
 
 ## Dates
@@ -170,6 +182,7 @@ Standardize/convert dates
 
 ```r
 df <- sample_data_1
+# date_standardize(clean_df(df), "%d%b%Y") # w/o pipe
 clean_df(df) %>% date_standardize("%d%b%Y")
 #> <clean dataset>
 #> Size: 1500 X 5
