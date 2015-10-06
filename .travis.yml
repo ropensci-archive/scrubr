@@ -8,6 +8,7 @@ before_install:
 
 install:
   - ./pkg-build.sh install_deps
+  - ./pkg-build.sh r_install rgbif sp rworldmap maps
   - ./pkg-build.sh install_github jimhester/covr
 
 script:
