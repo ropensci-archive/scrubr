@@ -8,20 +8,20 @@ scrubr
 
 __Clean Biological Occurrence Records__
 
-Clean using the following use cases:
+Clean using the following use cases (checkmarks indicate fxns exist - not necessarily complete):
 
 - [x] Impossible lat/long values: e.g., latitude 75
 - [x] Incomplete cases: one or the other of lat/long missing
 - [x] Unlikely lat/long values: e.g., points at 0,0
 - [x] Deduplication: try to identify duplicates, esp. when pulling data from multiple sources, e.g., can try to use occurrence IDs, if provided
 - [x] Date based cleaning
-- Taxonomic name based cleaning: via `taxize`
+* [x] Outside political boundary: User input to check for points in the wrong country, or points outside of a known country
+* [x] (one so far) Taxonomic name based cleaning: via `taxize`
 * Political centroids: unlikely that occurrences fall exactly on these points, more likely a
 default position
 * Herbaria/Museums: many specimens may have location of the collection they are housed in
 * Habitat type filtering: e.g., fish should not be on land; marine fish should not be in fresh water
 * Check for contextually wrong values: That is, if 99 out of 100 lat/long coordinates are within the continental US, but 1 is in China, then perhaps something is wrong with that one point
-* Outside political boundary: User input to check for points in the wrong country, or points outside of a known country
 * ...
 
 A note about examples: We think that using a piping workflow with `%>%` makes code easier to 
@@ -55,6 +55,7 @@ Remove impossible coordinates (using sample data included in the pkg)
 clean_df(sample_data_1) %>% coord_impossible()
 #> <clean dataset>
 #> Size: 1500 X 5
+#> Lat/Lon vars: latitude/longitude
 #> 
 #>                name  longitude latitude                date        key
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
@@ -78,6 +79,7 @@ Remove incomplete coordinates
 clean_df(sample_data_1) %>% coord_incomplete()
 #> <clean dataset>
 #> Size: 1306 X 5
+#> Lat/Lon vars: latitude/longitude
 #> 
 #>                name  longitude latitude                date        key
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
@@ -101,6 +103,7 @@ Remove unlikely coordinates (e.g., those at 0,0)
 clean_df(sample_data_1) %>% coord_unlikely()
 #> <clean dataset>
 #> Size: 1488 X 5
+#> Lat/Lon vars: latitude/longitude
 #> 
 #>                name  longitude latitude                date        key
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
@@ -126,6 +129,7 @@ clean_df(sample_data_1) %>%
   coord_unlikely()
 #> <clean dataset>
 #> Size: 1294 X 5
+#> Lat/Lon vars: latitude/longitude
 #> 
 #>                name  longitude latitude                date        key
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
@@ -171,6 +175,7 @@ attr(dp, "dups")
 #> <clean dataset>
 #> Size: 1 X 5
 #> 
+#> 
 #>               name longitude latitude                date        key
 #> 1 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954555
 ```
@@ -186,6 +191,7 @@ df <- sample_data_1
 clean_df(df) %>% date_standardize("%d%b%Y")
 #> <clean dataset>
 #> Size: 1500 X 5
+#> 
 #> 
 #>                name  longitude latitude      date        key
 #> 1  Ursus americanus  -79.68283 38.36662 14Jan2015 1065590124
@@ -218,6 +224,7 @@ Create date field from other fields
 clean_df(sample_data_2) %>% date_create(year, month, day)
 #> <clean dataset>
 #> Size: 1500 X 8
+#> 
 #> 
 #>                name  longitude latitude        key year month day
 #> 1  Ursus americanus  -79.68283 38.36662 1065590124 2015    01  14
