@@ -2,24 +2,43 @@
 #'
 #' @name taxonomy
 #' @param x (data.frame) A data.frame
+#' @param name (character) Taxonomic name field Optional. See Details.
 #' @param drop (logical) Drop bad data points or not. Either way, we parse
 #' out bade data points as an attribute you can access. Default: \code{TRUE}
 #' @return Returns a data.frame, with attributes
 #' @examples
-#' df <- sample_data_1
+#' library("rgbif")
+#' res <- occ_search(limit = 500)$data
 #'
 #' # Remove impossible coordinates
+#' NROW(res)
+#' df <- clean_df(res) %>% tax_no_epithet(name = "name")
 #' NROW(df)
-#' df <- clean_df(df) %>% coord_impossible()
-#' NROW(df)
-#' attr(df, "coord_impossible")
+#' attr(df, "name_var")
+#' attr(df, "tax_no_epithet")
 
 #' @export
 #' @rdname taxonomy
-tax_ <- function(x, drop = TRUE) {
-  message("not working yet...")
-  # incomp <- x[!complete.cases(x$latitude, x$longitude), ]
-  # if (NROW(incomp) == 0) incomp <- NA
-  # if (drop) x <- x[complete.cases(x$latitude, x$longitude), ]
-  # structure(x, coord_incomplete = incomp)
+tax_no_epithet <- function(x, name = NULL, drop = TRUE) {
+  x <- do_name(x, name)
+  noep <- x[!vapply(x$name, function(y) {
+    length(strsplit(y, "\\s|_")[[1]])
+  }, numeric(1)) >= 2, ]
+  if (NROW(noep) == 0) noep <- NA
+  if (drop) {
+    x <- x[vapply(x$name, function(y) {
+      length(strsplit(y, "\\s|_")[[1]])
+    }, numeric(1)) >= 2, ]
+  }
+  row.names(noep) <- NULL
+  row.names(x) <- NULL
+  structure(x, tax_no_epithet = noep)
+}
+
+do_name <- function(x, name) {
+  if (is.null(attr(x, "name_var"))) {
+    guess_name(x, name)
+  } else {
+    return(x)
+  }
 }

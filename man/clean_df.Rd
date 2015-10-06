@@ -4,23 +4,13 @@
 \alias{clean_df}
 \title{Clean data.frame}
 \usage{
-clean_df(x, lat = NULL, lon = NULL)
+clean_df(x)
 }
 \arguments{
 \item{x}{Input data.frame}
-
-\item{lat,lon}{(character) Latitude and longitude column to use. See Details.}
 }
 \description{
 Clean data.frame
-}
-\details{
-If either lat or lon (or both) given, we assign the given column name
-to be standardized names of "latitude", and "longitude". If not given, we attempt
-to guess what the lat and lon column names are and assign the same standardized
-names. Assign the same standardized names makes downstream processing easier
-so that we're dealing with consistent column names. FIXME: we could put back
-original names I suppose, on returning from any functions.
 }
 \examples{
 df <- sample_data_1

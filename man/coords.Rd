@@ -3,27 +3,69 @@
 \name{coords}
 \alias{coord_impossible}
 \alias{coord_incomplete}
+\alias{coord_pol_centroids}
 \alias{coord_unlikely}
+\alias{coord_within}
 \alias{coords}
 \title{Coordinate based cleaning}
 \usage{
-coord_incomplete(x, drop = TRUE)
+coord_incomplete(x, lat = NULL, lon = NULL, drop = TRUE)
 
-coord_impossible(x, drop = TRUE)
+coord_impossible(x, lat = NULL, lon = NULL, drop = TRUE)
 
-coord_unlikely(x, drop = TRUE)
+coord_unlikely(x, lat = NULL, lon = NULL, drop = TRUE)
+
+coord_within(x, field = NULL, country = NULL, lat = NULL, lon = NULL,
+  drop = TRUE)
+
+coord_pol_centroids(x, lat = NULL, lon = NULL, drop = TRUE)
 }
 \arguments{
 \item{x}{(data.frame) A data.frame}
 
+\item{lat,lon}{(character) Latitude and longitude column to use. See Details.}
+
 \item{drop}{(logical) Drop bad data points or not. Either way, we parse
 out bade data points as an attribute you can access. Default: \code{TRUE}}
+
+\item{field}{(character) Name of filed in input data.frame x with country names}
+
+\item{country}{(character) A single country name}
 }
 \value{
 Returns a data.frame, with attributes
 }
 \description{
 Coordinate based cleaning
+}
+\details{
+Explanation of the functions:
+
+\itemize{
+ \item coord_impossible - Impossible coordinates
+ \item coord_incomplete - Incomplete coordinaes
+ \item coord_pol_centroids - Points at political centroids
+ \item coord_unlikely - Unlikely coordinates
+ \item coord_within - Check if points are within user input
+ political boundaries
+}
+
+If either lat or lon (or both) given, we assign the given column name
+to be standardized names of "latitude", and "longitude". If not given, we attempt
+to guess what the lat and lon column names are and assign the same standardized
+names. Assign the same standardized names makes downstream processing easier
+so that we're dealing with consistent column names. FIXME: we could put back
+original names I suppose, on returning from any functions.
+
+For \code{coord_within}, we use \code{countriesLow} dataset from the
+\pkg{rworldmap} package to get country borders.
+}
+\section{coord_pol_centroids}{
+
+Right now, this function only deals with city centroids, using the
+\code{\link[maps]{world.cities}} dataset of more than 40,000 cities.
+We'll work on adding country centroids, and perhaps others (e.g.,
+counties, states, provinces, parks, etc.).
 }
 \examples{
 df <- sample_data_1
@@ -45,5 +87,28 @@ NROW(df)
 df_unlikely <- clean_df(df) \%>\% coord_unlikely()
 NROW(df_unlikely)
 attr(df_unlikely, "coord_unlikely")
+
+# Remove points not within correct political borders
+library("rgbif")
+res <- occ_search(geometry = 'POLYGON((30.1 10.1, 10 20, 20 40, 40 40, 30.1 10.1))', limit=1000)
+
+## By specific country name
+NROW(res$data)
+df_within <- clean_df(res$data) \%>\% coord_within(country = "Egypt")
+NROW(df_within)
+attr(df_within, "coord_within")
+
+## By a field in your data - makes sure your points occur in one of those countries
+NROW(res$data)
+df_within <- clean_df(res$data) \%>\% coord_within(field = "country")
+NROW(df_within)
+attr(df_within, "coord_within")
+
+# Remove those very near political centroids
+## not ready yet
+# NROW(df)
+# df_polcent <- clean_df(df) \%>\% coord_pol_centroids()
+# NROW(df_polcent)
+# attr(df_polcent, "coord_polcent")
 }
 

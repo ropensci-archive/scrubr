@@ -9,14 +9,14 @@ guess_latlon <- function(x, lat = NULL, lon = NULL) {
       if (length(nms) > 2) {
         message("Assuming '", lats, "' is latitude")
       }
-      names(x)[names(x) %in% lats] <- "latitude"
+      names(x)[names(x) %in% lats] <- lat_var <-  "latitude"
     } else {
       stop("Couldn't infer latitude column, please specify with the 'lat' parameter",
            call. = FALSE)
     }
   } else {
     if (!any(names(x) %in% lat)) stop("'", lat, "' not found in your data", call. = FALSE)
-    names(x)[names(x) %in% lat] <- "latitude"
+    names(x)[names(x) %in% lat] <- lat_var <- "latitude"
   }
 
   if (is.null(lon)) {
@@ -26,17 +26,17 @@ guess_latlon <- function(x, lat = NULL, lon = NULL) {
       if (length(nms) > 2) {
         message("Assuming '", lngs, "' is longitude")
       }
-      names(x)[names(x) %in% lngs] <- "longitude"
+      names(x)[names(x) %in% lngs] <- lon_var <- "longitude"
     } else {
       stop("Couldn't infer longitude column, please specify with 'lon' parameter",
            call. = FALSE)
     }
   } else {
     if (!any(names(x) %in% lon)) stop("'", lon, "' not found in your data", call. = FALSE)
-    names(x)[names(x) %in% lon] <- "longitude"
+    names(x)[names(x) %in% lon] <- lon_var <- "longitude"
   }
 
-  return(x)
+  structure(x, lat_var = lat_var, lon_var = lon_var)
 }
 
 lat_options <- c("lat", "latitude", "decimallatitude", "y")
