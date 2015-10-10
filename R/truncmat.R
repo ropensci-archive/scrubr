@@ -32,6 +32,7 @@ trunc_mat_ <- function(x, n = NULL){
   needs_dots <- is.na(rows) || rows > n
   if (needs_dots) {
     dot_width <- pmin(w[-1][!too_wide], 3)
+    if (!is.numeric(dot_width)) stop(paste0(dot_width, collapse = ", "), "not numeric")
     dots <- vapply(dot_width, function(i) paste(rep(".", i), collapse = ""), FUN.VALUE = character(1))
     shrunk <- rbind(shrunk, .. = dots)
   }
