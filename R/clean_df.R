@@ -41,7 +41,7 @@ as_data_frame <- function(x) {
 }
 
 names2 <- function(x) {
-  names(x) %||% rep("", length(x))
+  names(x) %||% rep.int("", length(x))
 }
 
 is_1d <- function(x) {
