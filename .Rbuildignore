@@ -3,3 +3,4 @@
 ^CONDUCT\.md$
 README.Rmd
 .travis.yml
+appveyor.yml
