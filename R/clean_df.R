@@ -8,11 +8,17 @@
 #' # Make a `clean_df` object
 #' clean_df(df)
 clean_df <- function(x) {
+  UseMethod("clean_df")
+}
+
+#' @export
+clean_df.data.frame <- function(x) {
   if (!is.data.frame(x)) stop("x must be a data.frame", call. = FALSE)
-  # x <- guess_latlon(x, lat, lon)
-  # x <- guess_name(x, name)
   as_data_frame(x)
 }
+
+#' @export
+clean_df.clean_df <- function(x) x
 
 as_data_frame <- function(x) {
   stopifnot(is.list(x))

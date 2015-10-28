@@ -23,7 +23,7 @@ Clean using the following use cases (checkmarks indicate fxns exist - not necess
 - [x] Deduplication: try to identify duplicates, esp. when pulling data from multiple sources, e.g., can try to use occurrence IDs, if provided
 - [x] Date based cleaning
 * [x] Outside political boundary: User input to check for points in the wrong country, or points outside of a known country
-* [x] (one so far) Taxonomic name based cleaning: via `taxize`
+* [x] Taxonomic name based cleaning: via `taxize` (one method so far)
 * Political centroids: unlikely that occurrences fall exactly on these points, more likely a
 default position
 * Herbaria/Museums: many specimens may have location of the collection they are housed in
@@ -31,7 +31,7 @@ default position
 * Check for contextually wrong values: That is, if 99 out of 100 lat/long coordinates are within the continental US, but 1 is in China, then perhaps something is wrong with that one point
 * ...
 
-A note about examples: We think that using a piping workflow with `%>%` makes code easier to 
+A note about examples: We think that using a piping workflow with `%>%` makes code easier to
 build up, and easier to understand. However, in some examples we provide examples without the pipe
 to demonstrate traditional usage.
 

@@ -43,6 +43,7 @@
 #'
 #' # Remove impossible coordinates
 #' NROW(df)
+#' df[1, "latitude"] <- 170
 #' df <- clean_df(df) %>% coord_impossible()
 #' NROW(df)
 #' attr(df, "coord_impossible")
@@ -98,9 +99,14 @@ coord_incomplete <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 #' @rdname coords
 coord_impossible <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
   x <- do_coords(x, lat, lon)
-  np <- na.omit(x[!abs(x$latitude) <= 90 | !abs(x$longitude) <= 180, ])
+  no_nas <- x[complete.cases(x$latitude, x$longitude), ]
+  np <- na.omit(no_nas[!abs(no_nas$latitude) <= 90 | !abs(no_nas$longitude) <= 180, ])
   if (NROW(np) == 0) np <- NA
-  if (drop) x <- x[abs(x$latitude) <= 90 | abs(x$longitude) <= 180, ]
+  if (drop) {
+    # x <- x[abs(x$latitude) <= 90 | abs(x$longitude) <= 180, ]
+    x <- x[abs(x$latitude) <= 90, ]
+    x <- x[abs(x$longitude) <= 180, ]
+  }
   row.names(np) <- NULL
   row.names(x) <- NULL
   structure(x, coord_impossible = np)

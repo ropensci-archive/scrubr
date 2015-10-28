@@ -72,6 +72,7 @@ df <- sample_data_1
 
 # Remove impossible coordinates
 NROW(df)
+df[1, "latitude"] <- 170
 df <- clean_df(df) \%>\% coord_impossible()
 NROW(df)
 attr(df, "coord_impossible")
