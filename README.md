@@ -3,8 +3,8 @@ scrubr
 
 
 
-[![Build Status](https://travis-ci.org/sckott/scrubr.svg?branch=master)](https://travis-ci.org/sckott/scrubr)
-[![codecov.io](http://codecov.io/github/sckott/scrubr/coverage.svg?branch=master)](http://codecov.io/github/sckott/scrubr?branch=master)
+[![Build Status](https://travis-ci.org/ropenscilabs/scrubr.svg?branch=master)](https://travis-ci.org/ropenscilabs/scrubr)
+[![codecov.io](http://codecov.io/github/ropenscilabs/scrubr/coverage.svg?branch=master)](http://codecov.io/github/ropenscilabs/scrubr?branch=master)
 
 __Clean Biological Occurrence Records__
 
@@ -16,7 +16,7 @@ Clean using the following use cases (checkmarks indicate fxns exist - not necess
 - [x] Deduplication: try to identify duplicates, esp. when pulling data from multiple sources, e.g., can try to use occurrence IDs, if provided
 - [x] Date based cleaning
 * [x] Outside political boundary: User input to check for points in the wrong country, or points outside of a known country
-* [x] (one so far) Taxonomic name based cleaning: via `taxize`
+* [x] Taxonomic name based cleaning: via `taxize` (one method so far)
 * Political centroids: unlikely that occurrences fall exactly on these points, more likely a
 default position
 * Herbaria/Museums: many specimens may have location of the collection they are housed in
@@ -24,7 +24,7 @@ default position
 * Check for contextually wrong values: That is, if 99 out of 100 lat/long coordinates are within the continental US, but 1 is in China, then perhaps something is wrong with that one point
 * ...
 
-A note about examples: We think that using a piping workflow with `%>%` makes code easier to 
+A note about examples: We think that using a piping workflow with `%>%` makes code easier to
 build up, and easier to understand. However, in some examples we provide examples without the pipe
 to demonstrate traditional usage.
 
@@ -32,7 +32,7 @@ to demonstrate traditional usage.
 
 
 ```r
-devtools::install_github("sckott/scrubr")
+devtools::install_github("ropenscilabs/scrubr")
 ```
 
 
@@ -58,6 +58,7 @@ clean_df(sample_data_1) %>% coord_impossible()
 #> Lat/Lon vars: latitude/longitude
 #> 
 #>                name  longitude latitude                date        key
+#>               (chr)      (dbl)    (dbl)              (time)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
 #> 2  Ursus americanus  -82.42028 35.73304 2015-01-13 00:25:39 1065588899
 #> 3  Ursus americanus  -99.09625 23.66893 2015-02-20 23:00:00 1098894889
@@ -82,6 +83,7 @@ clean_df(sample_data_1) %>% coord_incomplete()
 #> Lat/Lon vars: latitude/longitude
 #> 
 #>                name  longitude latitude                date        key
+#>               (chr)      (dbl)    (dbl)              (time)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
 #> 2  Ursus americanus  -82.42028 35.73304 2015-01-13 00:25:39 1065588899
 #> 3  Ursus americanus  -99.09625 23.66893 2015-02-20 23:00:00 1098894889
@@ -106,6 +108,7 @@ clean_df(sample_data_1) %>% coord_unlikely()
 #> Lat/Lon vars: latitude/longitude
 #> 
 #>                name  longitude latitude                date        key
+#>               (chr)      (dbl)    (dbl)              (time)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
 #> 2  Ursus americanus  -82.42028 35.73304 2015-01-13 00:25:39 1065588899
 #> 3  Ursus americanus  -99.09625 23.66893 2015-02-20 23:00:00 1098894889
@@ -132,6 +135,7 @@ clean_df(sample_data_1) %>%
 #> Lat/Lon vars: latitude/longitude
 #> 
 #>                name  longitude latitude                date        key
+#>               (chr)      (dbl)    (dbl)              (time)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
 #> 2  Ursus americanus  -82.42028 35.73304 2015-01-13 00:25:39 1065588899
 #> 3  Ursus americanus  -99.09625 23.66893 2015-02-20 23:00:00 1098894889
@@ -177,6 +181,7 @@ attr(dp, "dups")
 #> 
 #> 
 #>               name longitude latitude                date        key
+#>              (chr)     (dbl)    (dbl)              (time)      (dbl)
 #> 1 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954555
 ```
 
@@ -194,6 +199,7 @@ clean_df(df) %>% date_standardize("%d%b%Y")
 #> 
 #> 
 #>                name  longitude latitude      date        key
+#>               (chr)      (dbl)    (dbl)     (chr)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 14Jan2015 1065590124
 #> 2  Ursus americanus  -82.42028 35.73304 13Jan2015 1065588899
 #> 3  Ursus americanus  -99.09625 23.66893 20Feb2015 1098894889
@@ -226,21 +232,21 @@ clean_df(sample_data_2) %>% date_create(year, month, day)
 #> Size: 1500 X 8
 #> 
 #> 
-#>                name  longitude latitude        key year month day
-#> 1  Ursus americanus  -79.68283 38.36662 1065590124 2015    01  14
-#> 2  Ursus americanus  -82.42028 35.73304 1065588899 2015    01  13
-#> 3  Ursus americanus  -99.09625 23.66893 1098894889 2015    02  20
-#> 4  Ursus americanus  -72.77432 43.94883 1065611122 2015    02  13
-#> 5  Ursus americanus  -72.34617 43.86464 1088908315 2015    03  01
-#> 6  Ursus americanus -108.53674 32.65219 1088932238 2015    03  29
-#> 7  Ursus americanus -108.53691 32.65237 1088932273 2015    03  29
-#> 8  Ursus americanus -123.82900 40.13240 1132403409 2015    03  28
-#> 9  Ursus americanus  -78.25027 36.93018 1088923534 2015    03  20
-#> 10 Ursus americanus  -76.78671 35.53079 1088954559 2015    04  05
-#> ..              ...        ...      ...        ...  ...   ... ...
-#> Variables not shown: date (chr)
+#>                name  longitude latitude        key  year month   day
+#>               (chr)      (dbl)    (dbl)      (int) (chr) (chr) (chr)
+#> 1  Ursus americanus  -79.68283 38.36662 1065590124  2015    01    14
+#> 2  Ursus americanus  -82.42028 35.73304 1065588899  2015    01    13
+#> 3  Ursus americanus  -99.09625 23.66893 1098894889  2015    02    20
+#> 4  Ursus americanus  -72.77432 43.94883 1065611122  2015    02    13
+#> 5  Ursus americanus  -72.34617 43.86464 1088908315  2015    03    01
+#> 6  Ursus americanus -108.53674 32.65219 1088932238  2015    03    29
+#> 7  Ursus americanus -108.53691 32.65237 1088932273  2015    03    29
+#> 8  Ursus americanus -123.82900 40.13240 1132403409  2015    03    28
+#> 9  Ursus americanus  -78.25027 36.93018 1088923534  2015    03    20
+#> 10 Ursus americanus  -76.78671 35.53079 1088954559  2015    04    05
+#> ..              ...        ...      ...        ...   ...   ...   ...
 ```
 
 ## Meta
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

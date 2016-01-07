@@ -10,8 +10,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Build Status](https://travis-ci.org/sckott/scrubr.svg?branch=master)](https://travis-ci.org/sckott/scrubr)
-[![codecov.io](http://codecov.io/github/sckott/scrubr/coverage.svg?branch=master)](http://codecov.io/github/sckott/scrubr?branch=master)
+[![Build Status](https://travis-ci.org/ropenscilabs/scrubr.svg?branch=master)](https://travis-ci.org/ropenscilabs/scrubr)
+[![codecov.io](http://codecov.io/github/ropenscilabs/scrubr/coverage.svg?branch=master)](http://codecov.io/github/ropenscilabs/scrubr?branch=master)
 
 __Clean Biological Occurrence Records__
 
@@ -38,7 +38,7 @@ to demonstrate traditional usage.
 ## Install
 
 ```{r eval=FALSE}
-devtools::install_github("sckott/scrubr")
+devtools::install_github("ropenscilabs/scrubr")
 ```
 
 ```{r}
@@ -129,4 +129,4 @@ clean_df(sample_data_2) %>% date_create(year, month, day)
 
 ## Meta
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

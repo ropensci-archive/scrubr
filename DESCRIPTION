@@ -5,10 +5,12 @@ Description: Clean biological occurrence records. Includes functionality
     for cleaning based on various aspects of spatial coordinates,
     unlikely values due to political centroids, coordinates based on
     where collections of specimens are held, and more.
-Version: 0.0.4.9100
+Version: 0.0.4.9300
 Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com"))
 License: MIT + file LICENSE
+URL: https://github.com/ropenscilabs/scrubr
+BugReports: https://github.com/ropenscilabs/scrubr/issues
 LazyData: TRUE
 Imports:
     methods,
@@ -23,3 +25,4 @@ Suggests:
     sp,
     rworldmap,
     maps
+RoxygenNote: 5.0.1
