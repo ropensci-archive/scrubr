@@ -25,7 +25,7 @@ Clean using the following use cases (checkmarks indicate fxns exist - not necess
 * [x] Outside political boundary: User input to check for points in the wrong country, or points outside of a known country
 * [x] Taxonomic name based cleaning: via `taxize` (one method so far)
 * Political centroids: unlikely that occurrences fall exactly on these points, more likely a
-default position
+default position (Draft function started, but not exported, and commented out)
 * Herbaria/Museums: many specimens may have location of the collection they are housed in
 * Habitat type filtering: e.g., fish should not be on land; marine fish should not be in fresh water
 * Check for contextually wrong values: That is, if 99 out of 100 lat/long coordinates are within the continental US, but 1 is in China, then perhaps something is wrong with that one point

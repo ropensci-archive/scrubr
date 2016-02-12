@@ -1,7 +1,6 @@
 #' Deduplicate records
 #'
 #' @export
-#' @importFrom qlcMatrix sim.strings
 #' @param x (data.frame) A data.frame
 #' @param how (character) How to deal with duplicates. The default of \code{"one"}
 #' keeps one record of each group of duplicates, and drops the others, putting them

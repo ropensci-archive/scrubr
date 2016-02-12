@@ -8,9 +8,10 @@
 #' @return Returns a data.frame, with attributes
 #' @examples
 #' library("rgbif")
-#' res <- occ_search(limit = 500)$data
+#' res <- occ_data(limit = 500)$data
 #'
-#' # Remove impossible coordinates
+#' # Remove records where names don't have genus + epithet
+#' ## so removes those with only genus and those with no name (NA or NULL)
 #' NROW(res)
 #' df <- clean_df(res) %>% tax_no_epithet(name = "name")
 #' NROW(df)

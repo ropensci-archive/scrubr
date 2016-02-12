@@ -4,9 +4,12 @@
 \name{scrubr-package}
 \alias{scrubr}
 \alias{scrubr-package}
-\title{scrubr}
+\title{scrubr - Clean biological occurrence data}
 \description{
-Clean biological occurrence data
+scrubr - Clean biological occurrence data
+}
+\author{
+Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
 \keyword{package}
 
