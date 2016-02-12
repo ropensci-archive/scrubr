@@ -7,3 +7,4 @@ appveyor.yml
 cran-comments.md
 NEWS.md
 CONTRIBUTING.md
+Makefile

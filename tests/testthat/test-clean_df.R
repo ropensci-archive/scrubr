@@ -1,21 +1,21 @@
-context("clean_df")
+context("dframe")
 
 df <- sample_data_1
 
-test_that("clean_df basic use without lat/long vars works", {
+test_that("dframe basic use without lat/long vars works", {
   skip_on_cran()
 
-  aa <- suppressMessages(clean_df(df))
+  aa <- suppressMessages(dframe(df))
 
   expect_is(aa, "data.frame")
-  expect_is(aa, "clean_df")
+  expect_is(aa, "dframe")
 })
 
-test_that("clean_df fails well", {
+test_that("dframe fails well", {
   skip_on_cran()
 
-  expect_error(clean_df(),
+  expect_error(dframe(),
                "argument \"x\" is missing")
-  expect_error(clean_df("things"),
-               "no 'clean_df' method for")
+  expect_error(dframe("things"),
+               "no 'dframe' method for")
 })

@@ -23,7 +23,7 @@ Taxonomy based cleaning
 }
 \examples{
 library("rgbif")
-res <- occ_data(limit = 500)$data
+res <- occ_data(limit = 200)$data
 
 # Remove records where names don't have genus + epithet
 ## so removes those with only genus and those with no name (NA or NULL)
