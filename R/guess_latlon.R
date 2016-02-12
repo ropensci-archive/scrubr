@@ -2,6 +2,9 @@
 guess_latlon <- function(x, lat = NULL, lon = NULL) {
   nms <- names(x)
 
+  if (!is.null(attr(x, "lat_var_orig"))) lat <- attr(x, "lat_var_orig")
+  if (!is.null(attr(x, "lon_var_orig"))) lon <- attr(x, "lon_var_orig")
+
   if (is.null(lat)) {
     lats <- nms[grep(sprintf("^(%s)$", paste0(lat_options, collapse = "|")), nms, ignore.case = TRUE)]
 

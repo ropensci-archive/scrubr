@@ -25,9 +25,9 @@
 #' If either lat or lon (or both) given, we assign the given column name
 #' to be standardized names of "latitude", and "longitude". If not given, we attempt
 #' to guess what the lat and lon column names are and assign the same standardized
-#' names. Assign the same standardized names makes downstream processing easier
-#' so that we're dealing with consistent column names. FIXME: we could put back
-#' original names I suppose, on returning from any functions.
+#' names. Assigning the same standardized names makes downstream processing easier
+#' so that we're dealing with consistent column names. On returning the data, we
+#' return the original names.
 #'
 #' For \code{coord_within}, we use \code{countriesLow} dataset from the
 #' \pkg{rworldmap} package to get country borders.
@@ -62,17 +62,18 @@
 #'
 #' # Remove points not within correct political borders
 #' library("rgbif")
-#' res <- occ_search(geometry = 'POLYGON((30.1 10.1, 10 20, 20 40, 40 40, 30.1 10.1))', limit=1000)
+#' res <-
+#'  occ_data(geometry = 'POLYGON((30.1 10.1, 10 20, 20 40, 40 40, 30.1 10.1))', limit=100)$data
 #'
 #' ## By specific country name
-#' NROW(res$data)
-#' df_within <- clean_df(res$data) %>% coord_within(country = "Egypt")
+#' NROW(res)
+#' df_within <- clean_df(res) %>% coord_within(country = "Egypt")
 #' NROW(df_within)
 #' attr(df_within, "coord_within")
 #'
 #' ## By a field in your data - makes sure your points occur in one of those countries
-#' NROW(res$data)
-#' df_within <- clean_df(res$data) %>% coord_within(field = "country")
+#' NROW(res)
+#' df_within <- clean_df(res) %>% coord_within(field = "country")
 #' NROW(df_within)
 #' attr(df_within, "coord_within")
 #'
@@ -82,6 +83,15 @@
 #' # df_polcent <- clean_df(df) %>% coord_pol_centroids()
 #' # NROW(df_polcent)
 #' # attr(df_polcent, "coord_polcent")
+#'
+#' ## lat/long column names can vary
+#' df <- sample_data_1
+#' head(df)
+#' names(df)[2:3] <- c('mylon', 'mylat')
+#' head(df)
+#' df[1, "mylat"] <- 170
+#' clean_df(df) %>% coord_impossible(lat = "mylat", lon = "mylon")
+#'
 
 #' @export
 #' @rdname coords
@@ -92,7 +102,7 @@ coord_incomplete <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
   if (drop) x <- x[complete.cases(x$latitude, x$longitude), ]
   row.names(incomp) <- NULL
   row.names(x) <- NULL
-  structure(x, coord_incomplete = incomp)
+  structure(reassign(x), coord_incomplete = incomp)
 }
 
 #' @export
@@ -109,7 +119,7 @@ coord_impossible <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
   }
   row.names(np) <- NULL
   row.names(x) <- NULL
-  structure(x, coord_impossible = np)
+  structure(reassign(x), coord_impossible = np)
 }
 
 #' @export
@@ -122,7 +132,7 @@ coord_unlikely <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
   if (drop) x <- x[!x$latitude == 0 & !x$longitude == 0, ]
   row.names(unl) <- NULL
   row.names(x) <- NULL
-  structure(x, coord_unlikely = unl)
+  structure(reassign(x), coord_unlikely = unl)
 }
 
 #' @export
@@ -168,7 +178,7 @@ coord_within <- function(x, field = NULL, country = NULL,
   if (NROW(wth) == 0) wth <- NA
   row.names(wth) <- NULL
   row.names(x) <- NULL
-  structure(x, coord_within = wth)
+  structure(reassign(x), coord_within = wth)
 }
 
 #' @export
@@ -211,15 +221,3 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 #   coordinates(wc) <- ~long + lat
 #   wc
 # }
-
-
-
-# helper functions -----------------------
-do_coords <- function(x, lat, lon) {
-  if (is.null(attr(x, "lat_var")) || is.null(attr(x, "lon_var"))) {
-    guess_latlon(x, lat, lon)
-  } else {
-    return(x)
-  }
-}
-
