@@ -1,7 +1,7 @@
 #' scrubr - Clean biological occurrence data
 #'
 #' @importFrom methods is
-#' @importFrom stats complete.cases na.omit
+#' @importFrom stats complete.cases na.omit setNames
 #' @importFrom utils head data
 #' @importFrom lazyeval lazy_dots all_dots
 #' @importFrom qlcMatrix sim.strings

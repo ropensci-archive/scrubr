@@ -3,7 +3,7 @@ Type: Package
 Title: Clean Biological Occurrence Records
 Description: Clean biological occurrence records. Includes functionality
     for cleaning based on various aspects of spatial coordinates,
-    unlikely values due to political centroids, coordinates based on
+    unlikely values due to political 'centroids', coordinates based on
     where collections of specimens are held, and more.
 Version: 0.0.7.9000
 Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
