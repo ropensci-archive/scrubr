@@ -5,7 +5,11 @@ before_install:
 - sudo apt-get install libv8-dev
 
 r_packages:
-- rgbif sp rworldmap maps covr
+- rgbif
+- sp
+- rworldmap
+- maps
+- covr
 
 after_success:
 - Rscript -e 'covr::codecov()'
