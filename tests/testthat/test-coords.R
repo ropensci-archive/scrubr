@@ -26,6 +26,6 @@ test_that("coord_* passing lat/long vars works", {
   expect_is(bb, "clean_df")
   expect_equal(names(df)[2], lon_name)
   expect_equal(names(df)[3], lat_name)
-  expect_equal(names(bb)[2], "longitude")
-  expect_equal(names(bb)[3], "latitude")
+  expect_equal(names(bb)[2], "x")
+  expect_equal(names(bb)[3], "y")
 })

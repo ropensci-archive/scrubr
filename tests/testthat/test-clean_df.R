@@ -17,5 +17,5 @@ test_that("clean_df fails well", {
   expect_error(clean_df(),
                "argument \"x\" is missing")
   expect_error(clean_df("things"),
-               "x must be a data.frame")
+               "no 'clean_df' method for")
 })

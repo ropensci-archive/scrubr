@@ -12,6 +12,11 @@ clean_df <- function(x) {
 }
 
 #' @export
+clean_df.default <- function(x) {
+  stop("no 'clean_df' method for ", class(x), call. = FALSE)
+}
+
+#' @export
 clean_df.data.frame <- function(x) {
   if (!is.data.frame(x)) stop("x must be a data.frame", call. = FALSE)
   as_data_frame(x)
