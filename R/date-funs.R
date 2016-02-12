@@ -22,22 +22,22 @@
 #' @examples
 #' df <- sample_data_1
 #' # Standardize dates
-#' clean_df(df) %>% date_standardize()
-#' clean_df(df) %>% date_standardize("%Y/%m/%d")
-#' clean_df(df) %>% date_standardize("%d%b%Y")
-#' clean_df(df) %>% date_standardize("%Y")
-#' clean_df(df) %>% date_standardize("%y")
+#' dframe(df) %>% date_standardize()
+#' dframe(df) %>% date_standardize("%Y/%m/%d")
+#' dframe(df) %>% date_standardize("%d%b%Y")
+#' dframe(df) %>% date_standardize("%Y")
+#' dframe(df) %>% date_standardize("%y")
 #'
 #' # drop records without dates
 #' NROW(df)
-#' NROW(clean_df(df) %>% date_missing())
+#' NROW(dframe(df) %>% date_missing())
 #'
 #' # Create date field from other fields
 #' df <- sample_data_2
 #' ## NSE
-#' clean_df(df) %>% date_create(year, month, day)
+#' dframe(df) %>% date_create(year, month, day)
 #' ## SE
-#' date_create_(clean_df(df), "year", "month", "day")
+#' date_create_(dframe(df), "year", "month", "day")
 
 #' @export
 #' @rdname date

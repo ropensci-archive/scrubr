@@ -73,19 +73,19 @@ df <- sample_data_1
 # Remove impossible coordinates
 NROW(df)
 df[1, "latitude"] <- 170
-df <- clean_df(df) \%>\% coord_impossible()
+df <- dframe(df) \%>\% coord_impossible()
 NROW(df)
 attr(df, "coord_impossible")
 
 # Remove incomplete cases
 NROW(df)
-df_inc <- clean_df(df) \%>\% coord_incomplete()
+df_inc <- dframe(df) \%>\% coord_incomplete()
 NROW(df_inc)
 attr(df_inc, "coord_incomplete")
 
 # Remove unlikely points
 NROW(df)
-df_unlikely <- clean_df(df) \%>\% coord_unlikely()
+df_unlikely <- dframe(df) \%>\% coord_unlikely()
 NROW(df_unlikely)
 attr(df_unlikely, "coord_unlikely")
 
@@ -96,20 +96,20 @@ res <-
 
 ## By specific country name
 NROW(res)
-df_within <- clean_df(res) \%>\% coord_within(country = "Egypt")
+df_within <- dframe(res) \%>\% coord_within(country = "Egypt")
 NROW(df_within)
 attr(df_within, "coord_within")
 
 ## By a field in your data - makes sure your points occur in one of those countries
 NROW(res)
-df_within <- clean_df(res) \%>\% coord_within(field = "country")
+df_within <- dframe(res) \%>\% coord_within(field = "country")
 NROW(df_within)
 attr(df_within, "coord_within")
 
 # Remove those very near political centroids
 ## not ready yet
 # NROW(df)
-# df_polcent <- clean_df(df) \%>\% coord_pol_centroids()
+# df_polcent <- dframe(df) \%>\% coord_pol_centroids()
 # NROW(df_polcent)
 # attr(df_polcent, "coord_polcent")
 
@@ -119,7 +119,7 @@ head(df)
 names(df)[2:3] <- c('mylon', 'mylat')
 head(df)
 df[1, "mylat"] <- 170
-clean_df(df) \%>\% coord_impossible(lat = "mylat", lon = "mylon")
+dframe(df) \%>\% coord_impossible(lat = "mylat", lon = "mylon")
 
 }
 

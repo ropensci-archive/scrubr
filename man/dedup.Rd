@@ -31,7 +31,7 @@ smalldf <- df[1:20, ]
 smalldf <- rbind(smalldf, smalldf[10,])
 smalldf[21, "key"] <- 1088954555
 NROW(smalldf)
-dp <- clean_df(smalldf) \%>\% dedup()
+dp <- dframe(smalldf) \%>\% dedup()
 NROW(dp)
 attr(dp, "dups")
 
@@ -41,7 +41,7 @@ twodups <- df[1:10, ]
 twodups <- rbind(twodups, twodups[c(9, 10), ])
 rownames(twodups) <- NULL
 NROW(twodups)
-dp <- clean_df(twodups) \%>\% dedup()
+dp <- dframe(twodups) \%>\% dedup()
 NROW(dp)
 attr(dp, "dups")
 }

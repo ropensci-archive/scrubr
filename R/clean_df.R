@@ -1,29 +1,25 @@
-#' Clean data.frame
+#' Compact data.frame
 #'
 #' @export
 #' @param x Input data.frame
 #' @examples
-#' df <- sample_data_1
-#'
-#' # Make a `clean_df` object
-#' clean_df(df)
-clean_df <- function(x) {
-  UseMethod("clean_df")
+#' dframe(sample_data_1)
+#' dframe(mtcars)
+#' dframe(iris)
+dframe <- function(x) {
+  UseMethod("dframe")
 }
 
 #' @export
-clean_df.default <- function(x) {
-  stop("no 'clean_df' method for ", class(x), call. = FALSE)
+dframe.default <- function(x) {
+  stop("no 'dframe' method for ", class(x), call. = FALSE)
 }
 
 #' @export
-clean_df.data.frame <- function(x) {
-  if (!is.data.frame(x)) stop("x must be a data.frame", call. = FALSE)
-  as_data_frame(x)
-}
+dframe.data.frame <- function(x) as_data_frame(x)
 
 #' @export
-clean_df.clean_df <- function(x) x
+dframe.dframe <- function(x) x
 
 as_data_frame <- function(x) {
   stopifnot(is.list(x))
@@ -46,7 +42,7 @@ as_data_frame <- function(x) {
   if (length(n) != 1) {
     stop("Columns are not all same length", call. = FALSE)
   }
-  class(x) <- c("clean_df", "tbl_df", "tbl", "data.frame")
+  class(x) <- c("dframe", "tbl_df", "tbl", "data.frame")
   attr(x, "row.names") <- .set_row_names(n)
   return(x)
 }

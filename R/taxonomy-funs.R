@@ -13,7 +13,7 @@
 #' # Remove records where names don't have genus + epithet
 #' ## so removes those with only genus and those with no name (NA or NULL)
 #' NROW(res)
-#' df <- clean_df(res) %>% tax_no_epithet(name = "name")
+#' df <- dframe(res) %>% tax_no_epithet(name = "name")
 #' NROW(df)
 #' attr(df, "name_var")
 #' attr(df, "tax_no_epithet")
