@@ -18,7 +18,7 @@ Clean using the following use cases (checkmarks indicate fxns exist - not necess
 * [x] Outside political boundary: User input to check for points in the wrong country, or points outside of a known country
 * [x] Taxonomic name based cleaning: via `taxize` (one method so far)
 * Political centroids: unlikely that occurrences fall exactly on these points, more likely a
-default position
+default position (Draft function started, but not exported, and commented out)
 * Herbaria/Museums: many specimens may have location of the collection they are housed in
 * Habitat type filtering: e.g., fish should not be on land; marine fish should not be in fresh water
 * Check for contextually wrong values: That is, if 99 out of 100 lat/long coordinates are within the continental US, but 1 is in China, then perhaps something is wrong with that one point
@@ -51,9 +51,9 @@ Remove impossible coordinates (using sample data included in the pkg)
 
 
 ```r
-# coord_impossible(clean_df(sample_data_1)) # w/o pipe
-clean_df(sample_data_1) %>% coord_impossible()
-#> <clean dataset>
+# coord_impossible(dframe(sample_data_1)) # w/o pipe
+dframe(sample_data_1) %>% coord_impossible()
+#> <scrubr dframe>
 #> Size: 1500 X 5
 #> Lat/Lon vars: latitude/longitude
 #> 
@@ -76,9 +76,9 @@ Remove incomplete coordinates
 
 
 ```r
-# coord_incomplete(clean_df(sample_data_1)) # w/o pipe
-clean_df(sample_data_1) %>% coord_incomplete()
-#> <clean dataset>
+# coord_incomplete(dframe(sample_data_1)) # w/o pipe
+dframe(sample_data_1) %>% coord_incomplete()
+#> <scrubr dframe>
 #> Size: 1306 X 5
 #> Lat/Lon vars: latitude/longitude
 #> 
@@ -101,9 +101,9 @@ Remove unlikely coordinates (e.g., those at 0,0)
 
 
 ```r
-# coord_unlikely(clean_df(sample_data_1)) # w/o pipe
-clean_df(sample_data_1) %>% coord_unlikely()
-#> <clean dataset>
+# coord_unlikely(dframe(sample_data_1)) # w/o pipe
+dframe(sample_data_1) %>% coord_unlikely()
+#> <scrubr dframe>
 #> Size: 1488 X 5
 #> Lat/Lon vars: latitude/longitude
 #> 
@@ -126,11 +126,11 @@ Do all three
 
 
 ```r
-clean_df(sample_data_1) %>%
+dframe(sample_data_1) %>%
   coord_impossible() %>%
   coord_incomplete() %>%
   coord_unlikely()
-#> <clean dataset>
+#> <scrubr dframe>
 #> Size: 1294 X 5
 #> Lat/Lon vars: latitude/longitude
 #> 
@@ -153,9 +153,9 @@ Don't drop bad data
 
 
 ```r
-clean_df(sample_data_1) %>% coord_incomplete(drop = TRUE) %>% NROW
+dframe(sample_data_1) %>% coord_incomplete(drop = TRUE) %>% NROW
 #> [1] 1306
-clean_df(sample_data_1) %>% coord_incomplete(drop = FALSE) %>% NROW
+dframe(sample_data_1) %>% coord_incomplete(drop = FALSE) %>% NROW
 #> [1] 1500
 ```
 
@@ -172,11 +172,11 @@ row.names(smalldf) <- NULL
 smalldf[21, "key"] <- 1088954555
 NROW(smalldf)
 #> [1] 21
-dp <- clean_df(smalldf) %>% dedup()
+dp <- dframe(smalldf) %>% dedup()
 NROW(dp)
 #> [1] 20
 attr(dp, "dups")
-#> <clean dataset>
+#> <scrubr dframe>
 #> Size: 1 X 5
 #> 
 #> 
@@ -192,9 +192,9 @@ Standardize/convert dates
 
 ```r
 df <- sample_data_1
-# date_standardize(clean_df(df), "%d%b%Y") # w/o pipe
-clean_df(df) %>% date_standardize("%d%b%Y")
-#> <clean dataset>
+# date_standardize(dframe(df), "%d%b%Y") # w/o pipe
+dframe(df) %>% date_standardize("%d%b%Y")
+#> <scrubr dframe>
 #> Size: 1500 X 5
 #> 
 #> 
@@ -219,7 +219,7 @@ Drop records without dates
 ```r
 NROW(df)
 #> [1] 1500
-NROW(clean_df(df) %>% date_missing())
+NROW(dframe(df) %>% date_missing())
 #> [1] 1498
 ```
 
@@ -227,8 +227,8 @@ Create date field from other fields
 
 
 ```r
-clean_df(sample_data_2) %>% date_create(year, month, day)
-#> <clean dataset>
+dframe(sample_data_2) %>% date_create(year, month, day)
+#> <scrubr dframe>
 #> Size: 1500 X 8
 #> 
 #> 
@@ -245,8 +245,14 @@ clean_df(sample_data_2) %>% date_create(year, month, day)
 #> 9  Ursus americanus  -78.25027 36.93018 1088923534  2015    03    20
 #> 10 Ursus americanus  -76.78671 35.53079 1088954559  2015    04    05
 #> ..              ...        ...      ...        ...   ...   ...   ...
+#> Variables not shown: date (chr).
 ```
 
 ## Meta
 
+* Please [report any issues or bugs](https://github.com/ropenscilabs/scrubr/issues).
+* License: MIT
+* Get citation information for `scrubr` in R doing `citation(package = 'scrubr')`
 * Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

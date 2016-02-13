@@ -54,28 +54,28 @@ data("sampledata1")
 Remove impossible coordinates (using sample data included in the pkg)
 
 ```{r}
-# coord_impossible(clean_df(sample_data_1)) # w/o pipe
-clean_df(sample_data_1) %>% coord_impossible()
+# coord_impossible(dframe(sample_data_1)) # w/o pipe
+dframe(sample_data_1) %>% coord_impossible()
 ```
 
 Remove incomplete coordinates
 
 ```{r}
-# coord_incomplete(clean_df(sample_data_1)) # w/o pipe
-clean_df(sample_data_1) %>% coord_incomplete()
+# coord_incomplete(dframe(sample_data_1)) # w/o pipe
+dframe(sample_data_1) %>% coord_incomplete()
 ```
 
 Remove unlikely coordinates (e.g., those at 0,0)
 
 ```{r}
-# coord_unlikely(clean_df(sample_data_1)) # w/o pipe
-clean_df(sample_data_1) %>% coord_unlikely()
+# coord_unlikely(dframe(sample_data_1)) # w/o pipe
+dframe(sample_data_1) %>% coord_unlikely()
 ```
 
 Do all three
 
 ```{r}
-clean_df(sample_data_1) %>%
+dframe(sample_data_1) %>%
   coord_impossible() %>%
   coord_incomplete() %>%
   coord_unlikely()
@@ -84,8 +84,8 @@ clean_df(sample_data_1) %>%
 Don't drop bad data
 
 ```{r}
-clean_df(sample_data_1) %>% coord_incomplete(drop = TRUE) %>% NROW
-clean_df(sample_data_1) %>% coord_incomplete(drop = FALSE) %>% NROW
+dframe(sample_data_1) %>% coord_incomplete(drop = TRUE) %>% NROW
+dframe(sample_data_1) %>% coord_incomplete(drop = FALSE) %>% NROW
 ```
 
 
@@ -99,7 +99,7 @@ row.names(smalldf) <- NULL
 # make it slightly different
 smalldf[21, "key"] <- 1088954555
 NROW(smalldf)
-dp <- clean_df(smalldf) %>% dedup()
+dp <- dframe(smalldf) %>% dedup()
 NROW(dp)
 attr(dp, "dups")
 ```
@@ -110,23 +110,28 @@ Standardize/convert dates
 
 ```{r}
 df <- sample_data_1
-# date_standardize(clean_df(df), "%d%b%Y") # w/o pipe
-clean_df(df) %>% date_standardize("%d%b%Y")
+# date_standardize(dframe(df), "%d%b%Y") # w/o pipe
+dframe(df) %>% date_standardize("%d%b%Y")
 ```
 
 Drop records without dates
 
 ```{r}
 NROW(df)
-NROW(clean_df(df) %>% date_missing())
+NROW(dframe(df) %>% date_missing())
 ```
 
 Create date field from other fields
 
 ```{r}
-clean_df(sample_data_2) %>% date_create(year, month, day)
+dframe(sample_data_2) %>% date_create(year, month, day)
 ```
 
 ## Meta
 
+* Please [report any issues or bugs](https://github.com/ropenscilabs/scrubr/issues).
+* License: MIT
+* Get citation information for `scrubr` in R doing `citation(package = 'scrubr')`
 * Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
