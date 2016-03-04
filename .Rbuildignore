@@ -5,6 +5,5 @@ README.Rmd
 .travis.yml
 appveyor.yml
 cran-comments.md
-NEWS.md
 CONTRIBUTING.md
 Makefile
