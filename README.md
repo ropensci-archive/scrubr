@@ -5,6 +5,7 @@ scrubr
 
 [![Build Status](https://travis-ci.org/ropenscilabs/scrubr.svg?branch=master)](https://travis-ci.org/ropenscilabs/scrubr)
 [![codecov.io](http://codecov.io/github/ropenscilabs/scrubr/coverage.svg?branch=master)](http://codecov.io/github/ropenscilabs/scrubr?branch=master)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/scrubr?color=ff69b4)](https://github.com/metacran/cranlogs.app)
 
 __Clean Biological Occurrence Records__
 
@@ -29,6 +30,15 @@ build up, and easier to understand. However, in some examples we provide example
 to demonstrate traditional usage.
 
 ## Install
+
+Stable CRAN version
+
+
+```r
+install.packages("scrubr")
+```
+
+Development version
 
 
 ```r
