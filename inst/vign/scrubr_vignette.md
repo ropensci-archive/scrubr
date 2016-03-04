@@ -67,7 +67,7 @@ Remove impossible coordinates (using sample data included in the pkg)
 ```r
 # coord_impossible(dframe(sample_data_1)) # w/o pipe
 dframe(sample_data_1) %>% coord_impossible()
-#> <clean dataset>
+#> <scrubr dframe>
 #> Size: 1500 X 5
 #> Lat/Lon vars: latitude/longitude
 #> 
@@ -92,7 +92,7 @@ Remove incomplete coordinates
 ```r
 # coord_incomplete(dframe(sample_data_1)) # w/o pipe
 dframe(sample_data_1) %>% coord_incomplete()
-#> <clean dataset>
+#> <scrubr dframe>
 #> Size: 1306 X 5
 #> Lat/Lon vars: latitude/longitude
 #> 
@@ -117,7 +117,7 @@ Remove unlikely coordinates (e.g., those at 0,0)
 ```r
 # coord_unlikely(dframe(sample_data_1)) # w/o pipe
 dframe(sample_data_1) %>% coord_unlikely()
-#> <clean dataset>
+#> <scrubr dframe>
 #> Size: 1488 X 5
 #> Lat/Lon vars: latitude/longitude
 #> 
@@ -144,7 +144,7 @@ dframe(sample_data_1) %>%
   coord_impossible() %>%
   coord_incomplete() %>%
   coord_unlikely()
-#> <clean dataset>
+#> <scrubr dframe>
 #> Size: 1294 X 5
 #> Lat/Lon vars: latitude/longitude
 #> 
@@ -189,7 +189,7 @@ dp <- dframe(smalldf) %>% dedup()
 NROW(dp)
 #> [1] 20
 attr(dp, "dups")
-#> <clean dataset>
+#> <scrubr dframe>
 #> Size: 1 X 5
 #> 
 #> 
@@ -206,7 +206,7 @@ Standardize/convert dates
 ```r
 # date_standardize(dframe(df), "%d%b%Y") # w/o pipe
 dframe(sample_data_1) %>% date_standardize("%d%b%Y")
-#> <clean dataset>
+#> <scrubr dframe>
 #> Size: 1500 X 5
 #> 
 #> 
@@ -240,7 +240,7 @@ Create date field from other fields
 
 ```r
 dframe(sample_data_2) %>% date_create(year, month, day)
-#> <clean dataset>
+#> <scrubr dframe>
 #> Size: 1500 X 8
 #> 
 #> 
@@ -281,28 +281,27 @@ NROW(res)
 #> [1] 500
 df <- dframe(res) %>% tax_no_epithet(name = "name")
 NROW(df)
-#> [1] 483
+#> [1] 490
 attr(df, "name_var")
 #> [1] "name"
 attr(df, "tax_no_epithet")
-#> <clean dataset>
-#> Size: 17 X 74
+#> <scrubr dframe>
+#> Size: 10 X 97
 #> 
 #> Name var: name
 #> 
 #>     name        key decimalLatitude decimalLongitude
 #>    (chr)      (int)           (dbl)            (dbl)
-#> 1     NA 1227770300        37.08709       -122.06386
-#> 2     NA 1228050314        43.34010          5.49635
-#> 3     NA 1227771588        43.81766        -72.54275
-#> 4     NA 1227772149        23.29900       -106.44343
-#> 5     NA 1227772834        20.54332        -87.21385
-#> 6     NA 1233595412        29.86029        -95.61931
-#> 7     NA 1227766821       -41.06324        175.18910
-#> 8     NA 1227769676        38.04385       -122.79852
-#> 9     NA 1227769697        44.45309        -73.22313
-#> 10    NA 1227769856        33.06379        -96.98881
-#> ..   ...        ...             ...              ...
+#> 1     NA 1228053209        48.73583          2.27724
+#> 2     NA 1229956632        36.24426         -6.07235
+#> 3     NA 1229959363        42.97432          0.40971
+#> 4     NA 1233599876        38.71349       -123.00099
+#> 5     NA 1234563183       -44.70055        170.96715
+#> 6     NA 1234563247       -36.94663        174.61005
+#> 7     NA 1234563254       -36.94663        174.61005
+#> 8     NA 1234563259       -37.11878        175.20867
+#> 9     NA 1234563264       -36.94675        174.60806
+#> 10    NA 1234563300       -39.27376        174.09365
 #> Variables not shown: issues (chr), datasetKey (chr), publishingOrgKey
 #>   (chr), publishingCountry (chr), protocol (chr), lastCrawled (chr),
 #>   lastParsed (chr), basisOfRecord (chr), taxonKey (int), kingdomKey (int),
@@ -313,15 +312,22 @@ attr(df, "tax_no_epithet")
 #>   day (int), eventDate (chr), modified (chr), lastInterpreted (chr),
 #>   references (chr), geodeticDatum (chr), class (chr), countryCode (chr),
 #>   country (chr), rightsHolder (chr), identifier (chr), verbatimEventDate
-#>   (chr), datasetName (chr), gbifID (chr), collectionCode (chr),
-#>   verbatimLocality (chr), occurrenceID (chr), taxonID (chr), catalogNumber
-#>   (chr), recordedBy (chr), http://unknown.org/occurrenceDetails (chr),
+#>   (chr), datasetName (chr), gbifID (chr), verbatimLocality (chr),
+#>   collectionCode (chr), occurrenceID (chr), taxonID (chr), recordedBy
+#>   (chr), catalogNumber (chr), http://unknown.org/occurrenceDetails (chr),
 #>   institutionCode (chr), rights (chr), eventTime (chr), identificationID
-#>   (chr), infraspecificEpithet (chr), occurrenceRemarks (chr),
-#>   informationWithheld (chr), county (chr), locality (chr), elevation
-#>   (dbl), elevationAccuracy (dbl), depth (dbl), depthAccuracy (dbl),
-#>   waterBody (chr), type (chr), ownerInstitutionCode (chr),
-#>   samplingProtocol (chr), datasetID (chr), nameAccordingTo (chr),
-#>   identifiedBy (chr), georeferenceSources (chr), identificationRemarks
+#>   (chr), occurrenceRemarks (chr), informationWithheld (chr), stateProvince
+#>   (chr), recordNumber (chr), locality (chr), language (chr), type (chr),
+#>   otherCatalogNumbers (chr), fieldNotes (chr), identifiedBy (chr), county
+#>   (chr), infraspecificEpithet (chr), elevation (dbl), elevationAccuracy
+#>   (dbl), depth (dbl), depthAccuracy (dbl), waterBody (chr),
+#>   ownerInstitutionCode (chr), datasetID (chr), samplingProtocol (chr),
+#>   nameAccordingTo (chr), georeferenceSources (chr), sex (chr), continent
+#>   (chr), institutionID (chr), dynamicProperties (chr),
+#>   identificationVerificationStatus (chr), fieldNumber (chr), preparations
+#>   (chr), verbatimElevation (chr), nomenclaturalCode (chr), higherGeography
+#>   (chr), georeferencedBy (chr), island (chr), georeferenceProtocol (chr),
+#>   verbatimCoordinateSystem (chr), disposition (chr), startDayOfYear (chr),
+#>   higherClassification (chr), identificationRemarks (chr), municipality
 #>   (chr).
 ```
