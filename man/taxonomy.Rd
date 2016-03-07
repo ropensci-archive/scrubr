@@ -22,8 +22,12 @@ Returns a data.frame, with attributes
 Taxonomy based cleaning
 }
 \examples{
-library("rgbif")
-res <- occ_data(limit = 200)$data
+if (requireNamespace("rgbif", quietly = TRUE)) {
+   library("rgbif")
+   res <- rgbif::occ_data(limit = 200)$data
+} else {
+   res <- sample_data_3
+}
 
 # Remove records where names don't have genus + epithet
 ## so removes those with only genus and those with no name (NA or NULL)

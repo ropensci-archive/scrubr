@@ -90,9 +90,13 @@ NROW(df_unlikely)
 attr(df_unlikely, "coord_unlikely")
 
 # Remove points not within correct political borders
-library("rgbif")
-res <-
- occ_data(geometry = 'POLYGON((30.1 10.1, 10 20, 20 40, 40 40, 30.1 10.1))', limit=100)$data
+if (requireNamespace("rgbif", quietly = TRUE)) {
+   library("rgbif")
+   wkt <- 'POLYGON((30.1 10.1, 10 20, 20 40, 40 40, 30.1 10.1))'
+   res <- rgbif::occ_data(geometry = wkt, limit=100)$data
+} else {
+   res <- sample_data_4
+}
 
 ## By specific country name
 NROW(res)
