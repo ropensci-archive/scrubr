@@ -66,7 +66,7 @@ dedup <- function(x, how = "one", tolerance = 0.9) {
 }
 
 matrix2df <- function(x) {
-  x <- as.matrix(x)
+  x <- Matrix::as.matrix(x)
   x[!lower.tri(x)] <- NA
   df <- data.frame(one = rownames(x)[row(x)],
              two = colnames(x)[col(x)],

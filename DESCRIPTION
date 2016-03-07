@@ -17,6 +17,7 @@ Imports:
     methods,
     stats,
     utils,
+    Matrix,
     magrittr,
     qlcMatrix,
     lazyeval
