@@ -269,8 +269,12 @@ Get some data from GBIF, via `rgbif`
 
 
 ```r
-library("rgbif")
-res <- occ_data(limit = 500)$data
+if (requireNamespace("rgbif", quietly = TRUE)) {
+  library("rgbif")
+  res <- occ_data(limit = 500)$data
+} else {
+  res <- sample_data_3
+}
 ```
 
 Clean names
