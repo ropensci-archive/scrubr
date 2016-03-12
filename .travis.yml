@@ -1,15 +1,20 @@
 language: r
-sudo: required
+sudo: false
+cache: packages
 
-before_install:
-- sudo apt-get install libv8-dev
+addons:
+  apt:
+    packages:
+      - libv8-dev
+
+r_github_packages:
+- jimhester/covr
 
 r_packages:
 - rgbif
 - sp
 - rworldmap
 - maps
-- covr
 
 after_success:
 - Rscript -e 'covr::codecov(token = Sys.getenv("SCRUBR_CODECOV_UPLOAD_TOKEN"))'
