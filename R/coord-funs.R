@@ -5,6 +5,7 @@
 #' @param lat,lon (character) Latitude and longitude column to use. See Details.
 #' @param field (character) Name of filed in input data.frame x with country names
 #' @param country (character) A single country name
+#' @param which (character) one of "has_dec", "no_zeros", or "both" (default)
 #' @param drop (logical) Drop bad data points or not. Either way, we parse
 #' out bade data points as an attribute you can access. Default: \code{TRUE}
 #'
@@ -15,7 +16,8 @@
 #'
 #' \itemize{
 #'  \item coord_impossible - Impossible coordinates
-#'  \item coord_incomplete - Incomplete coordinaes
+#'  \item coord_incomplete - Incomplete coordinates
+#'  \item coord_imprecise - Imprecise coordinates
 #'  \item coord_pol_centroids - Points at political centroids
 #'  \item coord_unlikely - Unlikely coordinates
 #'  \item coord_within - Check if points are within user input
@@ -53,6 +55,24 @@
 #' df_inc <- dframe(df) %>% coord_incomplete()
 #' NROW(df_inc)
 #' attr(df_inc, "coord_incomplete")
+#'
+#'
+#' # Remove imprecise cases
+#' df <- sample_data_5
+#' NROW(df)
+#' ## remove records that don't have decimals at all
+#' df_imp <- dframe(df) %>% coord_imprecise(which = "has_dec")
+#' NROW(df_imp)
+#' attr(df_imp, "coord_imprecise")
+#' ## remove records that have all zeros
+#' df_imp <- dframe(df) %>% coord_imprecise(which = "no_zeros")
+#' NROW(df_imp)
+#' attr(df_imp, "coord_imprecise")
+#' ## remove both records that don't have decimals at all and those that have all zeros
+#' df_imp <- dframe(df) %>% coord_imprecise(which = "both")
+#' NROW(df_imp)
+#' attr(df_imp, "coord_imprecise")
+#'
 #'
 #' # Remove unlikely points
 #' NROW(df)
@@ -107,6 +127,51 @@ coord_incomplete <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
   row.names(incomp) <- NULL
   row.names(x) <- NULL
   structure(reassign(x), coord_incomplete = incomp)
+}
+
+#' @export
+#' @rdname coords
+coord_imprecise <- function(x, which = "both", lat = NULL, lon = NULL, drop = TRUE) {
+  x <- do_coords(x, lat, lon)
+  switch(
+    which,
+    has_dec = {
+      incomp <- x[!grepl("[0-9]+\\.[0-9]+", x$longitude) | !grepl("[0-9]+\\.[0-9]+", x$latitude), ]
+    },
+    no_zeros = {
+      incomp <- x[grepl("[0-9]+\\.[0]+$", x$longitude) | grepl("[0-9]+\\.[0]+$", x$latitude), ]
+    },
+    both = {
+      incomp1 <- x[!grepl("[0-9]+\\.[0-9]+", x$longitude) | !grepl("[0-9]+\\.[0-9]+", x$latitude), ]
+      incomp2 <- x[grepl("[0-9]+\\.[0]+$", x$longitude) | grepl("[0-9]+\\.[0]+$", x$latitude), ]
+      incomp <- rbind(incomp1, incomp2)
+      incomp <- incomp[!duplicated(incomp), ]
+    }
+  )
+
+  if (NROW(incomp) == 0) incomp <- NA
+  if (drop) {
+    switch(
+      which,
+      has_dec = {
+        x <- x[grepl("[0-9]+\\.[0-9]+", x$longitude), ]
+        x <- x[grepl("[0-9]+\\.[0-9]+", x$latitude), ]
+      },
+      no_zeros = {
+        x <- x[!grepl("[0-9]+\\.[0]+$", x$longitude), ]
+        x <- x[!grepl("[0-9]+\\.[0]+$", x$latitude), ]
+      },
+      both = {
+        x <- x[grepl("[0-9]+\\.[0-9]+", x$longitude), ]
+        x <- x[grepl("[0-9]+\\.[0-9]+", x$latitude), ]
+        x <- x[!grepl("[0-9]+\\.[0]+$", x$longitude), ]
+        x <- x[!grepl("[0-9]+\\.[0]+$", x$latitude), ]
+      }
+    )
+  }
+  row.names(incomp) <- NULL
+  row.names(x) <- NULL
+  structure(reassign(x), coord_imprecise = incomp)
 }
 
 #' @export

@@ -2,6 +2,7 @@
 % Please edit documentation in R/coord-funs.R
 \name{coords}
 \alias{coord_impossible}
+\alias{coord_imprecise}
 \alias{coord_incomplete}
 \alias{coord_pol_centroids}
 \alias{coord_unlikely}
@@ -10,6 +11,8 @@
 \title{Coordinate based cleaning}
 \usage{
 coord_incomplete(x, lat = NULL, lon = NULL, drop = TRUE)
+
+coord_imprecise(x, which = "both", lat = NULL, lon = NULL, drop = TRUE)
 
 coord_impossible(x, lat = NULL, lon = NULL, drop = TRUE)
 
@@ -28,6 +31,8 @@ coord_pol_centroids(x, lat = NULL, lon = NULL, drop = TRUE)
 \item{drop}{(logical) Drop bad data points or not. Either way, we parse
 out bade data points as an attribute you can access. Default: \code{TRUE}}
 
+\item{which}{(character) one of "has_dec", "no_zeros", or "both" (default)}
+
 \item{field}{(character) Name of filed in input data.frame x with country names}
 
 \item{country}{(character) A single country name}
@@ -43,7 +48,8 @@ Explanation of the functions:
 
 \itemize{
  \item coord_impossible - Impossible coordinates
- \item coord_incomplete - Incomplete coordinaes
+ \item coord_incomplete - Incomplete coordinates
+ \item coord_imprecise - Imprecise coordinates
  \item coord_pol_centroids - Points at political centroids
  \item coord_unlikely - Unlikely coordinates
  \item coord_within - Check if points are within user input
@@ -82,6 +88,24 @@ NROW(df)
 df_inc <- dframe(df) \%>\% coord_incomplete()
 NROW(df_inc)
 attr(df_inc, "coord_incomplete")
+
+
+# Remove imprecise cases
+df <- sample_data_5
+NROW(df)
+## remove records that don't have decimals at all
+df_imp <- dframe(df) \%>\% coord_imprecise(which = "has_dec")
+NROW(df_imp)
+attr(df_imp, "coord_imprecise")
+## remove records that have all zeros
+df_imp <- dframe(df) \%>\% coord_imprecise(which = "no_zeros")
+NROW(df_imp)
+attr(df_imp, "coord_imprecise")
+## remove both records that don't have decimals at all and those that have all zeros
+df_imp <- dframe(df) \%>\% coord_imprecise(which = "both")
+NROW(df_imp)
+attr(df_imp, "coord_imprecise")
+
 
 # Remove unlikely points
 NROW(df)
