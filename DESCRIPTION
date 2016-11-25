@@ -9,8 +9,8 @@ Version: 0.1.1.9400
 Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com"))
 License: MIT + file LICENSE
-URL: https://github.com/ropenscilabs/scrubr
-BugReports: https://github.com/ropenscilabs/scrubr/issues
+URL: https://github.com/ropensci/scrubr
+BugReports: https://github.com/ropensci/scrubr/issues
 LazyData: TRUE
 VignetteBuilder: knitr
 Imports:

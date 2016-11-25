@@ -3,8 +3,8 @@ scrubr
 
 
 
-[![Build Status](https://travis-ci.org/ropenscilabs/scrubr.svg?branch=master)](https://travis-ci.org/ropenscilabs/scrubr)
-[![codecov.io](http://codecov.io/github/ropenscilabs/scrubr/coverage.svg?branch=master)](http://codecov.io/github/ropenscilabs/scrubr?branch=master)
+[![Build Status](https://travis-ci.org/ropensci/scrubr.svg?branch=master)](https://travis-ci.org/ropensci/scrubr)
+[![codecov.io](http://codecov.io/github/ropensci/scrubr/coverage.svg?branch=master)](http://codecov.io/github/ropensci/scrubr?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/scrubr?color=ff69b4)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/scrubr)](https://cran.r-project.org/package=scrubr)
 
@@ -43,7 +43,7 @@ Development version
 
 
 ```r
-devtools::install_github("ropenscilabs/scrubr")
+devtools::install_github("ropensci/scrubr")
 ```
 
 
@@ -67,7 +67,7 @@ dframe(sample_data_1) %>% coord_impossible()
 #> <scrubr dframe>
 #> Size: 1500 X 5
 #> Lat/Lon vars: latitude/longitude
-#>
+#> 
 #>                name  longitude latitude                date        key
 #>               (chr)      (dbl)    (dbl)              (time)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
@@ -92,7 +92,7 @@ dframe(sample_data_1) %>% coord_incomplete()
 #> <scrubr dframe>
 #> Size: 1306 X 5
 #> Lat/Lon vars: latitude/longitude
-#>
+#> 
 #>                name  longitude latitude                date        key
 #>               (chr)      (dbl)    (dbl)              (time)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
@@ -117,7 +117,7 @@ dframe(sample_data_1) %>% coord_unlikely()
 #> <scrubr dframe>
 #> Size: 1488 X 5
 #> Lat/Lon vars: latitude/longitude
-#>
+#> 
 #>                name  longitude latitude                date        key
 #>               (chr)      (dbl)    (dbl)              (time)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
@@ -144,7 +144,7 @@ dframe(sample_data_1) %>%
 #> <scrubr dframe>
 #> Size: 1294 X 5
 #> Lat/Lon vars: latitude/longitude
-#>
+#> 
 #>                name  longitude latitude                date        key
 #>               (chr)      (dbl)    (dbl)              (time)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 2015-01-14 16:36:45 1065590124
@@ -189,8 +189,8 @@ NROW(dp)
 attr(dp, "dups")
 #> <scrubr dframe>
 #> Size: 1 X 5
-#>
-#>
+#> 
+#> 
 #>               name longitude latitude                date        key
 #>              (chr)     (dbl)    (dbl)              (time)      (dbl)
 #> 1 Ursus americanus -76.78671 35.53079 2015-04-05 23:00:00 1088954555
@@ -207,8 +207,8 @@ df <- sample_data_1
 dframe(df) %>% date_standardize("%d%b%Y")
 #> <scrubr dframe>
 #> Size: 1500 X 5
-#>
-#>
+#> 
+#> 
 #>                name  longitude latitude      date        key
 #>               (chr)      (dbl)    (dbl)     (chr)      (int)
 #> 1  Ursus americanus  -79.68283 38.36662 14Jan2015 1065590124
@@ -241,8 +241,8 @@ Create date field from other fields
 dframe(sample_data_2) %>% date_create(year, month, day)
 #> <scrubr dframe>
 #> Size: 1500 X 8
-#>
-#>
+#> 
+#> 
 #>                name  longitude latitude        key  year month   day
 #>               (chr)      (dbl)    (dbl)      (int) (chr) (chr) (chr)
 #> 1  Ursus americanus  -79.68283 38.36662 1065590124  2015    01    14
@@ -261,7 +261,7 @@ dframe(sample_data_2) %>% date_create(year, month, day)
 
 ## Meta
 
-* Please [report any issues or bugs](https://github.com/ropenscilabs/scrubr/issues).
+* Please [report any issues or bugs](https://github.com/ropensci/scrubr/issues).
 * License: MIT
 * Get citation information for `scrubr` in R doing `citation(package = 'scrubr')`
 * Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
