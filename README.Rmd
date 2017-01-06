@@ -27,10 +27,11 @@ Clean using the following use cases (checkmarks indicate fxns exist - not necess
 * [x] Outside political boundary: User input to check for points in the wrong country, or points outside of a known country
 * [x] Taxonomic name based cleaning: via `taxize` (one method so far)
 * Political centroids: unlikely that occurrences fall exactly on these points, more likely a
-default position (Draft function started, but not exported, and commented out)
-* Herbaria/Museums: many specimens may have location of the collection they are housed in
+default position (Draft function started, but not exported, and commented out). see [issue #6](https://github.com/ropensci/scrubr/issues/6)
+* Herbaria/Museums: many specimens may have location of the collection they are housed in, see [issue #20](https://github.com/ropensci/scrubr/issues/20)
 * Habitat type filtering: e.g., fish should not be on land; marine fish should not be in fresh water
 * Check for contextually wrong values: That is, if 99 out of 100 lat/long coordinates are within the continental US, but 1 is in China, then perhaps something is wrong with that one point
+* Collector/recorder names: see [issue #19](https://github.com/ropensci/scrubr/issues/19)
 * ...
 
 A note about examples: We think that using a piping workflow with `%>%` makes code easier to
@@ -144,4 +145,4 @@ dframe(sample_data_2) %>% date_create(year, month, day)
 * Get citation information for `scrubr` in R doing `citation(package = 'scrubr')`
 * Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
