@@ -8,3 +8,7 @@ check4pkg <- function(x) {
 }
 
 ct <- function(l) Filter(Negate(is.null), l)
+
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}
