@@ -8,7 +8,7 @@ test_that("dframe basic use without lat/long vars works", {
   aa <- suppressMessages(dframe(df))
 
   expect_is(aa, "data.frame")
-  expect_is(aa, "dframe")
+  expect_is(aa, "tbl_df")
 })
 
 test_that("dframe fails well", {

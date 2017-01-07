@@ -18,6 +18,7 @@ guess_latlon <- function(x, lat = NULL, lon = NULL) {
            call. = FALSE)
     }
   } else {
+    lats <- lat
     if (!any(names(x) %in% lat)) stop("'", lat, "' not found in your data", call. = FALSE)
     names(x)[names(x) %in% lat] <- lat_var <- "latitude"
   }
@@ -35,11 +36,13 @@ guess_latlon <- function(x, lat = NULL, lon = NULL) {
            call. = FALSE)
     }
   } else {
+    lngs <- lon
     if (!any(names(x) %in% lon)) stop("'", lon, "' not found in your data", call. = FALSE)
     names(x)[names(x) %in% lon] <- lon_var <- "longitude"
   }
 
-  structure(x, lat_var = lat_var, lon_var = lon_var)
+  structure(x, lat_var = lat_var, lon_var = lon_var,
+            lat_var_orig = lats, lon_var_orig = lngs)
 }
 
 lat_options <- c("lat", "latitude", "decimallatitude", "y")

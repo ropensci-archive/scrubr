@@ -123,10 +123,24 @@ coord_incomplete <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
   x <- do_coords(x, lat, lon)
   incomp <- x[!complete.cases(x$latitude, x$longitude), ]
   if (NROW(incomp) == 0) incomp <- NA
-  if (drop) x <- x[complete.cases(x$latitude, x$longitude), ]
+  if (drop) {
+    x <- add_atts(x[complete.cases(x$latitude, x$longitude), ], get_atts(x))
+  }
   row.names(incomp) <- NULL
   row.names(x) <- NULL
   structure(reassign(x), coord_incomplete = incomp)
+}
+
+get_atts <- function(x) {
+  attributes(x)[names(attributes(x)) %in%
+                  c('lat_var', 'lon_var', 'lat_var_orig', 'lon_var_orig')]
+}
+
+add_atts <- function(x, atts) {
+  for (i in seq_along(atts)) {
+    attr(x, names(atts)[i]) <- atts[[i]]
+  }
+  return(x)
 }
 
 #' @export
@@ -243,7 +257,7 @@ coord_within <- function(x, field = NULL, country = NULL,
   if (drop) {
     x <- x[!is.na(bb[, 1]), ]
   }
-  x <- as_data_frame(x@data)
+  x <- tibble::as_data_frame(x@data)
   if (NROW(wth) == 0) wth <- NA
   row.names(wth) <- NULL
   row.names(x) <- NULL

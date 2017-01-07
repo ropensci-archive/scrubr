@@ -14,12 +14,10 @@ Harvard botanist index functions
 }
 \examples{
 \dontrun{
-bot_search(name = "Asa Gray")
-bot_search(name = "A. Gray")
-bot_search(remarks = "harvard")
-bot_search(name = "Gray", fuzzy = TRUE)
-bot_search()
-bot_search()
+# bot_search(name = "Asa Gray")
+# bot_search(name = "A. Gray")
+# bot_search(remarks = "harvard")
+# bot_search(name = "Gray", fuzzy = TRUE)
 
 ## FIXME - this leads to a JSON parsing error because they give
 ##   bad JSON in some results, including this example

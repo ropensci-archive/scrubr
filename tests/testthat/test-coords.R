@@ -12,9 +12,9 @@ test_that("coord_* passing lat/long vars works", {
   bb <- suppressMessages(dframe(df) %>% coord_incomplete(lon = lon_name))
 
   expect_is(bb, "data.frame")
-  expect_is(bb, "dframe")
+  expect_is(bb, "tbl_df")
   expect_equal(names(df)[2], lon_name)
-  expect_equal(names(bb)[2], "longitude")
+  expect_equal(names(bb)[2], "decimalLongitude")
 
   # both names input
   lon_name <- "x"
@@ -24,7 +24,7 @@ test_that("coord_* passing lat/long vars works", {
   bb <- suppressMessages(dframe(df) %>% coord_incomplete(lat_name, lon_name))
 
   expect_is(bb, "data.frame")
-  expect_is(bb, "dframe")
+  expect_is(bb, "tbl_df")
   expect_equal(names(df)[2], lon_name)
   expect_equal(names(df)[3], lat_name)
   expect_equal(names(bb)[2], "x")

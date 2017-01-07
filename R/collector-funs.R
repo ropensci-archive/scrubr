@@ -37,5 +37,5 @@ coll_clean <- function(x, collector = NULL) {
   x <- stand_collectors(x)
   if (NROW(x) == 0) x <- NA
   row.names(x) <- NULL
-  structure(reassign(x), coll_clean = incomp)
+  structure(reassign(x), coll_clean = NULL)
 }

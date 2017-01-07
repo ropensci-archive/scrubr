@@ -18,7 +18,6 @@ dframe.default <- function(x) {
 #' @export
 dframe.data.frame <- function(x) {
   tibble::as_data_frame(x)
-  # as_data_frame(x)
 }
 
 #' @export

@@ -12,8 +12,8 @@ test_that("coord_* passing lat/long vars works", {
 
   expect_is(df, "data.frame")
   expect_is(smalldf, "data.frame")
-  expect_is(dp, "dframe")
-  expect_is(dups, "dframe")
+  expect_is(dp, "tbl_df")
+  expect_is(dups, "tbl_df")
   expect_lt(NROW(dp), NROW(smalldf))
   expect_equal(NROW(dups), 1)
   expect_named(attributes(dp), c('names', 'row.names', 'class', 'dups'))
