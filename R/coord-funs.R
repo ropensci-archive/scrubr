@@ -329,7 +329,7 @@ coord_uncertain<-function(x,coorduncertainityLimit=30000,drop=T,ignore.na=F){
   if (NROW(uncertain) == 0) incomp <- NA
 
   if(drop){
-    x<-x[!x$coordinateUncertaintyInMeters > coorduncertainityLimit,]
+    x<-x[!uncertain_indices,]
   }
   row.names(uncertain) <- NULL
   row.names(x) <- NULL
