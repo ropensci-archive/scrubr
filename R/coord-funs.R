@@ -304,3 +304,30 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 #   coordinates(wc) <- ~long + lat
 #   wc
 # }
+
+
+
+
+coords_uncertainity<-function(x,coorduncertainityLimit=30000,drop=T){
+
+  if(!("coordinateUncertaintyInMeters" %in% names(x))){
+    stop(" 'coordinateuncertainityInMeters' variable is missing", call. = FALSE)
+  }
+
+  x<-x[!is.na(x$coordinateUncertaintyInMeters),]
+  uncertain<-x[x$coordinateUncertaintyInMeters > coorduncertainityLimit,]
+
+  if (NROW(uncertain) == 0) incomp <- NA
+
+  if(drop){
+    x<-x[!x$coordinateUncertaintyInMeters > coorduncertainityLimit,]
+  }
+  row.names(uncertain) <- NULL
+  row.names(x) <- NULL
+
+  structure(x, coord_uncertainity=uncertain)
+}
+
+
+
+
