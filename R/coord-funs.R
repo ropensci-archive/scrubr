@@ -310,6 +310,7 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 
 coord_uncertain<-function(x,coorduncertainityLimit=30000,drop=T,ignore.na=F){
 
+  ## IF variable "coordinateUncertaintyInMeters" doesnt exist
   if(!("coordinateUncertaintyInMeters" %in% names(x))){
     stop(" 'coordinateuncertainityInMeters' variable is missing", call. = FALSE)
   }
@@ -329,7 +330,9 @@ coord_uncertain<-function(x,coorduncertainityLimit=30000,drop=T,ignore.na=F){
   if (NROW(uncertain) == 0) incomp <- NA
 
   if(drop){
-    x<-x[!uncertain_indices,]
+
+    certain_indices<-setdiff(1:nrow(x),uncertain_indices)
+    x<-x[certain_indices,]
   }
   row.names(uncertain) <- NULL
   row.names(x) <- NULL
