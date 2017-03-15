@@ -7,6 +7,8 @@
 #' @param country (character) A single country name
 #' @param which (character) one of "has_dec", "no_zeros", or "both" (default)
 #' @param drop (logical) Drop bad data points or not. Either way, we parse
+#' @param ignore.na (logical) To consider NA values as a bad point or not
+#' @param coorduncertainityLimit (numeric) numeric limit of the coordinateUncertainityInMeters variable
 #' out bade data points as an attribute you can access. Default: \code{TRUE}
 #'
 #' @return Returns a data.frame, with attributes
@@ -116,6 +118,7 @@
 #' head(df)
 #' df[1, "mylat"] <- 170
 #' dframe(df) %>% coord_impossible(lat = "mylat", lon = "mylon")
+#'
 #'
 
 #' @export
@@ -310,37 +313,24 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 
 #' @export
 #' @rdname coords
-coord_uncertain<-function(x,coorduncertainityLimit=30000,drop=T,ignore.na=F){
+coord_uncertain <- function(x, coorduncertainityLimit = 30000, drop = TRUE, ignore.na = FALSE){
 
-  ## IF variable "coordinateUncertaintyInMeters" doesnt exist
-  if(!("coordinateUncertaintyInMeters" %in% names(x))){
+  if(!("coordinateUncertaintyInMeters"  %in%  names(x))){
     stop(" 'coordinateuncertainityInMeters' variable is missing", call. = FALSE)
   }
 
-#   if(ignore.na==T){
-#     x<-x[!is.na(x$coordinateUncertaintyInMeters),]
-#     uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
-#     uncertain<-x[uncertain_indices,]
-#   }
-#   else if(ignore.na==F){
-#     NAs<-which(is.na(x$coordinateUncertaintyInMeters))
-#     uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
-#     uncertain_indices<-c(uncertain_indices,NAs)
-#     uncertain<-x[uncertain_indices,]
-#   }
+  if(ignore.na) x <- x[!is.na(x$coordinateUncertaintyInMeters), ]
 
-  if(ignore.na) x<-x[!is.na(x$coordinateUncertaintyInMeters),]
-
-  uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
-     uncertain<-x[uncertain_indices,]
+  uncertain_indices <- which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
+  uncertain <- x[uncertain_indices, ]
 
   if (NROW(uncertain) == 0) uncertain <- NA
 
   if(drop){
-
-    certain_indices<-setdiff(1:nrow(x),uncertain_indices)
-    x<-x[certain_indices,]
+    certain_indices <- setdiff(1:nrow(x), uncertain_indices)
+    x <- x[certain_indices, ]
   }
+
   row.names(uncertain) <- NULL
   row.names(x) <- NULL
 
