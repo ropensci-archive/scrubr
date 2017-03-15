@@ -315,19 +315,24 @@ coord_uncertain<-function(x,coorduncertainityLimit=30000,drop=T,ignore.na=F){
     stop(" 'coordinateuncertainityInMeters' variable is missing", call. = FALSE)
   }
 
-  if(ignore.na==T){
-    x<-x[!is.na(x$coordinateUncertaintyInMeters),]
-    uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
-    uncertain<-x[uncertain_indices,]
-  }
-  else if(ignore.na==F){
-    NAs<-which(is.na(x$coordinateUncertaintyInMeters))
-    uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
-    uncertain_indices<-c(uncertain_indices,NAs)
-    uncertain<-x[uncertain_indices,]
-  }
+#   if(ignore.na==T){
+#     x<-x[!is.na(x$coordinateUncertaintyInMeters),]
+#     uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
+#     uncertain<-x[uncertain_indices,]
+#   }
+#   else if(ignore.na==F){
+#     NAs<-which(is.na(x$coordinateUncertaintyInMeters))
+#     uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
+#     uncertain_indices<-c(uncertain_indices,NAs)
+#     uncertain<-x[uncertain_indices,]
+#   }
 
-  if (NROW(uncertain) == 0) incomp <- NA
+  if(ignore.na) x<-x[!is.na(x$coordinateUncertaintyInMeters),]
+
+  uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
+     uncertain<-x[uncertain_indices,]
+
+  if (NROW(uncertain) == 0) uncertain <- NA
 
   if(drop){
 
