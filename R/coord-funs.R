@@ -308,14 +308,23 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 
 
 
-coords_uncertainity<-function(x,coorduncertainityLimit=30000,drop=T){
+coord_uncertain<-function(x,coorduncertainityLimit=30000,drop=T,ignore.na=F){
 
   if(!("coordinateUncertaintyInMeters" %in% names(x))){
     stop(" 'coordinateuncertainityInMeters' variable is missing", call. = FALSE)
   }
 
-  x<-x[!is.na(x$coordinateUncertaintyInMeters),]
-  uncertain<-x[x$coordinateUncertaintyInMeters > coorduncertainityLimit,]
+  if(ignore.na==T){
+    x<-x[!is.na(x$coordinateUncertaintyInMeters),]
+    uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
+    uncertain<-x[uncertain_indices,]
+  }
+  else if(ignore.na==F){
+    NAs<-which(is.na(x$coordinateUncertaintyInMeters))
+    uncertain_indices<-which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
+    uncertain_indices<-c(uncertain_indices,NAs)
+    uncertain<-x[uncertain_indices,]
+  }
 
   if (NROW(uncertain) == 0) incomp <- NA
 
@@ -326,11 +335,5 @@ coords_uncertainity<-function(x,coorduncertainityLimit=30000,drop=T){
   row.names(x) <- NULL
 
   structure(x, coord_uncertainity=uncertain)
-}
-
-
-qwe<-function(){
-
-  print("YAYAYAYAYAAYAAY")
 }
 
