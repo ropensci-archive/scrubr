@@ -1,6 +1,7 @@
 #' Collector based cleaning
 #'
 #' @name collectors
+#' @export
 #' @keywords internal
 #' @param x (data.frame) A data.frame
 #' @param collector (character) Collector field to use. See Details.
@@ -17,19 +18,19 @@
 #' }
 #'
 #' @examples
-#' df <- data.frame(
-#'   coll = c('K.F.P. Martius', 'C. F. P. Martius', 'C. F. P. von Martius'),
-#'   species = 'Poa annua',
-#'   lat = 1:3,
-#'   lon = 4:6,
-#'   stringsAsFactors = FALSE
-#' )
+#' # df <- data.frame(
+#' #   coll = c('K.F.P. Martius', 'C. F. P. Martius', 'C. F. P. von Martius'),
+#' #   species = 'Poa annua',
+#' #   lat = 1:3,
+#' #   lon = 4:6,
+#' #  stringsAsFactors = FALSE
+#' # )
 #'
 #' # Standardize names
-#' NROW(df)
-#' df <- dframe(df) %>% coll_clean()
-#' NROW(df)
-#' attr(df, "coll_clean")
+#' # NROW(df)
+#' # df <- dframe(df) %>% coll_clean()
+#' # NROW(df)
+#' # attr(df, "coll_clean")
 
 #' @rdname collectors
 coll_clean <- function(x, collector = NULL) {
