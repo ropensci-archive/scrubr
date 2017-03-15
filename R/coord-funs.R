@@ -22,6 +22,7 @@
 #'  \item coord_unlikely - Unlikely coordinates
 #'  \item coord_within - Check if points are within user input
 #'  political boundaries
+#'  \item coord_uncertain - Uncertain occurrances of measured through coordinateUncertaintyInMeters default limit= 30000
 #' }
 #'
 #' If either lat or lon (or both) given, we assign the given column name
@@ -307,7 +308,8 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 
 
 
-
+#' @export
+#' @rdname coords
 coord_uncertain<-function(x,coorduncertainityLimit=30000,drop=T,ignore.na=F){
 
   ## IF variable "coordinateUncertaintyInMeters" doesnt exist
