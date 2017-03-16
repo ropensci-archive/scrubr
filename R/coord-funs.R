@@ -7,9 +7,10 @@
 #' @param country (character) A single country name
 #' @param which (character) one of "has_dec", "no_zeros", or "both" (default)
 #' @param drop (logical) Drop bad data points or not. Either way, we parse
-#' @param ignore.na (logical) To consider NA values as a bad point or not
+#'  out bad data points as an attribute you can access. Default: \code{TRUE}
+#' @param ignore.na (logical) To consider NA values as a bad point or not. Default: \code{FALSE}
 #' @param coorduncertainityLimit (numeric) numeric limit of the coordinateUncertainityInMeters variable
-#' out bade data points as an attribute you can access. Default: \code{TRUE}
+
 #'
 #' @return Returns a data.frame, with attributes
 #'
