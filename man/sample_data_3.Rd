@@ -19,4 +19,3 @@ Sample data.frame number 3
 }
 \keyword{datasets}
 \keyword{internal}
-

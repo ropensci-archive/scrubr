@@ -2,8 +2,8 @@
 % Please edit documentation in R/scrubr-package.R
 \docType{package}
 \name{scrubr-package}
-\alias{scrubr}
 \alias{scrubr-package}
+\alias{scrubr}
 \title{scrubr - Clean biological occurrence data}
 \description{
 scrubr - Clean biological occurrence data
@@ -12,4 +12,3 @@ scrubr - Clean biological occurrence data
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
 \keyword{package}
-

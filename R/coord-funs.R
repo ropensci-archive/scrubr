@@ -119,7 +119,22 @@
 #' df[1, "mylat"] <- 170
 #' dframe(df) %>% coord_impossible(lat = "mylat", lon = "mylon")
 #'
+#' df <- sample_data_6
 #'
+#' # Remove uncertain occurances
+#'
+#' NROW(df)
+#' df1<-df %>% coord_uncertain()
+#' NROW(df1)
+#' attr(df, "coord_uncertain")
+#'
+#' NROW(df)
+#' df2<-df %>% coord_uncertain(coorduncertainityLimit = 20000)
+#' NROW(df2)
+#'
+#' NROW(df)
+#' df3<-df %>% coord_uncertain(coorduncertainityLimit = 20000,ignore.na=TRUE)
+#' NROW(df3)
 
 #' @export
 #' @rdname coords

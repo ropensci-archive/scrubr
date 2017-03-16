@@ -21,4 +21,3 @@ Sample data.frame number 2
 }
 \keyword{datasets}
 \keyword{internal}
-
