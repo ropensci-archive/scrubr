@@ -8,8 +8,8 @@
 \describe{
   \item{name}{taxonomic name}
   \item{key}{GBIF occurrence key}
-  \item{latitude}{latitude, decimal degree}
-  \item{longitude}{longitude, decimal degree}
+  \item{decimalLatitude}{latitude, decimal degree}
+  \item{decimalLongitude}{longitude, decimal degree}
   \item{coordinateUncertaintyInMeters}{Uncertainity, the point-radius representation of the location}
 }
 

@@ -6,10 +6,10 @@
 #' @param field (character) Name of filed in input data.frame x with country names
 #' @param country (character) A single country name
 #' @param which (character) one of "has_dec", "no_zeros", or "both" (default)
-#' @param drop (logical) Drop bad data points or not. Either way, we parse
-#'  out bad data points as an attribute you can access. Default: \code{TRUE}
+#' @param drop (logical) Drop bad data points or not. Either way, we parse out bad data points as an attribute you can access. Default: \code{TRUE}
 #' @param ignore.na (logical) To consider NA values as a bad point or not. Default: \code{FALSE}
-#' @param coorduncertainityLimit (numeric) numeric limit of the coordinateUncertainityInMeters variable
+#' @param coorduncertainityLimit (numeric) numeric threshold for the coordinateUncertainityInMeters variable.
+#' Default: 30000
 
 #'
 #' @return Returns a data.frame, with attributes

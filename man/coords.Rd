@@ -32,7 +32,7 @@ coord_uncertain(x, coorduncertainityLimit = 30000, drop = TRUE,
 
 \item{lat, lon}{(character) Latitude and longitude column to use. See Details.}
 
-\item{drop}{(logical) Drop bad data points or not. Either way, we parse}
+\item{drop}{(logical) Drop bad data points or not. Either way, we parse out bad data points as an attribute you can access. Default: \code{TRUE}}
 
 \item{which}{(character) one of "has_dec", "no_zeros", or "both" (default)}
 
@@ -40,10 +40,10 @@ coord_uncertain(x, coorduncertainityLimit = 30000, drop = TRUE,
 
 \item{country}{(character) A single country name}
 
-\item{coorduncertainityLimit}{(numeric) numeric limit of the coordinateUncertainityInMeters variable
-out bade data points as an attribute you can access. Default: \code{TRUE}}
+\item{coorduncertainityLimit}{(numeric) numeric threshold for the coordinateUncertainityInMeters variable.
+Default: 30000}
 
-\item{ignore.na}{(logical) To consider NA values as a bad point or not}
+\item{ignore.na}{(logical) To consider NA values as a bad point or not. Default: \code{FALSE}}
 }
 \value{
 Returns a data.frame, with attributes
