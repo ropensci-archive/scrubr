@@ -18,7 +18,7 @@ r_packages:
 - maps
 
 after_success:
--Rscript -e 'covr::codecov(token = Sys.getenv("SCRUBR_CODECOV_UPLOAD_TOKEN"))'
+- Rscript -e 'covr::codecov(token = Sys.getenv("SCRUBR_CODECOV_UPLOAD_TOKEN"))'
 
 notifications:
   email:
