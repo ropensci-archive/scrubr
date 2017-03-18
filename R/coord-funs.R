@@ -10,7 +10,7 @@
 #' @param ignore.na (logical) To consider NA values as a bad point or not. Default: \code{FALSE}
 #' @param coorduncertainityLimit (numeric) numeric threshold for the coordinateUncertainityInMeters variable.
 #' Default: 30000
-
+#'
 #'
 #' @return Returns a data.frame, with attributes
 #'
@@ -325,31 +325,22 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 #   wc
 # }
 
-
-
 #' @export
 #' @rdname coords
 coord_uncertain <- function(x, coorduncertainityLimit = 30000, drop = TRUE, ignore.na = FALSE){
-
   if(!("coordinateUncertaintyInMeters"  %in%  names(x))){
     stop(" 'coordinateuncertainityInMeters' variable is missing", call. = FALSE)
   }
-
   if(ignore.na) x <- x[!is.na(x$coordinateUncertaintyInMeters), ]
-
   uncertain_indices <- which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
   uncertain <- x[uncertain_indices, ]
-
   if (NROW(uncertain) == 0) uncertain <- NA
-
   if(drop){
     certain_indices <- setdiff(1:nrow(x), uncertain_indices)
     x <- x[certain_indices, ]
   }
-
   row.names(uncertain) <- NULL
   row.names(x) <- NULL
-
   structure(x, coord_uncertainity=uncertain)
 }
 
