@@ -2,7 +2,7 @@ context("coord_* functions")
 
 df <- sample_data_1
 df5 <- sample_data_5
-
+df6<-sample_data_6
 test_that("coord_* passing lat/long vars works", {
   skip_on_cran()
 
@@ -40,3 +40,45 @@ test_that("coord_imprecise works", {
   expect_is(attr(df5_imp, "coord_imprecise"), "tbl_df")
   expect_equal(NROW(attr(df5_imp, "coord_imprecise")), 6)
 })
+
+
+test_that("coord_uncertain works", {
+  expect_equal(NROW(df6), 50)
+
+  ## remove records with uncertain elements
+  df6_imp <- dframe(df6) %>% coord_uncertain()
+  expect_equal(NROW(df6_imp), 38)
+  expect_is(attr(df6_imp, "coord_uncertain"), "tbl_df")
+  expect_equal(NROW(attr(df6_imp, "coord_uncertain")), 12)
+  ### coordinateUncertaintyInMeters column doesnt exist
+  expect_null(attr(df,"coord_uncertain"))
+
+})
+
+test_that("coord_incomplete works", {
+  expect_equal(NROW(df), 1500)
+
+  ## remove records with incomplete elements
+  df_imp <- dframe(df) %>% coord_incomplete()
+  expect_equal(NROW(df_imp), 1306)
+  expect_is(attr(df_imp, "coord_incomplete"), "tbl_df")
+  expect_equal(NROW(attr(df_imp, "coord_incomplete")), 194)
+
+})
+
+
+test_that("coord_unlikely works", {
+  expect_equal(NROW(df), 1500)
+
+  ## remove records with unlikely elements
+  df_imp <- dframe(df) %>% coord_unlikely()
+  expect_equal(NROW(df_imp), 1488)
+  expect_is(attr(df_imp, "coord_unlikely"), "tbl_df")
+  expect_equal(NROW(attr(df_imp, "coord_unlikely")), 12)
+
+})
+
+
+
+
+

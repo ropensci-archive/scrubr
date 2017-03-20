@@ -9,7 +9,7 @@
  \item \code{\link{sample_data_2}}
  \item \code{\link{sample_data_3}}
  \item \code{\link{sample_data_4}}
+ \item \code{\link{sample_data_6}}
 }
 }
 \keyword{datasets}
-

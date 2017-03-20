@@ -6,8 +6,11 @@
 #' @param field (character) Name of filed in input data.frame x with country names
 #' @param country (character) A single country name
 #' @param which (character) one of "has_dec", "no_zeros", or "both" (default)
-#' @param drop (logical) Drop bad data points or not. Either way, we parse
-#' out bade data points as an attribute you can access. Default: \code{TRUE}
+#' @param drop (logical) Drop bad data points or not. Either way, we parse out bad data points as an attribute you can access. Default: \code{TRUE}
+#' @param ignore.na (logical) To consider NA values as a bad point or not. Default: \code{FALSE}
+#' @param coorduncertainityLimit (numeric) numeric threshold for the coordinateUncertainityInMeters variable.
+#' Default: 30000
+#'
 #'
 #' @return Returns a data.frame, with attributes
 #'
@@ -22,6 +25,7 @@
 #'  \item coord_unlikely - Unlikely coordinates
 #'  \item coord_within - Check if points are within user input
 #'  political boundaries
+#'  \item coord_uncertain - Uncertain occurrances of measured through coordinateUncertaintyInMeters default limit= 30000
 #' }
 #'
 #' If either lat or lon (or both) given, we assign the given column name
@@ -116,6 +120,22 @@
 #' df[1, "mylat"] <- 170
 #' dframe(df) %>% coord_impossible(lat = "mylat", lon = "mylon")
 #'
+#' df <- sample_data_6
+#'
+#' # Remove uncertain occurances
+#'
+#' NROW(df)
+#' df1<-df %>% coord_uncertain()
+#' NROW(df1)
+#' attr(df, "coord_uncertain")
+#'
+#' NROW(df)
+#' df2<-df %>% coord_uncertain(coorduncertainityLimit = 20000)
+#' NROW(df2)
+#'
+#' NROW(df)
+#' df3<-df %>% coord_uncertain(coorduncertainityLimit = 20000,ignore.na=TRUE)
+#' NROW(df3)
 
 #' @export
 #' @rdname coords
@@ -304,3 +324,25 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 #   coordinates(wc) <- ~long + lat
 #   wc
 # }
+
+#' @export
+#' @rdname coords
+coord_uncertain <- function(x, coorduncertainityLimit = 30000, drop = TRUE, ignore.na = FALSE){
+  if(!("coordinateuncertaintyinmeters"  %in%  tolower(names(x)))){
+    stop(" 'coordinateuncertainityInMeters' variable is missing", call. = FALSE)
+  }
+  names(x)[grep("coordinateuncertaintyinmeters", tolower(names(x)))] <- "coordinateuncertaintyinmeters"
+  if(ignore.na) x <- x[!is.na(x$coordinateuncertaintyinmeters), ]
+  uncertain_indices <- which(x$coordinateuncertaintyinmeters > coorduncertainityLimit)
+  uncertain <- x[uncertain_indices, ]
+  if (NROW(uncertain) == 0) uncertain <- NA
+  if(drop){
+    certain_indices <- setdiff(seq_len(NROW(x)), uncertain_indices)
+    x <- x[certain_indices, ]
+  }
+  row.names(uncertain) <- NULL
+  row.names(x) <- NULL
+  structure(x, coord_uncertain=uncertain)
+}
+
+

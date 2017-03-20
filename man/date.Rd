@@ -2,10 +2,10 @@
 % Please edit documentation in R/date-funs.R
 \name{date}
 \alias{date}
+\alias{date_standardize}
+\alias{date_missing}
 \alias{date_create}
 \alias{date_create_}
-\alias{date_missing}
-\alias{date_standardize}
 \title{Date based cleaning}
 \usage{
 date_standardize(x, format = "\%Y-\%m-\%d", date_column = "date", ...)
@@ -64,4 +64,3 @@ dframe(df) \%>\% date_create(year, month, day)
 ## SE
 date_create_(dframe(df), "year", "month", "day")
 }
-
