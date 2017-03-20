@@ -13,8 +13,40 @@ library(foreach)
 library(doParallel)
 library(doSNOW)
 library(rgeos)
+library(devtools)
+install.packages(c("XMLSchema", "SSOAP"), 
+                   repos = c("http://packages.ropensci.org", 
+                             "http://cran.rstudio.com"))
+devtools::install_github("ropensci/taxizesoap")
+library(taxizesoap)
 
+#' Loading data from the gbif database
+#' @param species_name Specify the name of the species in order to download the
+#'   data from the gbif database
+#' @param start Specify the start index to begin the download with
+#' @param limit Specify the number of occurrences to download (max: 200.000)
+initData <- function(species_name, start = 0, limit = 200) {
+  occ <- occ_search(scientificName = species_name, limit = limit,
+                    hasCoordinate = TRUE, start = start)
+  return (occ)
+}
 
+#' Get the species properties from the worms database to check marine species
+#' with failing location check
+#' @param species_name Name of the species to get the properties for
+#' @return speciesOpts - habitat properties of the named species
+getSpeciesOpts <- function(species_name) {
+  # query the worms database for habitat
+  worms <- worms_records(scientific=species_name)
+  # setup a list with species properties
+  speciesOpts <- list()
+  if (NROW(worms) == 0 && NCOL(worms) == 0) {
+    speciesOpts$isMarine <- 0
+  } else {
+    speciesOpts$isMarine <- max(worms$isMarine, na.rm = TRUE)
+  }
+  return (speciesOpts)
+}
 #' Download spatial data from natural earth and unzip it
 initLocation <- function() {
   # load all countries of the world
@@ -219,3 +251,55 @@ correctSwap <- function(current_occ_chunk, countries, species_opts) {
   }
   return (current_occ_chunk_corrected)
 }
+
+#'Helper function for calling and examples
+helper<-function(fun,species_name,limit){
+   
+   # Load shape file
+  initLocation()
+  countries <- openShape()
+  
+  # Load species properties from worms
+  species_opts <- getSpeciesOpts(species_name)
+  
+
+  
+  
+  current_occ_chunk <- initData(
+    species_name = species_name,
+    
+    limit = limit)
+ 
+  current_occ_chunk_corrected <- current_occ_chunk
+  current_occ_chunk_corrected$data$correction_flag <- 1
+  
+  current_occ_chunk_corrected1 <- current_occ_chunk_corrected
+  
+  isLocationCorrect <- checkLocation(
+    current_occ_chunk = current_occ_chunk_corrected, countries = countries,
+    species_opts = species_opts)
+  # get the indices of the incorrect records which have to be corrected
+  locationIncorrect_idx <- which(!isLocationCorrect)
+  # apply different modification or correction modi
+  length(locationIncorrect_idx)
+  if (length(locationIncorrect_idx) > 0) 
+  {
+    correctedLocations <- fun(
+      current_occ_chunk = current_occ_chunk_corrected, countries = countries,
+      species_opts = species_opts)
+    
+    current_occ_chunk_corrected1$data[locationIncorrect_idx,] <-
+      correctedLocations$data[locationIncorrect_idx,]
+    
+    
+  }
+  
+  return(current_occ_chunk_corrected1)
+ }
+ 
+
+#'Examples,"Delphinus delphis"-Short-beaked common dolphin,example for both swap and sign functions
+ x1<-helper(correctSwap,"Delphinus delphis",200)
+ x2<-helper(correctSign,"Delphinus delphis",200)
+
+
