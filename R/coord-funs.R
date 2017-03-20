@@ -328,19 +328,21 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 #' @export
 #' @rdname coords
 coord_uncertain <- function(x, coorduncertainityLimit = 30000, drop = TRUE, ignore.na = FALSE){
-  if(!("coordinateUncertaintyInMeters"  %in%  names(x))){
+  if(!("coordinateuncertaintyinmeters"  %in%  tolower(names(x)))){
     stop(" 'coordinateuncertainityInMeters' variable is missing", call. = FALSE)
   }
-  if(ignore.na) x <- x[!is.na(x$coordinateUncertaintyInMeters), ]
-  uncertain_indices <- which(x$coordinateUncertaintyInMeters > coorduncertainityLimit)
+  names(x)[grep("coordinateuncertaintyinmeters", tolower(names(x)))] <- "coordinateuncertaintyinmeters"
+  if(ignore.na) x <- x[!is.na(x$coordinateuncertaintyinmeters), ]
+  uncertain_indices <- which(x$coordinateuncertaintyinmeters > coorduncertainityLimit)
   uncertain <- x[uncertain_indices, ]
   if (NROW(uncertain) == 0) uncertain <- NA
   if(drop){
-    certain_indices <- setdiff(1:nrow(x), uncertain_indices)
+    certain_indices <- setdiff(seq_len(NROW(x)), uncertain_indices)
     x <- x[certain_indices, ]
   }
   row.names(uncertain) <- NULL
   row.names(x) <- NULL
-  structure(x, coord_uncertainity=uncertain)
+  structure(x, coord_uncertain=uncertain)
 }
+
 
