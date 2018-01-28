@@ -7,3 +7,4 @@ appveyor.yml
 cran-comments.md
 CONTRIBUTING.md
 Makefile
+^codemeta\.json$
