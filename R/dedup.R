@@ -65,6 +65,8 @@ dedup <- function(x, how = "one", tolerance = 0.9) {
     }
   )
 
+  if (any(duplicated(x))) x <- x[!duplicated(x)]
+  if (any(duplicated(df))) df <- df[!duplicated(df)]
   row.names(df) <- NULL
   row.names(x) <- NULL
   structure(tibble::as_tibble(x), dups = tibble::as_tibble(df))
@@ -72,7 +74,7 @@ dedup <- function(x, how = "one", tolerance = 0.9) {
 
 matrix2df <- function(x) {
   x <- Matrix::as.matrix(x)
-  x[!lower.tri(x)] <- NA
+  x[!lower.tri(x)] <- NA_real_  
   df <- data.table(
     one = rownames(x)[row(x)],
     two = colnames(x)[col(x)],
