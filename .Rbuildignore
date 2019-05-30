@@ -9,3 +9,4 @@ CONTRIBUTING.md
 Makefile
 ^codemeta\.json$
 .github
+docs
