@@ -1,8 +1,8 @@
 all: move rmd2md
 
 move:
-		cp inst/vign/scrubr_vignette.md vignettes
+		cp inst/vign/scrubr.md vignettes
 
 rmd2md:
 		cd vignettes;\
-		mv scrubr_vignette.md scrubr_vignette.Rmd
+		mv scrubr.md scrubr.Rmd
