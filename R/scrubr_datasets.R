@@ -116,3 +116,12 @@ NULL
 #' @keywords datasets internal
 NULL
 
+#' Sample data.frame number 7
+#'
+#' @format A data frame with 50 rows and 91 variables
+#'
+#' Data originally collected from GBIF
+#' @name sample_data_7
+#' @docType data
+#' @keywords datasets internal
+NULL

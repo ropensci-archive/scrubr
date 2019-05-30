@@ -39,10 +39,10 @@ Date based cleaning
 }
 \details{
 \itemize{
- \item date_standardize - Converts dates to a specific format
- \item date_missing - Drops records that do not have dates, either via being
- NA or being a zero length character string
- \item date_create - Create a date field from
+\item date_standardize - Converts dates to a specific format
+\item date_missing - Drops records that do not have dates, either via being
+NA or being a zero length character string
+\item date_create - Create a date field from
 }
 }
 \examples{

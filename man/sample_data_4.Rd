@@ -6,12 +6,12 @@
 \title{Sample data.frame number 4}
 \format{A data frame with 100 rows and 6 variables:
 \describe{
-  \item{name}{taxonomic name}
-  \item{decimalLatitude}{latitude, decimal degree}
-  \item{decimalLongitude}{longitude, decimal degree}
-  \item{key}{occurrence key}
-  \item{eventDate}{date, date the occurrence was recorded}
-  \item{country}{country of occurrence record}
+\item{name}{taxonomic name}
+\item{decimalLatitude}{latitude, decimal degree}
+\item{decimalLongitude}{longitude, decimal degree}
+\item{key}{occurrence key}
+\item{eventDate}{date, date the occurrence was recorded}
+\item{country}{country of occurrence record}
 }
 
 Data originally collected from GBIF}

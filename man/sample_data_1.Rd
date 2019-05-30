@@ -6,11 +6,11 @@
 \title{Sample data.frame 1}
 \format{A data frame with 1500 rows and 5 variables:
 \describe{
-  \item{name}{taxonomic name}
-  \item{longitude}{longitude, decimal degree}
-  \item{latitude}{latitude, decimal degree}
-  \item{date}{date, date the occurrence was recorded}
-  \item{key}{occurrence key}
+\item{name}{taxonomic name}
+\item{longitude}{longitude, decimal degree}
+\item{latitude}{latitude, decimal degree}
+\item{date}{date, date the occurrence was recorded}
+\item{key}{occurrence key}
 }
 
 Data originally collected from GBIF}

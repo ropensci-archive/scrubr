@@ -6,11 +6,11 @@
 \title{Sample data.frame number 6}
 \format{A data frame with 50 rows and 5 variables:
 \describe{
-  \item{name}{taxonomic name}
-  \item{key}{GBIF occurrence key}
-  \item{decimalLatitude}{latitude, decimal degree}
-  \item{decimalLongitude}{longitude, decimal degree}
-  \item{coordinateUncertaintyInMeters}{Uncertainity, the point-radius representation of the location}
+\item{name}{taxonomic name}
+\item{key}{GBIF occurrence key}
+\item{decimalLatitude}{latitude, decimal degree}
+\item{decimalLongitude}{longitude, decimal degree}
+\item{coordinateUncertaintyInMeters}{Uncertainity, the point-radius representation of the location}
 }
 
 Data originally collected from GBIF}

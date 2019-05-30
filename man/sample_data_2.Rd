@@ -6,13 +6,13 @@
 \title{Sample data.frame number 2}
 \format{A data frame with 1500 rows and 7 variables:
 \describe{
-  \item{name}{taxonomic name}
-  \item{longitude}{longitude, decimal degree}
-  \item{latitude}{latitude, decimal degree}
-  \item{key}{occurrence key}
-  \item{year}{year of occurrence}
-  \item{month}{month of occurrence}
-  \item{day}{day of occurrence}
+\item{name}{taxonomic name}
+\item{longitude}{longitude, decimal degree}
+\item{latitude}{latitude, decimal degree}
+\item{key}{occurrence key}
+\item{year}{year of occurrence}
+\item{month}{month of occurrence}
+\item{day}{day of occurrence}
 }
 
 Data originally collected from GBIF}

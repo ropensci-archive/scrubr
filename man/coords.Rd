@@ -56,14 +56,14 @@ Coordinate based cleaning
 Explanation of the functions:
 
 \itemize{
- \item coord_impossible - Impossible coordinates
- \item coord_incomplete - Incomplete coordinates
- \item coord_imprecise - Imprecise coordinates
- \item coord_pol_centroids - Points at political centroids
- \item coord_unlikely - Unlikely coordinates
- \item coord_within - Check if points are within user input
- political boundaries
- \item coord_uncertain - Uncertain occurrances of measured through coordinateUncertaintyInMeters default limit= 30000
+\item coord_impossible - Impossible coordinates
+\item coord_incomplete - Incomplete coordinates
+\item coord_imprecise - Imprecise coordinates
+\item coord_pol_centroids - Points at political centroids
+\item coord_unlikely - Unlikely coordinates
+\item coord_within - Check if points are within user input
+political boundaries
+\item coord_uncertain - Uncertain occurrances of measured through coordinateUncertaintyInMeters default limit= 30000
 }
 
 If either lat or lon (or both) given, we assign the given column name

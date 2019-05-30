@@ -25,7 +25,7 @@ Collector based cleaning
 Explanation of the functions:
 
 \itemize{
- \item coll_clean - Standardize collector names
+\item coll_clean - Standardize collector names
 }
 }
 \examples{
