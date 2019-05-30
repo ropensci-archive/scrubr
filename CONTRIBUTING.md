@@ -1,9 +1,5 @@
 # CONTRIBUTING #
 
-### Please contribute!
-
-We love collaboration.
-
 ### Bugs?
 
 * Submit an issue on the Issues page [here](https://github.com/ropensci/scrubr/issues)
@@ -19,6 +15,4 @@ please do write some tests to cover the new functionality.
 * Push up to your account
 * Submit a pull request to home base at `ropensci/scrubr`
 
-### Questions? Get in touch: [scott@ropensci.org](mailto:scott@ropensci.org)
-
-### Thanks for contributing!
+### Questions? Get in touch: [myrmecocystus@gmail.com](mailto:myrmecocystus@gmail.com)
