@@ -5,7 +5,7 @@ Description: Clean biological occurrence records. Includes functionality
     for cleaning based on various aspects of spatial coordinates,
     unlikely values due to political 'centroids', coordinates based on
     where collections of specimens are held, and more.
-Version: 0.1.4.92
+Version: 0.1.4.93
 Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com"))
 License: MIT + file LICENSE
@@ -34,7 +34,7 @@ Suggests:
     knitr,
     rmarkdown,
     rgbif,
-    sp,
+    sf,
     rworldmap,
     maps
 RoxygenNote: 7.0.2

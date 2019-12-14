@@ -3,7 +3,7 @@
 #' @name coords
 #' @param x (data.frame) A data.frame
 #' @param lat,lon (character) Latitude and longitude column to use. See Details.
-#' @param field (character) Name of filed in input data.frame x with country names
+#' @param field (character) Name of field in input data.frame x with country names
 #' @param country (character) A single country name
 #' @param which (character) one of "has_dec", "no_zeros", or "both" (default)
 #' @param drop (logical) Drop bad data points or not. Either way, we parse out bad data points as an attribute you can access. Default: \code{TRUE}
@@ -87,22 +87,24 @@
 #' # Remove points not within correct political borders
 #' if (requireNamespace("rgbif", quietly = TRUE)) {
 #'    library("rgbif")
-#'    wkt <- 'POLYGON((30.1 10.1, 10 20, 20 40, 40 40, 30.1 10.1))'
-#'    res <- rgbif::occ_data(geometry = wkt, limit=100)$data
+#'    wkt <- 'POLYGON((30.1 10.1,40 40,20 40,10 20,30.1 10.1))'
+#'    res <- rgbif::occ_data(geometry = wkt, limit=300)$data
 #' } else {
 #'    res <- sample_data_4
 #' }
 #'
 #' ## By specific country name
 #' NROW(res)
-#' df_within <- dframe(res) %>% coord_within(country = "Egypt")
+#' df_within <- dframe(res) %>% coord_within(country = "Israel")
 #' NROW(df_within)
 #' attr(df_within, "coord_within")
 #'
-#' ## By a field in your data - makes sure your points occur in one of those countries
+#' ## By a field in your data - makes sure your points occur in one
+#' ## of those countries
 #' NROW(res)
 #' df_within <- dframe(res) %>% coord_within(field = "country")
 #' NROW(df_within)
+#' head(df_within)
 #' attr(df_within, "coord_within")
 #'
 #' # Remove those very near political centroids
@@ -247,37 +249,37 @@ coord_within <- function(x, field = NULL, country = NULL,
     pkgenv <- new.env()
     data("countriesLow", package = "rworldmap", envir = pkgenv)
   }
-  check4pkg("sp")
+  check4pkg("sf")
 
   x <- do_coords(x, lat, lon)
   if (!is.null(field)) {
-    if (!field %in% names(x)) stop("field not in input data.frame", call. = FALSE)
+    if (!field %in% names(x)) stop("field not in input data.frame",
+      call. = FALSE)
   }
 
-  class(x) <- "data.frame"
-  sp::coordinates(x) <- ~longitude + latitude
-  sp::proj4string(x) <- sp::CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+  z <- sf::st_as_sf(x, coords = c("longitude", "latitude"))
+  z <- sf::st_set_crs(z, 4326)
   refctrys <- as.character(get("countriesLow", envir = pkgenv)@data$SOVEREIGNT)
 
   if (is.null(field)) {
     ctry <- get("countriesLow", envir = pkgenv)[refctrys == country, ]
-    bb <- suppressMessages(sp::over(x, ctry))
-    wth <- x[is.na(bb[, 1]), ]@data
   } else {
     uniqctrys <- na.omit(unique(x[field][[1]]))
     if (!all(uniqctrys %in% unique(refctrys))) {
       notmatch <- uniqctrys[!uniqctrys %in% unique(refctrys)]
-      warning("Some countries do not match reference country dataset:\n ", notmatch)
+      warning("Some countries do not match reference country dataset:\n ",
+        notmatch)
     }
     ctry <- get("countriesLow", envir = pkgenv)[refctrys %in% uniqctrys, ]
-    bb <- suppressMessages(sp::over(x, ctry))
-    wth <- x[is.na(bb[, 1]), ]@data
   }
+  
+  ctry <- as(ctry, "sf")
+  bb <- sf::st_join(z, ctry, join = sf::st_within)
+  wth <- tibble::as_tibble(x[is.na(bb$ADMIN), ])
 
   if (drop) {
-    x <- x[!is.na(bb[, 1]), ]
+    x <- tibble::as_tibble(x[!is.na(bb$ADMIN), ])
   }
-  x <- tibble::as_data_frame(x@data)
   if (NROW(wth) == 0) wth <- NA
   row.names(wth) <- NULL
   row.names(x) <- NULL

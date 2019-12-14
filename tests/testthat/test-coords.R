@@ -66,7 +66,6 @@ test_that("coord_incomplete works", {
 
 })
 
-
 test_that("coord_unlikely works", {
   expect_equal(NROW(df), 1500)
 
@@ -78,7 +77,13 @@ test_that("coord_unlikely works", {
 
 })
 
+test_that("coord_within works", {
+  skip_if_not_installed("sf")
 
+  zz <- sample_data_4
+  df_within <- suppressMessages(coord_within(dframe(zz), country = "Israel"))
 
-
-
+  expect_gt(NROW(zz), NROW(df_within))
+  expect_is(attr(df_within, "coord_within"), "tbl_df")
+  expect_gt(NROW(df_within), NROW(attr(df_within, "coord_within")))
+})
