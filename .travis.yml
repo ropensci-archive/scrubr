@@ -19,12 +19,9 @@ addons:
     packages:
     - libudunits2-dev
     - libv8-dev
-    - libprotobuf-dev
-    - libprotoc-dev
     - libproj-dev
     - libgeos-dev
     - libgdal-dev
-    - protobuf-compiler
     - valgrind
     - libpq-dev
     - netcdf-bin
@@ -32,10 +29,11 @@ addons:
 r_binary_packages:
 - geoaxe
 - rgbif
-- sp
 - rworldmap
 - maps
 - covr
+
+r_packages:
 - sf
 
 after_success:
