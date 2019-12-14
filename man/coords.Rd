@@ -46,7 +46,7 @@ coord_uncertain(
 
 \item{which}{(character) one of "has_dec", "no_zeros", or "both" (default)}
 
-\item{field}{(character) Name of filed in input data.frame x with country names}
+\item{field}{(character) Name of field in input data.frame x with country names}
 
 \item{country}{(character) A single country name}
 
@@ -136,22 +136,24 @@ attr(df_unlikely, "coord_unlikely")
 # Remove points not within correct political borders
 if (requireNamespace("rgbif", quietly = TRUE)) {
    library("rgbif")
-   wkt <- 'POLYGON((30.1 10.1, 10 20, 20 40, 40 40, 30.1 10.1))'
-   res <- rgbif::occ_data(geometry = wkt, limit=100)$data
+   wkt <- 'POLYGON((30.1 10.1,40 40,20 40,10 20,30.1 10.1))'
+   res <- rgbif::occ_data(geometry = wkt, limit=300)$data
 } else {
    res <- sample_data_4
 }
 
 ## By specific country name
 NROW(res)
-df_within <- dframe(res) \%>\% coord_within(country = "Egypt")
+df_within <- dframe(res) \%>\% coord_within(country = "Israel")
 NROW(df_within)
 attr(df_within, "coord_within")
 
-## By a field in your data - makes sure your points occur in one of those countries
+## By a field in your data - makes sure your points occur in one
+## of those countries
 NROW(res)
 df_within <- dframe(res) \%>\% coord_within(field = "country")
 NROW(df_within)
+head(df_within)
 attr(df_within, "coord_within")
 
 # Remove those very near political centroids

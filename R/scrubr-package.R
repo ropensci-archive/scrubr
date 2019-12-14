@@ -9,6 +9,7 @@
 #' @importFrom fastmatch %fin%
 #' @importFrom Matrix as.matrix
 #' @importFrom magrittr %>%
+#' @importFrom methods as
 #' @name scrubr-package
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @aliases scrubr
