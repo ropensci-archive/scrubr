@@ -36,6 +36,7 @@
 #'          'P.c. subsp bolanderi', 'P.c. var. murrayana'),
 #'  stringsAsFactors = FALSE))
 #' fix_names(df, how="supplied", replace = replace_df)$name
+#' }
 fix_names <- function(x, how = "shortest", replace = NULL) {
   assert(x, "data.frame")
   assert(how, "character")

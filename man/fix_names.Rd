@@ -34,3 +34,19 @@ for whatever reason (e.g., some names have authorities on them), and
 collapses them to the same string - making data easier to deal with for
 making maps, etc. OR - you can think of this as a tool for
 }
+\examples{
+\dontrun{
+df <- sample_data_7
+
+# method: shortest
+fix_names(df, how="shortest")$name
+
+# method: supplied
+(replace_df <- data.frame(
+ one = unique(df$name), 
+ two = c('P. contorta', 'P.c. var. contorta',
+         'P.c. subsp bolanderi', 'P.c. var. murrayana'),
+ stringsAsFactors = FALSE))
+fix_names(df, how="supplied", replace = replace_df)$name
+}
+}
