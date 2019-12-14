@@ -10,3 +10,4 @@ Makefile
 ^codemeta\.json$
 .github
 docs
+vignettes/scrubr.Rmd.og

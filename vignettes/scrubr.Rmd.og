@@ -1,8 +1,16 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{scrubr introduction}
-%\VignetteEncoding{UTF-8}
--->
+---
+title: "scrubr introduction"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: readable
+vignette: >
+  %\VignetteIndexEntry{scrubr introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(
@@ -13,8 +21,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-scrubr introduction
-===================
 
 `scrubr` is a general purpose toolbox for cleaning biological occurrence records. Think
 of it like `dplyr` but specifically for occurrence data. It includes functionality for

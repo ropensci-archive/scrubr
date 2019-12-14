@@ -13,20 +13,29 @@
 \usage{
 coord_incomplete(x, lat = NULL, lon = NULL, drop = TRUE)
 
-coord_imprecise(x, which = "both", lat = NULL, lon = NULL,
-  drop = TRUE)
+coord_imprecise(x, which = "both", lat = NULL, lon = NULL, drop = TRUE)
 
 coord_impossible(x, lat = NULL, lon = NULL, drop = TRUE)
 
 coord_unlikely(x, lat = NULL, lon = NULL, drop = TRUE)
 
-coord_within(x, field = NULL, country = NULL, lat = NULL,
-  lon = NULL, drop = TRUE)
+coord_within(
+  x,
+  field = NULL,
+  country = NULL,
+  lat = NULL,
+  lon = NULL,
+  drop = TRUE
+)
 
 coord_pol_centroids(x, lat = NULL, lon = NULL, drop = TRUE)
 
-coord_uncertain(x, coorduncertainityLimit = 30000, drop = TRUE,
-  ignore.na = FALSE)
+coord_uncertain(
+  x,
+  coorduncertainityLimit = 30000,
+  drop = TRUE,
+  ignore.na = FALSE
+)
 }
 \arguments{
 \item{x}{(data.frame) A data.frame}

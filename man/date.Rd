@@ -14,8 +14,7 @@ date_missing(x, date_column = "date", drop = TRUE, ...)
 
 date_create(x, ...)
 
-date_create_(x, ..., .dots, format = "\%Y-\%m-\%d",
-  date_column = "date")
+date_create_(x, ..., .dots, format = "\%Y-\%m-\%d", date_column = "date")
 }
 \arguments{
 \item{x}{(data.frame) A data.frame}

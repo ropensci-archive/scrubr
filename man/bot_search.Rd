@@ -4,10 +4,20 @@
 \alias{bot_search}
 \title{Harvard botanist index functions}
 \usage{
-bot_search(name = NULL, individual = FALSE, start = NULL,
-  fuzzy = FALSE, remarks = NULL, speciality = NULL, country = NULL,
-  is_collector = FALSE, is_author = FALSE, team = FALSE,
-  error = stop, ...)
+bot_search(
+  name = NULL,
+  individual = FALSE,
+  start = NULL,
+  fuzzy = FALSE,
+  remarks = NULL,
+  speciality = NULL,
+  country = NULL,
+  is_collector = FALSE,
+  is_author = FALSE,
+  team = FALSE,
+  error = stop,
+  ...
+)
 }
 \description{
 Harvard botanist index functions
