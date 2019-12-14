@@ -1,10 +1,10 @@
 #' Taxonomy based cleaning
 #'
 #' @name taxonomy
-#' @param x (data.frame) A data.frame
+#' @param x (data.frame) A data.frame1
 #' @param name (character) Taxonomic name field Optional. See Details.
 #' @param drop (logical) Drop bad data points or not. Either way, we parse
-#' out bade data points as an attribute you can access. Default: \code{TRUE}
+#' out bade data points as an attribute you can access. Default: `TRUE`
 #' @return Returns a data.frame, with attributes
 #' @examples
 #' if (requireNamespace("rgbif", quietly = TRUE)) {

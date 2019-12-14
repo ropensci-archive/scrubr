@@ -3,44 +3,43 @@
 #' @name coords
 #' @param x (data.frame) A data.frame
 #' @param lat,lon (character) Latitude and longitude column to use. See Details.
-#' @param field (character) Name of field in input data.frame x with country names
+#' @param field (character) Name of field in input data.frame x with country
+#' names
 #' @param country (character) A single country name
 #' @param which (character) one of "has_dec", "no_zeros", or "both" (default)
-#' @param drop (logical) Drop bad data points or not. Either way, we parse out bad data points as an attribute you can access. Default: \code{TRUE}
-#' @param ignore.na (logical) To consider NA values as a bad point or not. Default: \code{FALSE}
-#' @param coorduncertainityLimit (numeric) numeric threshold for the coordinateUncertainityInMeters variable.
-#' Default: 30000
-#'
-#'
+#' @param drop (logical) Drop bad data points or not. Either way, we parse out
+#' bad data points as an attribute you can access. Default: `TRUE`
+#' @param ignore.na (logical) To consider NA values as a bad point or not.
+#' Default: `FALSE`
+#' @param coorduncertainityLimit (numeric) numeric threshold for the
+#' coordinateUncertainityInMeters variable. Default: 30000
 #' @return Returns a data.frame, with attributes
-#'
 #' @details
 #' Explanation of the functions:
 #'
-#' \itemize{
-#'  \item coord_impossible - Impossible coordinates
-#'  \item coord_incomplete - Incomplete coordinates
-#'  \item coord_imprecise - Imprecise coordinates
-#'  \item coord_pol_centroids - Points at political centroids
-#'  \item coord_unlikely - Unlikely coordinates
-#'  \item coord_within - Check if points are within user input
-#'  political boundaries
-#'  \item coord_uncertain - Uncertain occurrances of measured through coordinateUncertaintyInMeters default limit= 30000
-#' }
+#' - coord_impossible - Impossible coordinates
+#' - coord_incomplete - Incomplete coordinates
+#' - coord_imprecise - Imprecise coordinates
+#' - coord_pol_centroids - Points at political centroids
+#' - coord_unlikely - Unlikely coordinates
+#' - coord_within - Check if points are within user input
+#' political boundaries
+#' - coord_uncertain - Uncertain occurrances of measured through
+#' coordinateUncertaintyInMeters default limit= 30000
 #'
 #' If either lat or lon (or both) given, we assign the given column name
-#' to be standardized names of "latitude", and "longitude". If not given, we attempt
-#' to guess what the lat and lon column names are and assign the same standardized
-#' names. Assigning the same standardized names makes downstream processing easier
-#' so that we're dealing with consistent column names. On returning the data, we
-#' return the original names.
+#' to be standardized names of "latitude", and "longitude". If not given, we
+#' attempt to guess what the lat and lon column names are and assign the
+#' same standardized names. Assigning the same standardized names makes
+#' downstream processing easier so that we're dealing with consistent column
+#' names. On returning the data, we return the original names.
 #'
-#' For \code{coord_within}, we use \code{countriesLow} dataset from the
+#' For `coord_within`, we use `countriesLow` dataset from the
 #' \pkg{rworldmap} package to get country borders.
 #'
 #' @section coord_pol_centroids:
 #' Right now, this function only deals with city centroids, using the
-#' \code{\link[maps]{world.cities}} dataset of more than 40,000 cities.
+#' [maps::world.cities] dataset of more than 40,000 cities.
 #' We'll work on adding country centroids, and perhaps others (e.g.,
 #' counties, states, provinces, parks, etc.).
 #'
@@ -72,7 +71,8 @@
 #' df_imp <- dframe(df) %>% coord_imprecise(which = "no_zeros")
 #' NROW(df_imp)
 #' attr(df_imp, "coord_imprecise")
-#' ## remove both records that don't have decimals at all and those that have all zeros
+#' ## remove both records that don't have decimals at all and those that
+#' ## have all zeros
 #' df_imp <- dframe(df) %>% coord_imprecise(which = "both")
 #' NROW(df_imp)
 #' attr(df_imp, "coord_imprecise")
@@ -167,7 +167,9 @@ add_atts <- function(x, atts) {
 
 #' @export
 #' @rdname coords
-coord_imprecise <- function(x, which = "both", lat = NULL, lon = NULL, drop = TRUE) {
+coord_imprecise <- function(x, which = "both", lat = NULL, lon = NULL,
+  drop = TRUE) {
+
   x <- do_coords(x, lat, lon)
   switch(
     which,
@@ -215,7 +217,8 @@ coord_imprecise <- function(x, which = "both", lat = NULL, lon = NULL, drop = TR
 coord_impossible <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
   x <- do_coords(x, lat, lon)
   no_nas <- x[complete.cases(x$latitude, x$longitude), ]
-  np <- na.omit(no_nas[!abs(no_nas$latitude) <= 90 | !abs(no_nas$longitude) <= 180, ])
+  np <- na.omit(no_nas[!abs(no_nas$latitude) <= 90 |
+    !abs(no_nas$longitude) <= 180, ])
   if (NROW(np) == 0) np <- NA
   if (drop) {
     # x <- x[abs(x$latitude) <= 90 | abs(x$longitude) <= 180, ]
@@ -272,7 +275,7 @@ coord_within <- function(x, field = NULL, country = NULL,
     }
     ctry <- get("countriesLow", envir = pkgenv)[refctrys %in% uniqctrys, ]
   }
-  
+
   ctry <- as(ctry, "sf")
   bb <- sf::st_join(z, ctry, join = sf::st_within)
   wth <- tibble::as_tibble(x[is.na(bb$ADMIN), ])
@@ -329,13 +332,18 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
 
 #' @export
 #' @rdname coords
-coord_uncertain <- function(x, coorduncertainityLimit = 30000, drop = TRUE, ignore.na = FALSE){
+coord_uncertain <- function(x, coorduncertainityLimit = 30000, drop = TRUE,
+  ignore.na = FALSE){
+
   if(!("coordinateuncertaintyinmeters"  %in%  tolower(names(x)))){
-    stop(" 'coordinateuncertainityInMeters' variable is missing", call. = FALSE)
+    stop(" 'coordinateuncertainityInMeters' variable is missing",
+      call. = FALSE)
   }
-  names(x)[grep("coordinateuncertaintyinmeters", tolower(names(x)))] <- "coordinateuncertaintyinmeters"
+  names(x)[grep("coordinateuncertaintyinmeters",
+    tolower(names(x)))] <- "coordinateuncertaintyinmeters"
   if(ignore.na) x <- x[!is.na(x$coordinateuncertaintyinmeters), ]
-  uncertain_indices <- which(x$coordinateuncertaintyinmeters > coorduncertainityLimit)
+  uncertain_indices <-
+    which(x$coordinateuncertaintyinmeters > coorduncertainityLimit)
   uncertain <- x[uncertain_indices, ]
   if (NROW(uncertain) == 0) uncertain <- NA
   if(drop){

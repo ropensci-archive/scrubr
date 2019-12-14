@@ -42,18 +42,21 @@ coord_uncertain(
 
 \item{lat, lon}{(character) Latitude and longitude column to use. See Details.}
 
-\item{drop}{(logical) Drop bad data points or not. Either way, we parse out bad data points as an attribute you can access. Default: \code{TRUE}}
+\item{drop}{(logical) Drop bad data points or not. Either way, we parse out
+bad data points as an attribute you can access. Default: \code{TRUE}}
 
 \item{which}{(character) one of "has_dec", "no_zeros", or "both" (default)}
 
-\item{field}{(character) Name of field in input data.frame x with country names}
+\item{field}{(character) Name of field in input data.frame x with country
+names}
 
 \item{country}{(character) A single country name}
 
-\item{coorduncertainityLimit}{(numeric) numeric threshold for the coordinateUncertainityInMeters variable.
-Default: 30000}
+\item{coorduncertainityLimit}{(numeric) numeric threshold for the
+coordinateUncertainityInMeters variable. Default: 30000}
 
-\item{ignore.na}{(logical) To consider NA values as a bad point or not. Default: \code{FALSE}}
+\item{ignore.na}{(logical) To consider NA values as a bad point or not.
+Default: \code{FALSE}}
 }
 \value{
 Returns a data.frame, with attributes
@@ -63,7 +66,6 @@ Coordinate based cleaning
 }
 \details{
 Explanation of the functions:
-
 \itemize{
 \item coord_impossible - Impossible coordinates
 \item coord_incomplete - Incomplete coordinates
@@ -72,15 +74,16 @@ Explanation of the functions:
 \item coord_unlikely - Unlikely coordinates
 \item coord_within - Check if points are within user input
 political boundaries
-\item coord_uncertain - Uncertain occurrances of measured through coordinateUncertaintyInMeters default limit= 30000
+\item coord_uncertain - Uncertain occurrances of measured through
+coordinateUncertaintyInMeters default limit= 30000
 }
 
 If either lat or lon (or both) given, we assign the given column name
-to be standardized names of "latitude", and "longitude". If not given, we attempt
-to guess what the lat and lon column names are and assign the same standardized
-names. Assigning the same standardized names makes downstream processing easier
-so that we're dealing with consistent column names. On returning the data, we
-return the original names.
+to be standardized names of "latitude", and "longitude". If not given, we
+attempt to guess what the lat and lon column names are and assign the
+same standardized names. Assigning the same standardized names makes
+downstream processing easier so that we're dealing with consistent column
+names. On returning the data, we return the original names.
 
 For \code{coord_within}, we use \code{countriesLow} dataset from the
 \pkg{rworldmap} package to get country borders.
@@ -88,7 +91,7 @@ For \code{coord_within}, we use \code{countriesLow} dataset from the
 \section{coord_pol_centroids}{
 
 Right now, this function only deals with city centroids, using the
-\code{\link[maps]{world.cities}} dataset of more than 40,000 cities.
+\link[maps:world.cities]{maps::world.cities} dataset of more than 40,000 cities.
 We'll work on adding country centroids, and perhaps others (e.g.,
 counties, states, provinces, parks, etc.).
 }
@@ -121,7 +124,8 @@ attr(df_imp, "coord_imprecise")
 df_imp <- dframe(df) \%>\% coord_imprecise(which = "no_zeros")
 NROW(df_imp)
 attr(df_imp, "coord_imprecise")
-## remove both records that don't have decimals at all and those that have all zeros
+## remove both records that don't have decimals at all and those that
+## have all zeros
 df_imp <- dframe(df) \%>\% coord_imprecise(which = "both")
 NROW(df_imp)
 attr(df_imp, "coord_imprecise")

@@ -1,12 +1,11 @@
 #' scrubr datasets
 #'
-#' \itemize{
-#'  \item \code{\link{sample_data_1}}
-#'  \item \code{\link{sample_data_2}}
-#'  \item \code{\link{sample_data_3}}
-#'  \item \code{\link{sample_data_4}}
-#'  \item \code{\link{sample_data_6}}
-#' }
+#' - [sample_data_1]
+#' - [sample_data_2]
+#' - [sample_data_3]
+#' - [sample_data_4]
+#' - [sample_data_6]
+#'
 #' @name scrubr_datasets
 #' @keywords datasets
 NULL

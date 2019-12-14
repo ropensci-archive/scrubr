@@ -19,7 +19,7 @@ date_create_(x, ..., .dots, format = "\%Y-\%m-\%d", date_column = "date")
 \arguments{
 \item{x}{(data.frame) A data.frame}
 
-\item{format}{(character) Date format. See \code{\link{as.Date}}}
+\item{format}{(character) Date format. See \code{\link[=as.Date]{as.Date()}}}
 
 \item{date_column}{(character) Name of the date column}
 

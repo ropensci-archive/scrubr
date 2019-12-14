@@ -6,16 +6,14 @@
 #' @param x (data.frame) A data.frame
 #' @param collector (character) Collector field to use. See Details.
 #' @param drop (logical) Drop bad data points or not. Either way, we parse
-#' out bade data points as an attribute you can access. Default: \code{TRUE}
+#' out bade data points as an attribute you can access. Default: `TRUE`
 #'
 #' @return Returns a data.frame, with attributes
 #'
 #' @details
 #' Explanation of the functions:
 #'
-#' \itemize{
-#'  \item coll_clean - Standardize collector names
-#' }
+#' - coll_clean - Standardize collector names
 #'
 #' @examples
 #' # df <- data.frame(

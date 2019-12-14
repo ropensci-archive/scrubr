@@ -8,7 +8,7 @@
 tax_no_epithet(x, name = NULL, drop = TRUE)
 }
 \arguments{
-\item{x}{(data.frame) A data.frame}
+\item{x}{(data.frame) A data.frame1}
 
 \item{name}{(character) Taxonomic name field Optional. See Details.}
 

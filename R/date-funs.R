@@ -2,22 +2,21 @@
 #'
 #' @name date
 #' @param x (data.frame) A data.frame
-#' @param format (character) Date format. See \code{\link{as.Date}}
+#' @param format (character) Date format. See [as.Date()]
 #' @param date_column (character) Name of the date column
 #' @param drop (logical) Drop bad data points or not. Either way, we parse
-#' out bade data points as an attribute you can access. Default: \code{TRUE}
+#' out bade data points as an attribute you can access. Default: `TRUE`
 #' @param ...	Comma separated list of unquoted variable names
 #' @param .dots	Used to work around non-standard evaluation
 #'
 #' @return Returns a data.frame, with attributes
 #'
 #' @details
-#' \itemize{
-#'  \item date_standardize - Converts dates to a specific format
-#'  \item date_missing - Drops records that do not have dates, either via being
-#'  NA or being a zero length character string
-#'  \item date_create - Create a date field from
-#' }
+#' 
+#' - date_standardize - Converts dates to a specific format
+#' - date_missing - Drops records that do not have dates, either via being
+#' NA or being a zero length character string
+#' - date_create - Create a date field from
 #'
 #' @examples
 #' df <- sample_data_1

@@ -10,8 +10,8 @@ dedup(x, how = "one", tolerance = 0.9)
 \item{x}{(data.frame) A data.frame, tibble, or data.table}
 
 \item{how}{(character) How to deal with duplicates. The default of
-\code{"one"} keeps one record of each group of duplicates, and drops the
-others, putting them into the \code{dups} attribute. \code{"all"} drops all
+"one" keeps one record of each group of duplicates, and drops the
+others, putting them into the \code{dups} attribute. "all" drops all
 duplicates, in case e.g., you don't want to deal with any records that are
 duplicated, as e.g., it may be hard to tell which one to remove.}
 

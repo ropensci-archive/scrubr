@@ -5,11 +5,11 @@
 \title{scrubr datasets}
 \description{
 \itemize{
-\item \code{\link{sample_data_1}}
-\item \code{\link{sample_data_2}}
-\item \code{\link{sample_data_3}}
-\item \code{\link{sample_data_4}}
-\item \code{\link{sample_data_6}}
+\item \link{sample_data_1}
+\item \link{sample_data_2}
+\item \link{sample_data_3}
+\item \link{sample_data_4}
+\item \link{sample_data_6}
 }
 }
 \keyword{datasets}

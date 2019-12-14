@@ -23,7 +23,6 @@ Collector based cleaning
 }
 \details{
 Explanation of the functions:
-
 \itemize{
 \item coll_clean - Standardize collector names
 }
