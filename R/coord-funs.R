@@ -22,7 +22,7 @@
 #' - coord_imprecise - Imprecise coordinates
 #' - coord_pol_centroids - Points at political centroids
 #' - coord_unlikely - Unlikely coordinates
-#' - coord_within - Check if points are within user input
+#' - coord_within - Filter points within user input
 #' political boundaries
 #' - coord_uncertain - Uncertain occurrances of measured through
 #' coordinateUncertaintyInMeters default limit= 30000
@@ -354,5 +354,3 @@ coord_uncertain <- function(x, coorduncertainityLimit = 30000, drop = TRUE,
   row.names(x) <- NULL
   structure(x, coord_uncertain=uncertain)
 }
-
-

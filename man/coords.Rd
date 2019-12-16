@@ -72,7 +72,7 @@ Explanation of the functions:
 \item coord_imprecise - Imprecise coordinates
 \item coord_pol_centroids - Points at political centroids
 \item coord_unlikely - Unlikely coordinates
-\item coord_within - Check if points are within user input
+\item coord_within - Filter points within user input
 political boundaries
 \item coord_uncertain - Uncertain occurrances of measured through
 coordinateUncertaintyInMeters default limit= 30000
