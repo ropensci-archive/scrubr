@@ -10,6 +10,8 @@
 #' @importFrom Matrix as.matrix
 #' @importFrom magrittr %>%
 #' @importFrom methods as
+#' @importFrom hoardr hoard
+#' @importFrom curl curl_download
 #' @name scrubr-package
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @aliases scrubr

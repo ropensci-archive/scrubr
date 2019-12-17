@@ -28,7 +28,9 @@ Imports:
     lazyeval,
     crul,
     jsonlite,
-    tibble
+    tibble,
+    hoardr,
+    curl
 Suggests:
     testthat,
     knitr,
