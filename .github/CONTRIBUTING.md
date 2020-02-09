@@ -14,5 +14,3 @@
 please do write some tests to cover the new functionality.
 * Push up to your account
 * Submit a pull request to home base at `ropensci/scrubr`
-
-### Questions? Get in touch: [myrmecocystus@gmail.com](mailto:myrmecocystus@gmail.com)
