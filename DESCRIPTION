@@ -38,6 +38,7 @@ Suggests:
     rmarkdown,
     rgbif,
     sf,
+    mapview,
     rworldmap,
     maps
 RoxygenNote: 7.0.2

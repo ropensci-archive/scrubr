@@ -8,7 +8,7 @@
 #' @param lat,lon (character) Latitude and longitude column to use. See Details.
 #' @param drop (logical) Drop bad data points or not. Either way, we parse out
 #' bad data points as an attribute you can access. Default: `TRUE`
-#' @param ignore.na (logical) To consider NA values as a bad point or not.
+#' #param ignore.na (logical) To consider NA values as a bad point or not.
 #' Default: `FALSE`
 #' @return Returns a data.frame, with attributes
 #' @details see `scrubr_cache` for managing the cache of data
@@ -25,6 +25,7 @@
 #' - fao: asdfasdf
 #'
 #' @examples
+#' if (requireNamespace("mapview") && requireNamespace("sf")) {
 #' ## Marine Ecoregions of the World
 #' wkt <- 'POLYGON((-119.8 12.2, -105.1 11.5, -106.1 21.6, -119.8 20.9, -119.8 12.2))'
 #' res <- rgbif::occ_data(geometry = wkt, limit=300)$data
@@ -44,12 +45,10 @@
 #' dat <- sf::st_as_sf(res$data, coords = c("decimalLongitude", "decimalLatitude"))
 #' dat <- sf::st_set_crs(dat, 4326)
 #' mapview::mapview(dat)
-#' tmp <- ecoregion(dframe(res$data), dataset = "fao", ecoregion = "OCEAN:Indian")
-#' library(dplyr)
-#' tmp <- filter(tmp, !is.na(decimalLongitude))
 #' tmp2 <- sf::st_as_sf(tmp, coords = c("decimalLongitude", "decimalLatitude"))
 #' tmp2 <- sf::st_set_crs(tmp2, 4326)
 #' mapview::mapview(tmp2)
+#' }
 ecoregion <- function(x, dataset = "meow", ecoregion,
   lat = NULL, lon = NULL, drop = TRUE) {
 
