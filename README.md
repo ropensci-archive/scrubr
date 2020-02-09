@@ -239,6 +239,25 @@ dframe(sample_data_2) %>% date_create(year, month, day)
 #> # … with 1,490 more rows
 ```
 
+## Ecoregion
+
+Filter by FAO areas
+
+
+```r
+wkt <- 'POLYGON((72.2 38.5,-173.6 38.5,-173.6 -41.5,72.2 -41.5,72.2 38.5))'
+manta_ray <- rgbif::name_backbone("Mobula alfredi")$usageKey
+res <- rgbif::occ_data(manta_ray, geometry = wkt, limit=300, hasCoordinate = TRUE)
+dat <- sf::st_as_sf(res$data, coords = c("decimalLongitude", "decimalLatitude"))
+dat <- sf::st_set_crs(dat, 4326)
+mapview::mapview(dat)
+tmp <- ecoregion(dframe(res$data), dataset = "fao", ecoregion = "OCEAN:Indian")
+tmp <- tmp[!is.na(tmp$decimalLongitude), ]
+tmp2 <- sf::st_as_sf(tmp, coords = c("decimalLongitude", "decimalLatitude"))
+tmp2 <- sf::st_set_crs(tmp2, 4326)
+mapview::mapview(tmp2)
+```
+
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/ropensci/scrubr/issues).

@@ -45,6 +45,8 @@
 #' dat <- sf::st_as_sf(res$data, coords = c("decimalLongitude", "decimalLatitude"))
 #' dat <- sf::st_set_crs(dat, 4326)
 #' mapview::mapview(dat)
+#' tmp <- ecoregion(dframe(res$data), dataset = "fao", ecoregion = "OCEAN:Indian")
+#' tmp <- tmp[!is.na(tmp$decimalLongitude), ]
 #' tmp2 <- sf::st_as_sf(tmp, coords = c("decimalLongitude", "decimalLatitude"))
 #' tmp2 <- sf::st_set_crs(tmp2, 4326)
 #' mapview::mapview(tmp2)
