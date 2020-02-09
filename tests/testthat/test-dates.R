@@ -48,5 +48,5 @@ test_that("creating date rows data works", {
   expect_equal(NCOL(df), 7)
   expect_equal(NCOL(aa), 8)
   expect_false(any(grepl("date", names(df))))
-  expect_that(any(grepl("date", names(aa))), is_true())
+  expect_true(any(grepl("date", names(aa))))
 })

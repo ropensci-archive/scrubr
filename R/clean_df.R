@@ -17,7 +17,7 @@ dframe.default <- function(x) {
 
 #' @export
 dframe.data.frame <- function(x) {
-  tibble::as_data_frame(x)
+  tibble::as_tibble(x)
 }
 
 #' @export
