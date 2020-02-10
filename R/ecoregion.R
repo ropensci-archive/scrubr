@@ -4,27 +4,39 @@
 #' @param x (data.frame) A data.frame
 #' @param dataset (character) the dataset to use. one of: "meow" (Marine
 #' Ecoregions of the World), "fao" (). See Details.
-#' @param ecoregion (character) the ecoregion name. See Details.
-#' @param lat,lon (character) Latitude and longitude column to use. See Details.
+#' @param region (character) the region name. has the form `a:b` where 
+#' `a` is a variable name (column in the sf object) and `b` is the value you want 
+#' to filter to within that variable. See Details.
+#' @param lat,lon (character) name of the latitude and longitude column to use
 #' @param drop (logical) Drop bad data points or not. Either way, we parse out
 #' bad data points as an attribute you can access. Default: `TRUE`
 #' #param ignore.na (logical) To consider NA values as a bad point or not.
 #' Default: `FALSE`
 #' @return Returns a data.frame, with attributes
 #' @details see `scrubr_cache` for managing the cache of data
-#' @section Datasets: and ecoregions:
+#' @section dataset options:
 #'
-#' - meow: https://opendata.arcgis.com/datasets/ed2be4cf8b7a451f84fd093c2e7660e3_0.geojson
-#' - fao:http://www.fao.org/geonetwork/srv/en/main.home?uuid=ac02a460-da52-11dc-9d70-0017f293bd28
-#' http://www.fao.org/figis/geoserver/area/ows?service=WFS&request=GetFeature&version=1.0.0&typeName=area:FAO_AREAS&outputFormat=SHAPE-ZIP
-#' http://www.fao.org/figis/geoserver/area/ows?service=WFS&request=GetFeature&version=1.0.0&typeName=area:FAO_AREAS&outputFormat=application/json
+#' - Marine Ecoregions of the World (meow):
+#'   - data from: https://opendata.arcgis.com/datasets/ed2be4cf8b7a451f84fd093c2e7660e3_0.geojson
+#' - Food and Agriculture Organization (fao):
+#'   - data from: http://www.fao.org/geonetwork/srv/en/main.home?uuid=ac02a460-da52-11dc-9d70-0017f293bd28
 #'
-#' @section Ecoregions:
+#' @section region options:
 #'
-#' - meow: 
-#' - fao: asdfasdf
+#' - within meow:
+#'   - ECOREGION: many options, see `regions_meow()`
+#'   - ECO_CODE: many options, see `regions_meow()`
+#'   - and you can use others as well; run `regions_meow()` to get the data used
+#'     within `eco_region()` and see what variables/columns can be used
+#' - within fao: 
+#'   - OCEAN: Atlantic, Pacific, Indian, Arctic
+#'   - SUBOCEAN: 1 through 11 (inclusive)
+#'   - F_AREA (fishing area): 18, 21, 27, 31, 34, 37, 41, 47, 48, 51, 57, 58,
+#'     61, 67, 71, 77, 81, 87, 88
+#'   - and you can use others as well; run `regions_fao()` to get the data used
+#'     within `eco_region()` and see what variables/columns can be used
 #'
-#' @examples
+#' @examples \dontrun{
 #' if (requireNamespace("mapview") && requireNamespace("sf")) {
 #' ## Marine Ecoregions of the World
 #' wkt <- 'POLYGON((-119.8 12.2, -105.1 11.5, -106.1 21.6, -119.8 20.9, -119.8 12.2))'
@@ -32,8 +44,8 @@
 #' res2 <- sf::st_as_sf(res, coords = c("decimalLongitude", "decimalLatitude"))
 #' res2 <- sf::st_set_crs(res2, 4326)
 #' mapview::mapview(res2)
-#' tmp <- ecoregion(dframe(res), dataset = "meow",
-#'    ecoregion = "ECOREGION:Mexican Tropical Pacific")
+#' tmp <- eco_region(dframe(res), dataset = "meow",
+#'    region = "ECOREGION:Mexican Tropical Pacific")
 #' tmp2 <- sf::st_as_sf(tmp, coords = c("decimalLongitude", "decimalLatitude"))
 #' tmp2 <- sf::st_set_crs(tmp2, 4326)
 #' mapview::mapview(tmp2)
@@ -45,29 +57,29 @@
 #' dat <- sf::st_as_sf(res$data, coords = c("decimalLongitude", "decimalLatitude"))
 #' dat <- sf::st_set_crs(dat, 4326)
 #' mapview::mapview(dat)
-#' tmp <- ecoregion(dframe(res$data), dataset = "fao", ecoregion = "OCEAN:Indian")
+#' tmp <- eco_region(dframe(res$data), dataset = "fao", region = "OCEAN:Indian")
 #' tmp <- tmp[!is.na(tmp$decimalLongitude), ]
 #' tmp2 <- sf::st_as_sf(tmp, coords = c("decimalLongitude", "decimalLatitude"))
 #' tmp2 <- sf::st_set_crs(tmp2, 4326)
 #' mapview::mapview(tmp2)
-#' }
-ecoregion <- function(x, dataset = "meow", ecoregion,
+#' }}
+eco_region <- function(x, dataset = "meow", region,
   lat = NULL, lon = NULL, drop = TRUE) {
 
   check4pkg("sf")
   assert(dataset, "character")
   stopifnot(dataset %in% c("meow", "fao"))
-  assert(ecoregion, "character")
-  stopifnot(grepl(":", ecoregion))
+  assert(region, "character")
+  stopifnot(grepl(":", region))
   scrubr_cache$mkdir()
 
   x <- do_coords(x, lat, lon)
   z <- sf::st_as_sf(x, coords = c("longitude", "latitude"))
   z <- sf::st_set_crs(z, 4326)
 
-  ref_sf <- switch(dataset, meow = do_meow(), fao = do_fao())
-  er_split <- strsplit(ecoregion, ":")[[1]]
-  ref_target <- ref_sf[ref_sf[[er_split[1]]] %in% er_split[2], ]
+  ref_sf <- switch(dataset, meow = regions_meow(), fao = regions_fao())
+  er_split <- strsplit(region, ":")[[1]]
+  ref_target <- ref_sf[ref_sf[[ er_split[1] ]] %in% er_split[2], ]
 
   bb <- sf::st_join(z, ref_target, join = sf::st_within)
   wth <- tibble::as_tibble(x[is.na(bb$FID), ])
@@ -79,10 +91,12 @@ ecoregion <- function(x, dataset = "meow", ecoregion,
   row.names(wth) <- NULL
   row.names(x) <- NULL
   structure(reassign(x), coord_ecoregion = wth,
-    dataset = dataset, ecoregion = ecoregion)
+    dataset = dataset, region = region)
 }
 
-do_meow <- function() {
+#' @export
+#' @rdname eco_region
+regions_meow <- function() {
   path <- file.path(scrubr_cache$cache_path_get(), "meow.geojson")
   if (file.exists(path)) {
     message("meow.geojson exists in the cache")
@@ -92,10 +106,10 @@ do_meow <- function() {
   }
   sf::read_sf(path)
 }
-# w <- do_meow()
-# mapview::mapview(w)
 
-do_fao <- function() {
+#' @export
+#' @rdname eco_region
+regions_fao <- function() {
   path <- file.path(scrubr_cache$cache_path_get(), "fao.geojson")
   if (file.exists(path)) {
     message("fao.geojson exists in the cache")
@@ -105,5 +119,6 @@ do_fao <- function() {
   }
   sf::read_sf(path)
 }
-# z <- do_fao()
-# mapview::mapview(z)
+
+# http://www.fao.org/figis/geoserver/area/ows?service=WFS&request=GetFeature&version=1.0.0&typeName=area:FAO_AREAS&outputFormat=SHAPE-ZIP
+# http://www.fao.org/figis/geoserver/area/ows?service=WFS&request=GetFeature&version=1.0.0&typeName=area:FAO_AREAS&outputFormat=application/json
