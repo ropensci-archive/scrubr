@@ -1,6 +1,6 @@
 ---
 title: "scrubr introduction"
-date: "2019-12-13"
+date: "2020-02-10"
 output:
   html_document:
     toc: true
@@ -269,53 +269,52 @@ NROW(res)
 #> [1] 500
 df <- dframe(res) %>% tax_no_epithet(name = "name")
 NROW(df)
-#> [1] 390
+#> [1] 486
 attr(df, "name_var")
 #> [1] "name"
 attr(df, "tax_no_epithet")
-#> # A tibble: 110 x 110
+#> # A tibble: 14 x 96
 #>    key   scientificName decimalLatitude decimalLongitude issues datasetKey
 #>    <chr> <chr>                    <dbl>            <dbl> <chr>  <chr>     
-#>  1 1840… Lepidoptera               25.0             121. txmat… e0b8cb67-…
-#>  2 1981… Geometridae               24.2             121. txmat… e0b8cb67-…
-#>  3 1981… Nolidae                   25.1             121. txmat… e0b8cb67-…
-#>  4 1981… Lepidoptera               25.0             122. txmat… e0b8cb67-…
-#>  5 1981… Crambidae                 24.2             121. txmat… e0b8cb67-…
-#>  6 1981… Erebidae                  25.0             122. txmat… e0b8cb67-…
-#>  7 1981… Lepidoptera               24.9             121. txmat… e0b8cb67-…
-#>  8 1981… Lepidoptera               25.0             122. txmat… e0b8cb67-…
-#>  9 1981… Lepidoptera               25.0             122. txmat… e0b8cb67-…
-#> 10 1981… Lepidoptera               24.9             121. txmat… e0b8cb67-…
-#> # … with 100 more rows, and 104 more variables: publishingOrgKey <chr>,
-#> #   installationKey <chr>, publishingCountry <chr>, protocol <chr>,
-#> #   lastCrawled <chr>, lastParsed <chr>, crawlId <int>, basisOfRecord <chr>,
-#> #   taxonKey <int>, kingdomKey <int>, phylumKey <int>, classKey <int>,
-#> #   orderKey <int>, familyKey <int>, genusKey <int>, speciesKey <int>,
-#> #   acceptedTaxonKey <int>, acceptedScientificName <chr>, kingdom <chr>,
-#> #   phylum <chr>, order <chr>, family <chr>, genus <chr>, species <chr>,
-#> #   genericName <chr>, specificEpithet <chr>, infraspecificEpithet <chr>,
-#> #   taxonRank <chr>, taxonomicStatus <chr>, dateIdentified <chr>, year <int>,
-#> #   month <int>, eventDate <chr>, modified <chr>, lastInterpreted <chr>,
-#> #   references <chr>, license <chr>, class <chr>, countryCode <chr>,
-#> #   country <chr>, rightsHolder <chr>, identifier <chr>, habitat <chr>,
-#> #   verbatimEventDate <chr>, gbifID <chr>, collectionCode <chr>,
-#> #   language <chr>, verbatimLocality <chr>, occurrenceID <chr>, type <chr>,
-#> #   catalogNumber <chr>, institutionCode <chr>, identificationRemarks <chr>,
-#> #   identifiedBy <chr>, identificationID <chr>, stateProvince <chr>,
-#> #   geodeticDatum <chr>, elevation <dbl>, continent <chr>, county <chr>,
-#> #   datasetName <chr>, eventRemarks <chr>, fieldNumber <chr>, recordedBy <chr>,
-#> #   coordinateUncertaintyInMeters <dbl>, day <int>,
-#> #   `http://unknown.org/nick` <chr>, taxonID <chr>,
-#> #   `http://unknown.org/occurrenceDetails` <chr>, rights <chr>,
-#> #   eventTime <chr>, occurrenceRemarks <chr>, elevationAccuracy <dbl>,
-#> #   recordNumber <chr>, locality <chr>, municipality <chr>,
-#> #   ownerInstitutionCode <chr>, higherGeography <chr>, islandGroup <chr>,
-#> #   vernacularName <chr>, higherClassification <chr>, individualCount <int>,
-#> #   identificationVerificationStatus <chr>, occurrenceStatus <chr>,
-#> #   taxonConceptID <chr>, behavior <chr>, informationWithheld <chr>,
-#> #   endDayOfYear <chr>, startDayOfYear <chr>, originalNameUsage <chr>,
-#> #   datasetID <chr>, accessRights <chr>, associatedReferences <chr>,
-#> #   verbatimElevation <chr>, eventID <chr>, otherCatalogNumbers <chr>,
-#> #   dataGeneralizations <chr>, lifeStage <chr>, associatedTaxa <chr>,
-#> #   name <chr>, …
+#>  1 2542… Agaricales                55.9            12.3  cdrou… 84d26682-…
+#>  2 2542… Fungi                     56.5             9.84 cdrou… 84d26682-…
+#>  3 2542… Agaricales                55.9            12.5  cdrou… 84d26682-…
+#>  4 2542… Polyporales               55.9            12.3  cdrou… 84d26682-…
+#>  5 2542… Trichiaceae               56.7             9.87 cdrou… 84d26682-…
+#>  6 2542… Xylariales                56.2            10.6  cdrou… 84d26682-…
+#>  7 2542… Hymenochaetac…            56.5             9.84 cdrou… 84d26682-…
+#>  8 2542… Polyporales               56.0            12.3  cdrou… 84d26682-…
+#>  9 2542… Fungi                     55.8            12.5  cdrou… 84d26682-…
+#> 10 2542… Fungi                     55.9            12.4  cdrou… 84d26682-…
+#> 11 2542… Fungi                     55.9            12.3  cdrou… 84d26682-…
+#> 12 2542… Fungi                     55.9            12.3  cdrou… 84d26682-…
+#> 13 2542… Hyaloscyphace…            54.9            11.5  cdrou… 84d26682-…
+#> 14 2542… Physarales                54.9            11.5  cdrou… 84d26682-…
+#> # … with 90 more variables: publishingOrgKey <chr>, installationKey <chr>,
+#> #   publishingCountry <chr>, protocol <chr>, lastCrawled <chr>,
+#> #   lastParsed <chr>, crawlId <int>, basisOfRecord <chr>, taxonKey <int>,
+#> #   kingdomKey <int>, phylumKey <int>, classKey <int>, orderKey <int>,
+#> #   familyKey <int>, genusKey <int>, speciesKey <int>, acceptedTaxonKey <int>,
+#> #   acceptedScientificName <chr>, kingdom <chr>, phylum <chr>, order <chr>,
+#> #   family <chr>, genus <chr>, species <chr>, genericName <chr>,
+#> #   specificEpithet <chr>, taxonRank <chr>, taxonomicStatus <chr>,
+#> #   dateIdentified <chr>, elevation <dbl>, elevationAccuracy <dbl>,
+#> #   stateProvince <chr>, year <int>, month <int>, day <int>, eventDate <chr>,
+#> #   modified <chr>, lastInterpreted <chr>, license <chr>, geodeticDatum <chr>,
+#> #   class <chr>, countryCode <chr>, country <chr>, rightsHolder <chr>,
+#> #   identifier <chr>, recordNumber <chr>, municipality <chr>,
+#> #   datasetName <chr>, locality <chr>, gbifID <chr>, collectionCode <chr>,
+#> #   language <chr>, occurrenceID <chr>, type <chr>, catalogNumber <chr>,
+#> #   recordedBy <chr>, institutionCode <chr>, ownerInstitutionCode <chr>,
+#> #   occurrenceRemarks <chr>, identifiedBy <chr>, references <chr>,
+#> #   eventID <chr>, occurrenceStatus <chr>, vernacularName <chr>,
+#> #   locationRemarks <chr>, dataGeneralizations <chr>, taxonConceptID <chr>,
+#> #   coordinateUncertaintyInMeters <dbl>, individualCount <int>,
+#> #   continent <chr>, county <chr>, identificationVerificationStatus <chr>,
+#> #   taxonID <chr>, eventTime <chr>, behavior <chr>, informationWithheld <chr>,
+#> #   endDayOfYear <chr>, originalNameUsage <chr>, startDayOfYear <chr>,
+#> #   datasetID <chr>, accessRights <chr>, higherClassification <chr>,
+#> #   habitat <chr>, dynamicProperties <chr>, associatedTaxa <chr>,
+#> #   locationAccordingTo <chr>, locationID <chr>, bibliographicCitation <chr>,
+#> #   verbatimLocality <chr>, name <chr>
 ```
