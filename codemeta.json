@@ -292,7 +292,7 @@
   "contIntegration": ["https://travis-ci.org/ropensci/scrubr", "https://codecov.io/github/ropensci/scrubr?branch=master"],
   "releaseNotes": "https://github.com/ropensci/scrubr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/scrubr/blob/master/README.md",
-  "fileSize": "292.831KB",
+  "fileSize": "292.826KB",
   "contributor": {},
   "copyrightHolder": {},
   "funder": {},

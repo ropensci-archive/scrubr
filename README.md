@@ -251,7 +251,7 @@ res <- rgbif::occ_data(manta_ray, geometry = wkt, limit=300, hasCoordinate = TRU
 dat <- sf::st_as_sf(res$data, coords = c("decimalLongitude", "decimalLatitude"))
 dat <- sf::st_set_crs(dat, 4326)
 mapview::mapview(dat)
-tmp <- ecoregion(dframe(res$data), dataset = "fao", ecoregion = "OCEAN:Indian")
+tmp <- eco_region(dframe(res$data), dataset = "fao", region = "OCEAN:Indian")
 tmp <- tmp[!is.na(tmp$decimalLongitude), ]
 tmp2 <- sf::st_as_sf(tmp, coords = c("decimalLongitude", "decimalLatitude"))
 tmp2 <- sf::st_set_crs(tmp2, 4326)
