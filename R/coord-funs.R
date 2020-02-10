@@ -38,10 +38,9 @@
 #' \pkg{rworldmap} package to get country borders.
 #'
 #' @section coord_pol_centroids:
-#' Right now, this function only deals with city centroids, using the
-#' [maps::world.cities] dataset of more than 40,000 cities.
-#' We'll work on adding country centroids, and perhaps others (e.g.,
-#' counties, states, provinces, parks, etc.).
+#' Right now, this function only deals with city centroids, using a
+#' dataset of 15,000 cities from https://simplemaps.com/data/world-cities
+#' (the "Basic" dataset, CC license)
 #'
 #' @examples
 #' df <- sample_data_1
@@ -292,17 +291,16 @@ coord_within <- function(x, field = NULL, country = NULL,
 #' @export
 #' @rdname coords
 coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
-  stop("not ready yet", call. = FALSE)
-  # x <- do_coords(x, lat, lon)
-
-  # check4pkg("maps")
-  # check4pkg("sp")
-  # class(x) <- "data.frame"
-  # x <- na.omit(x)
+  # stop("not ready yet", call. = FALSE)
+  check4pkg("sf")
+  citys <- make_cities()
+  x <- do_coords(x, lat, lon)
+  class(x) <- "data.frame"
+  x <- na.omit(x)
+  x <- sf::st_as_sf(x, coords = c("longitude", "latitude"))
   # coordinates(x) <- ~longitude + latitude
-  # citys <- make_cities()
-  # polcent <- sp::over(x, gBuffer(citys[1,], width = 0.1))
-  # # polcent <- sp::over(x, gBuffer(SpatialPoints(citys), width = 0.1))
+  polcent <- sp::over(x, gBuffer(citys[1,], width = 0.1))
+  polcent <- sp::over(x, gBuffer(SpatialPoints(citys), width = 0.1))
   #
   # out <- list()
   # for (i in seq_len(NROW(citys))) {
@@ -324,11 +322,11 @@ coord_pol_centroids <- function(x, lat = NULL, lon = NULL, drop = TRUE) {
   # structure(x, coord_polcent = polcent)
 }
 
-# make_cities <- function() {
-#   wc <- world.cities
-#   coordinates(wc) <- ~long + lat
-#   wc
-# }
+make_cities <- function() {
+  wc <- system.file("extdata/worldcities.csv", package="scrubr")
+  df <- data.table::fread(wc, data.table=FALSE)
+  sf::st_as_sf(df, coords = c("lng", "lat"))
+}
 
 #' @export
 #' @rdname coords
