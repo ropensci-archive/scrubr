@@ -35,3 +35,7 @@ check: build
 
 readme:
 	${RSCRIPT} -e "knitr::knit('README.Rmd')"
+
+check_windows:
+	${RSCRIPT} -e "devtools::check_win_devel(); devtools::check_win_release()"
+		
