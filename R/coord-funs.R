@@ -261,7 +261,7 @@ coord_within <- function(x, field = NULL, country = NULL,
   }
 
   z <- sf::st_as_sf(x, coords = c("longitude", "latitude"))
-  z <- sf::st_set_crs(z, 4326)
+  z <- sf::st_set_crs(z, "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
   refctrys <- as.character(get("countriesLow", envir = pkgenv)@data$SOVEREIGNT)
 
   if (is.null(field)) {
