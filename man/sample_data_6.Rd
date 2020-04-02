@@ -4,7 +4,8 @@
 \name{sample_data_6}
 \alias{sample_data_6}
 \title{Sample data.frame number 6}
-\format{A data frame with 50 rows and 5 variables:
+\format{
+A data frame with 50 rows and 5 variables:
 \describe{
 \item{name}{taxonomic name}
 \item{key}{GBIF occurrence key}
@@ -13,7 +14,8 @@
 \item{coordinateUncertaintyInMeters}{Uncertainity, the point-radius representation of the location}
 }
 
-Data originally collected from GBIF}
+Data originally collected from GBIF
+}
 \description{
 Sample data.frame number 6
 }

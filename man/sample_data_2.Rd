@@ -4,7 +4,8 @@
 \name{sample_data_2}
 \alias{sample_data_2}
 \title{Sample data.frame number 2}
-\format{A data frame with 1500 rows and 7 variables:
+\format{
+A data frame with 1500 rows and 7 variables:
 \describe{
 \item{name}{taxonomic name}
 \item{longitude}{longitude, decimal degree}
@@ -15,7 +16,8 @@
 \item{day}{day of occurrence}
 }
 
-Data originally collected from GBIF}
+Data originally collected from GBIF
+}
 \description{
 Sample data.frame number 2
 }

@@ -4,9 +4,11 @@
 \name{sample_data_7}
 \alias{sample_data_7}
 \title{Sample data.frame number 7}
-\format{A data frame with 50 rows and 91 variables
+\format{
+A data frame with 50 rows and 91 variables
 
-Data originally collected from GBIF}
+Data originally collected from GBIF
+}
 \description{
 Sample data.frame number 7
 }
