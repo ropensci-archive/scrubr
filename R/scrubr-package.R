@@ -1,5 +1,5 @@
-#' scrubr - Clean biological occurrence data
-#'
+#' @title scrubr
+#' @description Clean biological occurrence data
 #' @import data.table
 #' @importFrom methods is
 #' @importFrom stats complete.cases na.omit setNames
