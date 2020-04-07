@@ -1,3 +1,11 @@
+scrubr 0.3.2
+============
+
+### BUG FIXES
+
+* fix some failing cran checks - changed CRS specification when using sf package (#34)
+
+
 scrubr 0.3.0
 ============
 
