@@ -37,7 +37,7 @@
 #'     within `eco_region()` and see what variables/columns can be used
 #'
 #' @examples \dontrun{
-#' if (requireNamespace("mapview") && requireNamespace("sf")) {
+#' if (requireNamespace("mapview") && requireNamespace("sf") && interactive()) {
 #' ## Marine Ecoregions of the World
 #' wkt <- 'POLYGON((-119.8 12.2, -105.1 11.5, -106.1 21.6, -119.8 20.9, -119.8 12.2))'
 #' res <- rgbif::occ_data(geometry = wkt, limit=300)$data

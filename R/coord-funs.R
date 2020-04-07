@@ -85,7 +85,7 @@
 #' attr(df_unlikely, "coord_unlikely")
 #'
 #' # Remove points not within correct political borders
-#' if (requireNamespace("rgbif", quietly = TRUE)) {
+#' if (requireNamespace("rgbif", quietly = TRUE) && interactive()) {
 #'    library("rgbif")
 #'    wkt <- 'POLYGON((30.1 10.1,40 40,20 40,10 20,30.1 10.1))'
 #'    res <- rgbif::occ_data(geometry = wkt, limit=300)$data
