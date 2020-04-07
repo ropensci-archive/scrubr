@@ -75,17 +75,19 @@ eco_region <- function(x, dataset = "meow", region,
 
   x <- do_coords(x, lat, lon)
   z <- sf::st_as_sf(x, coords = c("longitude", "latitude"))
-  z <- sf::st_set_crs(z, 4326)
+  z <- sf::st_set_crs(z, "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
 
   ref_sf <- switch(dataset, meow = regions_meow(), fao = regions_fao())
   er_split <- strsplit(region, ":")[[1]]
   ref_target <- ref_sf[ref_sf[[ er_split[1] ]] %in% er_split[2], ]
 
   bb <- sf::st_join(z, ref_target, join = sf::st_within)
-  wth <- tibble::as_tibble(x[is.na(bb$FID), ])
+  bb_is_na <- bb[is.na(bb$FID), ]
+  wth <- tibble::as_tibble(x[x$key %in% bb_is_na$key, ])
 
   if (drop) {
-    x <- tibble::as_tibble(x[!is.na(bb$FID), ])
+    bb_not_na <- bb[!is.na(bb$FID), ]
+    x <- tibble::as_tibble(x[x$key %in% bb_not_na$key, ])
   }
   if (NROW(wth) == 0) wth <- NA
   row.names(wth) <- NULL

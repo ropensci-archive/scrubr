@@ -22,7 +22,7 @@ Returns a data.frame, with attributes
 Taxonomy based cleaning
 }
 \examples{
-if (requireNamespace("rgbif", quietly = TRUE)) {
+if (requireNamespace("rgbif", quietly = TRUE) && interactive()) {
    library("rgbif")
    res <- rgbif::occ_data(limit = 200)$data
 } else {

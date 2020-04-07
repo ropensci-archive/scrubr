@@ -7,7 +7,7 @@
 #' out bade data points as an attribute you can access. Default: `TRUE`
 #' @return Returns a data.frame, with attributes
 #' @examples
-#' if (requireNamespace("rgbif", quietly = TRUE)) {
+#' if (requireNamespace("rgbif", quietly = TRUE) && interactive()) {
 #'    library("rgbif")
 #'    res <- rgbif::occ_data(limit = 200)$data
 #' } else {
