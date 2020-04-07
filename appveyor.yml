@@ -1,6 +1,3 @@
-environment:
-  R_CHECK_ARGS: --no-build-vignettes --no-manual
-
 init:
   ps: |
         $ErrorActionPreference = "Stop"
