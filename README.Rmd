@@ -50,7 +50,7 @@ install.packages("scrubr")
 Development version
 
 ```{r eval=FALSE}
-devtools::install_github("ropensci/scrubr")
+remotes::install_github("ropensci/scrubr")
 ```
 
 ```{r}

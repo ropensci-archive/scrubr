@@ -45,7 +45,7 @@ Development version
 
 
 ```r
-devtools::install_github("ropensci/scrubr")
+remotes::install_github("ropensci/scrubr")
 ```
 
 
