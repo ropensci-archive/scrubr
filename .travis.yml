@@ -30,6 +30,7 @@ r_binary_packages:
 - rworldmap
 - maps
 - covr
+- raster
 
 r_packages:
 - sf
