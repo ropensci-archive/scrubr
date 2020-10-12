@@ -42,7 +42,7 @@ fix_names <- function(x, how = "shortest", replace = NULL) {
   assert(how, "character")
   assert(replace, "data.frame")
   if (!how %in% fix_names_how)
-    stop("'how' must be one of", paste0(fix_names_how, collapse = ", "))
+    stop("'how' must be one of ", paste0(fix_names_how, collapse = ", "))
   if (is.factor(x$name)) x$name <- as.character(x$name)
   if (how == "shortest") { # shortest
     uniqnames <- unique(x$name)

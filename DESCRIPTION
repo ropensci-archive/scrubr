@@ -42,7 +42,7 @@ Suggests:
     mapview,
     rworldmap,
     maps
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 X-schema.org-applicationCategory: Biodiversity
 X-schema.org-keywords: specimens, occurrences, data, data-cleaning
 X-schema.org-isPartOf: https://ropensci.org
