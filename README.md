@@ -3,7 +3,7 @@ scrubr
 
 
 
-[![Build Status](https://travis-ci.org/ropensci/scrubr.svg?branch=master)](https://travis-ci.org/ropensci/scrubr)
+[![R-check](https://github.com/ropensci/scrubr/workflows/R-check/badge.svg)](https://github.com/ropensci/scrubr/actions?query=workflow%3AR-check)
 [![cran checks](https://cranchecks.info/badges/worst/scrubr)](https://cranchecks.info/pkgs/scrubr)
 [![codecov.io](https://codecov.io/github/ropensci/scrubr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/scrubr?branch=master)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/scrubr?color=ff69b4)](https://github.com/metacran/cranlogs.app)
