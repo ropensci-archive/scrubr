@@ -11,3 +11,4 @@ Makefile
 .github
 docs
 vignettes/scrubr.Rmd.og
+^LICENSE\.md$
