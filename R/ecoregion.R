@@ -4,8 +4,8 @@
 #' @param x (data.frame) A data.frame
 #' @param dataset (character) the dataset to use. one of: "meow" (Marine
 #' Ecoregions of the World), "fao" (). See Details.
-#' @param region (character) the region name. has the form `a:b` where 
-#' `a` is a variable name (column in the sf object) and `b` is the value you want 
+#' @param region (character) one or more region names. has the form `a:b` where
+#' `a` is a variable name (column in the sf object) and `b` is the value you want
 #' to filter to within that variable. See Details.
 #' @param lat,lon (character) name of the latitude and longitude column to use
 #' @param drop (logical) Drop bad data points or not. Either way, we parse out
@@ -28,7 +28,7 @@
 #'   - ECO_CODE: many options, see `regions_meow()`
 #'   - and you can use others as well; run `regions_meow()` to get the data used
 #'     within `eco_region()` and see what variables/columns can be used
-#' - within fao: 
+#' - within fao:
 #'   - OCEAN: Atlantic, Pacific, Indian, Arctic
 #'   - SUBOCEAN: 1 through 11 (inclusive)
 #'   - F_AREA (fishing area): 18, 21, 27, 31, 34, 37, 41, 47, 48, 51, 57, 58,
@@ -49,7 +49,14 @@
 #' tmp2 <- sf::st_as_sf(tmp, coords = c("decimalLongitude", "decimalLatitude"))
 #' tmp2 <- sf::st_set_crs(tmp2, 4326)
 #' mapview::mapview(tmp2)
-#' 
+#' ## filter many regions at once
+#' out <- eco_region(dframe(res), dataset = "meow",
+#'    region = c("ECOREGION:Mexican Tropical Pacific", "ECOREGION:Seychelles"))
+#' out
+#' out2 <- sf::st_as_sf(out, coords = c("decimalLongitude", "decimalLatitude"))
+#' out2 <- sf::st_set_crs(out2, 4326)
+#' mapview::mapview(out2)
+#'
 #' ## FAO
 #' wkt <- 'POLYGON((72.2 38.5,-173.6 38.5,-173.6 -41.5,72.2 -41.5,72.2 38.5))'
 #' manta_ray <- rgbif::name_backbone("Mobula alfredi")$usageKey
@@ -70,7 +77,7 @@ eco_region <- function(x, dataset = "meow", region,
   assert(dataset, "character")
   stopifnot(dataset %in% c("meow", "fao"))
   assert(region, "character")
-  stopifnot(grepl(":", region))
+  stopifnot(all(grepl(":", region)))
   scrubr_cache$mkdir()
 
   x <- do_coords(x, lat, lon)
@@ -78,8 +85,12 @@ eco_region <- function(x, dataset = "meow", region,
   z <- sf::st_set_crs(z, "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
 
   ref_sf <- switch(dataset, meow = regions_meow(), fao = regions_fao())
-  er_split <- strsplit(region, ":")[[1]]
-  ref_target <- ref_sf[ref_sf[[ er_split[1] ]] %in% er_split[2], ]
+  er_split <- lapply(region, function(w) strsplit(w, ":")[[1]])
+  tmp <- c()
+  for (i in seq_along(er_split)) {
+    tmp[[i]] <- ref_sf[ref_sf[[ er_split[[i]][1] ]] %in% er_split[[i]][2], ]
+  }
+  ref_target <- do.call(rbind, tmp)
 
   bb <- sf::st_join(z, ref_target, join = sf::st_within)
   bb_is_na <- bb[is.na(bb$FID), ]

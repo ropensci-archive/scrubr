@@ -79,6 +79,7 @@ test_that("coord_unlikely works", {
 
 test_that("coord_within works", {
   skip_if_not_installed("sf")
+  skip_if_not_installed("rworldmap")
 
   zz <- sample_data_4
   df_within <- suppressMessages(coord_within(dframe(zz), country = "Israel"))

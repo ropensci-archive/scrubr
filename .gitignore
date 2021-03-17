@@ -3,3 +3,5 @@
 .RData
 oldtravis.yml
 docs/
+scrubr.Rproj
+.Rproj.user/
