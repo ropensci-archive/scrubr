@@ -6,7 +6,7 @@ scrubr
 [![R-check](https://github.com/ropensci/scrubr/workflows/R-check/badge.svg)](https://github.com/ropensci/scrubr/actions?query=workflow%3AR-check)
 [![cran checks](https://cranchecks.info/badges/worst/scrubr)](https://cranchecks.info/pkgs/scrubr)
 [![codecov.io](https://codecov.io/github/ropensci/scrubr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/scrubr?branch=master)
-[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/scrubr?color=ff69b4)](https://github.com/metacran/cranlogs.app)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/scrubr?color=ff69b4)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/scrubr)](https://cran.r-project.org/package=scrubr)
 
 __Clean Biological Occurrence Records__
@@ -264,6 +264,3 @@ mapview::mapview(tmp2)
 * License: MIT
 * Get citation information for `scrubr` in R doing `citation(package = 'scrubr')`
 * Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
-
-[![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
-
