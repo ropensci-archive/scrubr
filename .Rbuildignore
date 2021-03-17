@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^CODE_OF_CONDUCT\.md$
 README.Rmd
+README.md
 .travis.yml
 appveyor.yml
 cran-comments.md
@@ -10,5 +11,5 @@ Makefile
 ^codemeta\.json$
 .github
 docs
-vignettes/scrubr.Rmd.og
+vignettes/
 ^LICENSE\.md$
