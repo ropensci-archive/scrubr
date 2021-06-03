@@ -14,7 +14,6 @@ URL: https://github.com/ropensci/scrubr (devel)
     https://docs.ropensci.org/scrubr/ (docs)
 BugReports: https://github.com/ropensci/scrubr/issues
 LazyData: TRUE
-VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
@@ -35,8 +34,6 @@ Imports:
     curl
 Suggests:
     testthat,
-    knitr,
-    rmarkdown,
     rgbif,
     sf,
     mapview,
