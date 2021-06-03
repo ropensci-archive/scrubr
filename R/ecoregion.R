@@ -130,6 +130,7 @@ regions_fao <- function() {
     fao_url <- "http://www.fao.org/figis/geoserver/area/ows?service=WFS&request=GetFeature&version=1.0.0&typeName=area:FAO_AREAS&outputFormat=application/json"
     curl::curl_download(fao_url, path)
   }
+  while(!file.exists(path)) Sys.sleep(0.5)
   sf::read_sf(path)
 }
 
