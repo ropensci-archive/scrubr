@@ -58,6 +58,7 @@
 #' mapview::mapview(out2)
 #'
 #' ## FAO
+#' ## FIXME - this needs fixing, broken
 #' wkt <- 'POLYGON((72.2 38.5,-173.6 38.5,-173.6 -41.5,72.2 -41.5,72.2 38.5))'
 #' manta_ray <- rgbif::name_backbone("Mobula alfredi")$usageKey
 #' res <- rgbif::occ_data(manta_ray, geometry = wkt, limit=300, hasCoordinate = TRUE)
