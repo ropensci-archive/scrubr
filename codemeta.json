@@ -10,13 +10,13 @@
   "codeRepository": "https://github.com/ropensci/scrubr",
   "issueTracker": "https://github.com/ropensci/scrubr/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.3 Patched (2020-03-11 r78147)",
+  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -53,30 +53,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=testthat"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "knitr",
-      "name": "knitr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "rmarkdown",
-      "name": "rmarkdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
     },
     {
       "@type": "SoftwareApplication",
@@ -288,15 +264,15 @@
       "sameAs": "https://CRAN.R-project.org/package=curl"
     }
   ],
-  "contIntegration": ["https://travis-ci.org/ropensci/scrubr", "https://codecov.io/github/ropensci/scrubr?branch=master"],
+  "contIntegration": "https://codecov.io/github/ropensci/scrubr?branch=master",
   "releaseNotes": "https://github.com/ropensci/scrubr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/scrubr/blob/master/README.md",
-  "fileSize": "0KB",
+  "fileSize": "662.042KB",
   "contributor": {},
   "copyrightHolder": {},
   "funder": {},
   "applicationCategory": "Biodiversity",
   "isPartOf": "https://ropensci.org",
   "keywords": ["specimens", "occurrences", "data", "data-cleaning", "biodiversity", "gbif", "rstats", "r", "spocc", "r-package"],
-  "relatedLink": "https://docs.ropensci.org/scrubr"
+  "relatedLink": ["https://docs.ropensci.org/scrubr", "https://docs.ropensci.org/scrubr/"]
 }

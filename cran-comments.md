@@ -1,7 +1,7 @@
 ## Test environments
 
-* local OS X install, R 3.6.3 Patched
-* ubuntu 16.04 (on travis-ci), R 3.6.2
+* local macOS install, R 4.1.0
+* ubuntu 16.04 (on github actions), R 4.1.0
 * win-builder (devel)
 
 ## R CMD check results
@@ -10,11 +10,11 @@
 
 ## Reverse dependencies
 
-There are no reverse dependencies
+* I have run R CMD check on the 1 downstream dependency; there were no errors related to scrubr.
 
 --------
 
-This version fixes two failing cran checks related to internal use of sf package.
+This version fixes a failing cran check, and another minor issue.
 
 Thanks!
 Scott Chamberlain

@@ -1,3 +1,12 @@
+scrubr 0.4.0
+============
+
+### MINOR IMPROVEMENTS
+
+* only run `coord_within()` examples in docs if `sf` and `rworldmap` are present (and in interactive mode) (#35)
+* allow `eco_region()` to filter more than one region (#36)
+
+
 scrubr 0.3.2
 ============
 
