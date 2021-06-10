@@ -97,6 +97,7 @@
 #' if (
 #'   interactive() &&
 #'   requireNamespace("sf", quietly=TRUE) && 
+#'   requireNamespace("s2", quietly=TRUE) && 
 #'   requireNamespace("rworldmap", quietly=TRUE)
 #' ) {
 #' NROW(res)

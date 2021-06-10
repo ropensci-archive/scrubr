@@ -65,7 +65,7 @@ jobs:
             netcdf-bin
       
       - name: Install dependencies
-        run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)" -e "remotes::install_cran(c('rcmdcheck', 'geoaxe', 'rgbif', 'rworldmap', 'maps', 'covr', 'raster', 'sf'))"
+        run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)" -e "remotes::install_cran(c('rcmdcheck', 'geoaxe', 'rgbif', 'rworldmap', 'maps', 'covr', 'raster', 'sf', 's2'))"
 
       - name: Check
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')"
