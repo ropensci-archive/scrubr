@@ -112,6 +112,7 @@ eco_region <- function(x, dataset = "meow", region,
 #' @rdname eco_region
 regions_meow <- function() {
   path <- file.path(scrubr_cache$cache_path_get(), "meow.geojson")
+  dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
   if (file.exists(path)) {
     message("meow.geojson exists in the cache")
   } else {
@@ -125,6 +126,7 @@ regions_meow <- function() {
 #' @rdname eco_region
 regions_fao <- function() {
   path <- file.path(scrubr_cache$cache_path_get(), "fao.geojson")
+  dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
   if (file.exists(path)) {
     message("fao.geojson exists in the cache")
   } else {
