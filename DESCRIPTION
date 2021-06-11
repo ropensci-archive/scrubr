@@ -36,6 +36,7 @@ Suggests:
     testthat,
     rgbif,
     sf,
+    s2,
     mapview,
     rworldmap,
     maps
